@@ -3,9 +3,11 @@ chapter_name: "Chapter "
 repo: https://github.com/griffithlab/pVACtools_Intro_Course/
 rmd_files: ["index.Rmd",
             "01-intro.Rmd",
-            "02-running_pvactools.Rmd",
-            "03-pvacview_tour.Rmd",
-            "04-conclusions.Rmd",
+            "02-prerequisites.Rmd",
+            "03-running_pvactools.Rmd",
+            "04-outputs.Rmd",
+            "05-pvacview_tour.Rmd",
+            "06-conclusions.Rmd",
             "About.Rmd",
             "References.Rmd"]
 new_session: yes

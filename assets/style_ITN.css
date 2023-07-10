@@ -549,3 +549,9 @@ a.anchor:hover {
   font-size: .85em;
   color: #193a5c;
 }
+
+/* Reference List Entry */
+
+div.csl-entry {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
