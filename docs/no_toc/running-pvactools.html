@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Running pVACtools | Introduction to pVACtools</title>
+  <title>Chapter 3 Running pVACtools | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Running pVACtools | Introduction to pVACtools" />
+  <meta property="og:title" content="Chapter 3 Running pVACtools | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Running pVACtools | Introduction to pVACtools" />
+  <meta name="twitter:title" content="Chapter 3 Running pVACtools | Introduction to pVACtools" />
   
   <meta name="twitter:description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/ITN_favicon.ico" type="image/x-icon" />
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="tour-of-pvacview.html"/>
+<link rel="prev" href="prerequisites.html"/>
+<link rel="next" href="understanding-pvactools-outputs.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -53,6 +53,69 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -97,37 +160,56 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.2</b> Target Audience</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.3</b> Curriculum</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.2</b> Background</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.3</b> Target Audience</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.4</b> Curriculum</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="running-pvactools.html"><a href="running-pvactools.html"><i class="fa fa-check"></i><b>2</b> Running pVACtools</a>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="running-pvactools.html"><a href="running-pvactools.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="running-pvactools.html"><a href="running-pvactools.html#installation-of-pvactools"><i class="fa fa-check"></i><b>2.2</b> Installation of pVACtools</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="running-pvactools.html"><a href="running-pvactools.html#using-docker"><i class="fa fa-check"></i><b>2.2.1</b> Using docker</a></li>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#docker"><i class="fa fa-check"></i><b>2.2</b> Docker</a></li>
+<li class="chapter" data-level="2.3" data-path="prerequisites.html"><a href="prerequisites.html#terminal"><i class="fa fa-check"></i><b>2.3</b> Terminal</a></li>
+<li class="chapter" data-level="2.4" data-path="prerequisites.html"><a href="prerequisites.html#r-studio-and-r-package-dependencies"><i class="fa fa-check"></i><b>2.4</b> R Studio and R package dependencies</a></li>
+<li class="chapter" data-level="2.5" data-path="prerequisites.html"><a href="prerequisites.html#data"><i class="fa fa-check"></i><b>2.5</b> Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvactools-1"><i class="fa fa-check"></i><b>2.3</b> Running pVACtools</a></li>
-<li class="chapter" data-level="2.4" data-path="running-pvactools.html"><a href="running-pvactools.html#understanding-pvac-outputs"><i class="fa fa-check"></i><b>2.4</b> Understanding pVAC outputs</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html"><i class="fa fa-check"></i><b>3</b> Tour of pVACview</a>
+<li class="chapter" data-level="3" data-path="running-pvactools.html"><a href="running-pvactools.html"><i class="fa fa-check"></i><b>3</b> Running pVACtools</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="3.2" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#introduction-to-the-pvacview-module"><i class="fa fa-check"></i><b>3.2</b> Introduction to the pVACview module</a></li>
-<li class="chapter" data-level="3.3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#tour-of-the-pvacview-interface"><i class="fa fa-check"></i><b>3.3</b> Tour of the pVACview interface</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a>
+<li class="chapter" data-level="3.1" data-path="running-pvactools.html"><a href="running-pvactools.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="running-pvactools.html"><a href="running-pvactools.html#starting-docker"><i class="fa fa-check"></i><b>3.2</b> Starting Docker</a></li>
+<li class="chapter" data-level="3.3" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacseq"><i class="fa fa-check"></i><b>3.3</b> Running pVACseq</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="conclusions.html"><a href="conclusions.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="conclusions.html"><a href="conclusions.html#key-conclusions"><i class="fa fa-check"></i><b>4.2</b> Key conclusions</a></li>
-<li class="chapter" data-level="4.3" data-path="conclusions.html"><a href="conclusions.html#additional-resources"><i class="fa fa-check"></i><b>4.3</b> Additional Resources</a></li>
+<li class="chapter" data-level="3.3.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacseq"><i class="fa fa-check"></i><b>3.3.1</b> Required Parameters for pVACseq</a></li>
+<li class="chapter" data-level="3.3.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacseq"><i class="fa fa-check"></i><b>3.3.2</b> Optional Parameters for pVACseq</a></li>
+<li class="chapter" data-level="3.3.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacseq-command"><i class="fa fa-check"></i><b>3.3.3</b> pVACseq Command</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacfuse"><i class="fa fa-check"></i><b>3.4</b> Running pVACfuse</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.1</b> Required Parameters for pVACfuse</a></li>
+<li class="chapter" data-level="3.4.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.2</b> Optional Parameters for pVACfuse</a></li>
+<li class="chapter" data-level="3.4.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacfuse-command"><i class="fa fa-check"></i><b>3.4.3</b> pVACfuse Command</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html"><i class="fa fa-check"></i><b>4</b> Understanding pVACtools outputs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html"><i class="fa fa-check"></i><b>5</b> Tour of pVACview</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#introduction-to-the-pvacview-module"><i class="fa fa-check"></i><b>5.2</b> Introduction to the pVACview module</a></li>
+<li class="chapter" data-level="5.3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#tour-of-the-pvacview-interface"><i class="fa fa-check"></i><b>5.3</b> Tour of the pVACview interface</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="conclusions.html"><a href="conclusions.html#key-conclusions"><i class="fa fa-check"></i><b>6.2</b> Key conclusions</a></li>
+<li class="chapter" data-level="6.3" data-path="conclusions.html"><a href="conclusions.html#additional-resources"><i class="fa fa-check"></i><b>6.3</b> Additional Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
+<li class="chapter" data-level="7" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
 <li class="divider"></li>
 <p style="text-align:center;"> <a href="https://github.com/jhudsl/OTTR_Template" target="blank" > This content was published with</a> <a href="https://bookdown.org/" target="blank"> bookdown by: </a> </p>
-<p style="text-align:center;"> <a href="http://jhudatascience.org/"> The Johns Hopkins Data Science Lab </a></p>
-<a href="http://jhudatascience.org/"><img src="https://jhudatascience.org/images/dasl.png" style=" width: 80%; filter: grayscale(100%); padding-left: 40px; padding-top: 8px; vertical-align: top "</a>
+<p style="text-align:center;"> <a href="https://griffithlab.org/"> The Griffith Lab </a></p>
 <p style="text-align:center; font-size: 12px;"> <a href="https://github.com/rstudio4edu/rstudio4edu-book/"> Style adapted from: rstudio4edu-book </a> <a href ="https://creativecommons.org/licenses/by/2.0/"> (CC-BY 2.0) </a></p>
 <p style="padding-left: 40px;"><div class="trapezoid" style = "padding-left: 40px;"><span>  <a href="https://forms.gle/hc8Xt3Y2Znjb6M4Y7"> Click here to provide feedback</a> <img src="assets/itcr_arrow.png" style=" width: 10%" ></span></div></p>
 </ul>
@@ -159,33 +241,309 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/itcr_main_image.png">
 </div>
-<div id="running-pvactools" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Running pVACtools</h1>
-<div id="learning-objectives" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Learning Objectives</h2>
+<div id="running-pvactools" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Running pVACtools</h1>
+<div id="learning-objectives-1" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Learning Objectives</h2>
 <p>This chapter will cover:</p>
 <ul>
-<li>Installation of pVACtools</li>
-<li>Running pVACtools</li>
-<li>Understanding pVAC outputs</li>
+<li>Starting an interactive Docker session</li>
+<li>Running pVACseq</li>
+<li>Running pVACfuse</li>
 </ul>
 </div>
-<div id="installation-of-pvactools" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Installation of pVACtools</h2>
-<p>This section will describe how to install pVACtools.</p>
-<div id="using-docker" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Using docker</h3>
-<p>This subsection will cover how to run pVACtools from a docker container</p>
+<div id="starting-docker" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Starting Docker</h2>
+<p>In your Terminal execute the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="running-pvactools.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> pVACtools_outputs</span>
+<span id="cb3-2"><a href="running-pvactools.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="running-pvactools.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="dt">\</span></span>
+<span id="cb3-4"><a href="running-pvactools.html#cb3-4" aria-hidden="true" tabindex="-1"></a>-v <span class="va">${PWD}</span>/HCC1395_inputs:/HCC1395_inputs <span class="dt">\</span></span>
+<span id="cb3-5"><a href="running-pvactools.html#cb3-5" aria-hidden="true" tabindex="-1"></a>-v <span class="va">${PWD}</span>/pVACtools_outputs:/pVACtools_outputs <span class="dt">\</span></span>
+<span id="cb3-6"><a href="running-pvactools.html#cb3-6" aria-hidden="true" tabindex="-1"></a>-it griffithlab/pvactools:4.0.0 <span class="dt">\</span></span>
+<span id="cb3-7"><a href="running-pvactools.html#cb3-7" aria-hidden="true" tabindex="-1"></a>/bin/bash</span></code></pre></div>
+<p>This will pull the 4.0.0 version of the griffithlab/pvactools Docker image and
+start an interactive session (<code>-it</code>) of that Docker image using the bash shell (<code>/bin/bash</code>).
+The <code>-v ${PWD}/HCC1395_inputs:/HCC1395_inputs</code>
+part of the command will mount the
+<code>HCC1395_inputs</code> folder at <code>/HCC1395_inputs</code> inside of the Docker container
+so that you will have access to the input data from inside the Docker
+container. The <code>-v ${PWD}/pVACtools_outputs:/pVACtools_outputs</code> part of the command
+will mount the <code>pVACtools_outputs</code> folder you just created. We will write the
+outputs from pVACseq and pVACfuse to that folder so that you will have access
+to it once you exit the Docker image.</p>
+</div>
+<div id="running-pvacseq" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Running pVACseq</h2>
+<p>pVACseq is used to identify neoantigens from missense, inframe indel, and
+frameshift mutations. The pipeline uses a somatic VCF file as an input, which
+represents variants identified in the tumor sample. The VEP annotations in the VCF file
+provide the variant type of a variant and their consequence on individual gene transcripts
+overlapping the genomic coordinates of the variant. The predicted amino acid change of
+the variant for a particular transcript is used by pVACseq to calculate the mutated peptide sequence.</p>
+<p>The pVACseq pipeline is run using the <code>pvacseq run</code> command.</p>
+<div id="required-parameters-for-pvacseq" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Required Parameters for pVACseq</h3>
+<p>The <code>pvacseq run</code> command takes a number of required parameters in the
+following order:</p>
+<ul>
+<li><code>vcf_file</code>: A VEP-annotated single- or multi-sample VCF containing genotype,
+transcript, Wildtype protein sequence, and Frameshift protein sequence
+information.</li>
+<li><code>sample_name</code>: The name of the tumor sample being processed. When processing
+a multi-sample VCF the sample name must be a sample ID in the input VCF #CHROM
+header line. Only variants that are called (with a genotype/GT of 0/1 or 1/1)
+in that sample will be processed.</li>
+<li><code>allele(s)</code>: The name of the HLA allele(s) to use for epitope prediction. Multiple
+alleles can be specified using a comma-separated list. These should be the
+HLA alleles of your patient/sample. You might have clinical typing information for
+your patient. If not, you will need to computationally predict the patient’s
+HLA type using software such as OptiType. The the HLA allele names should
+be in the following format: <code>HLA-A*02:01</code>.<br />
+</li>
+<li><code>prediction_algorithms</code>: The epitope prediction algorithms to use. Multiple
+prediction algorithms can be specified, separated by spaces. Use <code>all</code> to
+run all available prediction algorithms. pVACseq will automatically determine
+which algorithms are valid for each HLA allele.</li>
+<li><code>output_dir</code>: The directory for writing all result files.</li>
+</ul>
+</div>
+<div id="optional-parameters-for-pvacseq" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Optional Parameters for pVACseq</h3>
+<p>The <code>pvacseq run</code> command offers quite a few optional arguments to fine-tune
+your run. Here are a list of parameters we generally recommend:</p>
+<ul>
+<li><code>--phased-proximal-variants-vcf</code>: This is an additional VCF file that
+includes both somatic and germline variants with phasing information. This
+file is used to identify variants near a somatic variant of interest and
+in-phase that would, as a result, change the predicted protein sequence
+around the somatic variant of interest and, thus, change the predicted
+neoantigens. Please note that pVACseq is currently only able to incorporate
+proximal missense variants so users should still manually investigate their
+candidates for other types of nearby variants (e.g. inframe and frameshift
+indels)</li>
+<li><code>--normal-sample-name</code>: When using a tumor-normal input VCF, this parameter
+is used to identify the normal sample in the VCF in order to parse
+coverage metrics for the normal sample.</li>
+<li><code>--iedb-install-directory</code>: For speed and reliability, we generally recommend
+that users use a standalone installation of the IEDB software. The pVACtools
+Docker containers already come with this software pre-installed in the
+<code>/opt/iedb</code> directory.</li>
+<li><code>--allele-specific-binding-thresholds</code>: When filtering and tiering
+neoantigen candidates, one main criteria is the predicted peptide-MHC
+binding affinity. By default, pVACseq uses a cutoff of &lt;500 nmol IC50.
+However, for some HLA alleles, other cutoffs are more appropriate depending
+on the distribution of binding affinities across peptides. Setting
+this flag enables allele-specific binding cutoffs as recommended by
+<a href="https://help.iedb.org/hc/en-us/articles/114094152371-What-thresholds-cut-offs-should-I-use-for-MHC-class-I-and-II-binding-predictions">IEDB</a>.</li>
+<li><code>--allele-specific-anchors</code>: When considering a neoantigen candidate, only a
+subset of peptide positions are presented to the T cell receptor
+for recognition, while others are responsible for anchoring to the MHC, making
+these positional considerations critical for predicting T cell responses.
+Conventionally, the 1st, 2nd, n-1 and n position in a neoantigen candidate
+were considered anchors while recent studies <span class="citation">(<a href="#ref-Xia2023" role="doc-biblioref">Xia et al. 2023</a>)</span> have shown that
+these positions will depend on the HLA allele. Setting this flag will use
+allele-specific anchor locations where possible (we have predictions for ~300 common alleles).</li>
+<li><code>--run-reference-proteome-similarity</code>: One consideration when selecting
+neoantigen candidates, is that the neoantigen should not occur natively in
+the patient’s proteome. When this flag is set, pVACseq will search for each
+neoantigen candidate in the reference proteome and report any hits found.
+By default this is done using BLASTp but we recommend using a proteome FASTA
+file via the <code>--peptide-fasta</code> parameter to speed up this step. This will trigger
+a much faster k-mer based search strategy.</li>
+<li><code>--pass-only</code>: By default, all variants that were called in the tumor sample
+are considered by pVACseq. This flag will lead pVACseq to skip variants that
+have a FILTER applied in the VCF to, e.g., exclude variants that were marked
+as low quality by the variant caller.</li>
+<li><code>--percentile-threshold</code>: When considering the peptide-MHC binding affinity
+for filtering and prioritizing neoantigen candidates, by default only the
+IC50 value is being used. Setting this parameter will additionally also filter
+on the predicted percentile. We recommend a value of 0.01 (1%) for this
+threshold.</li>
+</ul>
+<p>Additionally there are a number of parameters that might be useful depending
+on your specific analysis needs:</p>
+<ul>
+<li><code>--class-i-epitope-length</code> and <code>--class-ii-epitope-length</code>: By default 8,
+9, 10, 11 and 12, 13, 14, 15, 16, 17, 18 are set for these parameters,
+respectively, but different lengths might be desired.</li>
+<li><code>--tumor-purity</code>: This parameter is used to bin variants into clonal and
+sub-clonal. This parameter might need to be adjusted based on the tumor
+purity of your data.</li>
+<li><code>--problematic-amino-acids</code>: Some vaccine manufacturers will consider certain amino
+acids in the neoantigen candidates difficult to manufacture. For example, a
+Cysteine is commonly considered problematic as it makes the peptide
+unstable. This parameter allows users to set their own rules as to which
+peptides are considered problematic and peptides meeting those rules will be marked in the
+pVACseq results and deprioritized.</li>
+<li><code>--threads</code>: This argument will allow pVACseq to run in multi-processing
+mode.</li>
+<li><code>--keep-tmp-files</code>: Setting this flag will save intermediate files created by pVACseq.</li>
+<li><code>--downstream-sequence-length</code>: For frameshift variants, the downstream
+sequence can potentially be very long, which can be computationally
+expensive. This parameter limits how many amino acids of the downstream
+sequence are included in the prediction. We often set a limit of <code>100</code>.</li>
+</ul>
+<p>There are additional parameters in pVACseq that we won’t discuss at this point
+because the defaults are usually sufficient. To see all available parameters, you can
+run <code>pvacseq run -h</code>.</p>
+</div>
+<div id="pvacseq-command" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> pVACseq Command</h3>
+<p>Given the considerations outlined above, let’s run pVACseq on our sample data.</p>
+<p>From the <code>optitype_normal_result.tsv</code> we know that the patient’s class I alleles are
+HLA-A*29:02, HLA-B*45:01, HLA-B*82:02, and HLA-C*06:02 (indicated that two of three class I
+alleles are homozygous in this sample). We also have clinical typing information that confirms
+these class I alleles as well as identifying DQA1*03:03, DQB1*03:02, and DRB1*04:05 as the
+patient’s class II alleles.</p>
+<p>Note that where needed pVACseq will automatically create HLA class II dimer combinations using
+valid class II allele pairings.</p>
+<p>To identify the tumor and normal sample names we will grep the VCF file for
+the CHROM header:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="running-pvactools.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> CHROM /HCC1395_inputs/annotated.expression.vcf.gz</span></code></pre></div>
+<p>This shows that the tumor sample is named <code>HCC1395_TUMOR_DNA</code> and the normal sample is named <code>HCC1395_NORMAL_DNA</code>.</p>
+<p>For our test run, please execute the <code>pvacseq run</code> command below. The
+prediction run might take a while but pVACseq will output progress messages as
+it runs through the pipeline.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="running-pvactools.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pvacseq</span> run <span class="dt">\</span></span>
+<span id="cb5-2"><a href="running-pvactools.html#cb5-2" aria-hidden="true" tabindex="-1"></a>/HCC1395_inputs/annotated.expression.vcf.gz <span class="dt">\</span></span>
+<span id="cb5-3"><a href="running-pvactools.html#cb5-3" aria-hidden="true" tabindex="-1"></a>HCC1395_TUMOR_DNA <span class="dt">\</span></span>
+<span id="cb5-4"><a href="running-pvactools.html#cb5-4" aria-hidden="true" tabindex="-1"></a>HLA-A<span class="pp">*</span>29:02,HLA-B<span class="pp">*</span>45:01,HLA-B<span class="pp">*</span>82:02,HLA-C<span class="pp">*</span>06:02,DQA1<span class="pp">*</span>03:03,DQB1<span class="pp">*</span>03:02,DRB1<span class="pp">*</span>04:05 <span class="dt">\</span></span>
+<span id="cb5-5"><a href="running-pvactools.html#cb5-5" aria-hidden="true" tabindex="-1"></a>all <span class="dt">\</span></span>
+<span id="cb5-6"><a href="running-pvactools.html#cb5-6" aria-hidden="true" tabindex="-1"></a>/pVACtools_outputs/pvacseq_predictions <span class="dt">\</span></span>
+<span id="cb5-7"><a href="running-pvactools.html#cb5-7" aria-hidden="true" tabindex="-1"></a>--normal-sample-name HCC1395_NORMAL_DNA <span class="dt">\</span></span>
+<span id="cb5-8"><a href="running-pvactools.html#cb5-8" aria-hidden="true" tabindex="-1"></a>--phased-proximal-variants-vcf /HCC1395_inputs/phased.vcf.gz <span class="dt">\</span></span>
+<span id="cb5-9"><a href="running-pvactools.html#cb5-9" aria-hidden="true" tabindex="-1"></a>--iedb-install-directory /opt/iedb <span class="dt">\</span></span>
+<span id="cb5-10"><a href="running-pvactools.html#cb5-10" aria-hidden="true" tabindex="-1"></a>--pass-only <span class="dt">\</span></span>
+<span id="cb5-11"><a href="running-pvactools.html#cb5-11" aria-hidden="true" tabindex="-1"></a>--allele-specific-binding-thresholds <span class="dt">\</span></span>
+<span id="cb5-12"><a href="running-pvactools.html#cb5-12" aria-hidden="true" tabindex="-1"></a>--percentile-threshold 0.01 <span class="dt">\</span></span>
+<span id="cb5-13"><a href="running-pvactools.html#cb5-13" aria-hidden="true" tabindex="-1"></a>--allele-specific-anchors <span class="dt">\</span></span>
+<span id="cb5-14"><a href="running-pvactools.html#cb5-14" aria-hidden="true" tabindex="-1"></a>--run-reference-proteome-similarity <span class="dt">\</span></span>
+<span id="cb5-15"><a href="running-pvactools.html#cb5-15" aria-hidden="true" tabindex="-1"></a>--peptide-fasta /HCC1395_inputs/Homo_sapiens.GRCh38.pep.all.fa.gz <span class="dt">\</span></span>
+<span id="cb5-16"><a href="running-pvactools.html#cb5-16" aria-hidden="true" tabindex="-1"></a>--problematic-amino-acids C <span class="dt">\</span></span>
+<span id="cb5-17"><a href="running-pvactools.html#cb5-17" aria-hidden="true" tabindex="-1"></a>--downstream-sequence-length 100 <span class="dt">\</span></span>
+<span id="cb5-18"><a href="running-pvactools.html#cb5-18" aria-hidden="true" tabindex="-1"></a>--n-threads 8 <span class="dt">\</span></span>
+<span id="cb5-19"><a href="running-pvactools.html#cb5-19" aria-hidden="true" tabindex="-1"></a>--keep-tmp-files</span></code></pre></div>
 </div>
 </div>
-<div id="running-pvactools-1" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Running pVACtools</h2>
-<p>This section will explain how to run pVACtools either locally or on the cloud</p>
+<div id="running-pvacfuse" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Running pVACfuse</h2>
+<p>pVACfuse is run to in order to predict neoantigens from fusion events. The
+pipeline uses annotated fusion calls from either AGFusion or Arriba for this
+purpose. These annotators already include the fusion peptide sequence in their
+outputs which pVACfuse uses to extract neoantigens around the fusion position.</p>
+<p>The pVACfuse pipeline is run using the <code>pvacfuse run</code> command.</p>
+<div id="required-parameters-for-pvacfuse" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Required Parameters for pVACfuse</h3>
+<p>The <code>pvacfuse run</code> command takes a number of required parameters in the
+following order:</p>
+<ul>
+<li><code>input_file</code>: An AGFusion output directory or Arriba fusion.tsv output file.
+For the purpose of this course, we will be running pVACfuse with AGFusion
+output.</li>
+<li><code>sample_name</code>: The name of the tumor sample being processed.</li>
+<li><code>allele(s)</code>: The name of the HLA allele to use for epitope prediction. Multiple
+alleles can be specified using a comma-separated list. These should be the
+HLA alleles of your patient. You might have clinical typing information for
+your patient. If not, you will need to computational predict the patient’s
+HLA type using software such as OptiType.</li>
+<li><code>prediction_algorithms</code>: The epitope prediction algorithms to use. Multiple
+prediction algorithms can be specified, separated by spaces. Use <code>all</code> to
+run all available prediction algorithms.</li>
+<li><code>output_dir</code>: The directory for writing all result files.</li>
+</ul>
 </div>
-<div id="understanding-pvac-outputs" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Understanding pVAC outputs</h2>
-<p>This section will review pVACtools outputs and explain how to correctly interpret them.</p>
+<div id="optional-parameters-for-pvacfuse" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Optional Parameters for pVACfuse</h3>
+<p>In addition to the required parameters, the <code>pvacseq run</code> command also offers
+optional arguments to fine-tune your run. You will find a lot of overlap
+between pVACfuse and pVACseq parameters and the same general considerations
+usually apply. Here are a list of parameters we generally recommend:</p>
+<ul>
+<li><code>--starfusion-file</code>: Path to a <code>star-fusion.fusion_predictions.tsv</code> or
+<code>star-fusion.fusion_predictions.abridged.tsv</code>. This file is used to extract
+read support and expression information for each predicted fusion.</li>
+<li><code>--iedb-install-directory</code>: For speed and reliability, we generally recommend
+that users use a standalone installation of the IEDB software. The pVACtools
+Docker containers already come with this software pre-installed in the
+<code>/opt/iedb</code> directory.</li>
+<li><code>--allele-specific-binding-thresholds</code>: When filtering and tiering
+neoantigen candidates, one main criteria is the predicted peptide-MHC
+binding affinity. By default, pVACfuse uses a cutoff of &lt;500 nmol IC50.
+However, for some HLA alleles, other cutoffs are more appropriate depending
+on the distribution of binding affinities across peptides. Setting
+this flag enables allele-specific binding cutoffs as recommended by
+<a href="https://help.iedb.org/hc/en-us/articles/114094152371-What-thresholds-cut-offs-should-I-use-for-MHC-class-I-and-II-binding-predictions">IEDB</a>.</li>
+<li><code>--run-reference-proteome-similarity</code>: One consideration when selecting
+neoantigen candidates, is that the neoantigen should not occur natively in
+the patient’s proteome. When this flag is set, pVACfuse will search for each
+neoantigen candidate in the reference proteome and report any hits found.
+By default this is done using BLASTp but we recommend using a proteome FASTA
+file via the <code>--peptide-fasta</code> parameter to speed up this step.</li>
+<li><code>--percentile-threshold</code>: When considering the peptide-MHC binding affinity
+for filtering and prioritizing neoantigen candidates, by default only the
+IC50 value is being used. Setting this parameter will additionally also filter
+on the predicted percentile. We recommend a value of 0.01 (1%) for this
+threshold.</li>
+</ul>
+<p>Additionally there are a number of parameters that might be useful depending
+on your specific analysis needs:</p>
+<ul>
+<li><code>--class-i-epitope-length</code> and <code>--class-ii-epitope-length</code>: By default 8,
+9, 10, 11 and 12, 13, 14, 15, 16, 17, 18 are set for these parameters,
+respectively, but different lengths might be desired.</li>
+<li><code>--problematic-amino-acids</code>: Some vaccine manufacturers will consider certain amino
+acids in the neoantigen candidates difficult to manufacture. For example, a
+Cysteine is commonly considered problematic as it makes the peptide
+unstable. This parameter allows users to set their own rules as to which
+peptides are considered problematic and peptides meeting those rules will be marked in the
+pVACseq results and deprioritized.</li>
+<li><code>--threads</code>: This argument will allow pVACfuse to run in multi-processing
+mode.</li>
+<li><code>--keep-tmp-files</code>: Setting this flag will save intermediate files created by pVACfuse.</li>
+<li><code>--downstream-sequence-length</code>: For frameshift fusions, the downstream
+sequence can potentially be very long, which can be computationally
+expensive. This parameter limits how many amino acids of the downstream
+sequence are included in the prediction. We often set a limit of <code>100</code>.</li>
+</ul>
+</div>
+<div id="pvacfuse-command" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> pVACfuse Command</h3>
+<p>Given the considerations outlined above, let’s run pVACfuse on our sample data.</p>
+<p>As with pVACseq, we can use the <code>optitype_normal_result.tsv</code> file to identify the patient’s
+class I HLA alleles. These are HLA-A*29:02, HLA-B*45:01, HLA-B*82:02, and HLA-C*06:02.
+We also have clinical typing information that confirms these class I alleles as well as
+identified DQA1*03:03, DQB1*03:02, and DRB1*04:05 as the patient’s class II alleles.</p>
+<p>For pVACfuse the sample name is not used for any parsing so it doesn’t need to
+match any specific information in the AGFusion results. It is only used for
+naming result files. For consistency we will use the same <code>HCC1395_TUMOR_DNA</code>
+sample name we used in pVACfuse.</p>
+<p>For our test run, please execute the <code>pvacfuse run</code> command below. The
+prediction run might take a while but pVACfuse will output progress messages as
+it runs through the pipeline.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="running-pvactools.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pvacfuse</span> run <span class="dt">\</span></span>
+<span id="cb6-2"><a href="running-pvactools.html#cb6-2" aria-hidden="true" tabindex="-1"></a>/HCC1395_inputs/agfusion_results <span class="dt">\</span></span>
+<span id="cb6-3"><a href="running-pvactools.html#cb6-3" aria-hidden="true" tabindex="-1"></a>HCC1395_TUMOR_DNA <span class="dt">\</span></span>
+<span id="cb6-4"><a href="running-pvactools.html#cb6-4" aria-hidden="true" tabindex="-1"></a>HLA-A<span class="pp">*</span>29:02,HLA-B<span class="pp">*</span>45:01,HLA-B<span class="pp">*</span>82:02,HLA-C<span class="pp">*</span>06:02,DQA1<span class="pp">*</span>03:03,DQB1<span class="pp">*</span>03:02,DRB1<span class="pp">*</span>04:05 <span class="dt">\</span></span>
+<span id="cb6-5"><a href="running-pvactools.html#cb6-5" aria-hidden="true" tabindex="-1"></a>all <span class="dt">\</span></span>
+<span id="cb6-6"><a href="running-pvactools.html#cb6-6" aria-hidden="true" tabindex="-1"></a>/pVACtools_outputs/pvacfuse_predictions <span class="dt">\</span></span>
+<span id="cb6-7"><a href="running-pvactools.html#cb6-7" aria-hidden="true" tabindex="-1"></a>--iedb-install-directory /opt/iedb <span class="dt">\</span></span>
+<span id="cb6-8"><a href="running-pvactools.html#cb6-8" aria-hidden="true" tabindex="-1"></a>--allele-specific-binding-thresholds <span class="dt">\</span></span>
+<span id="cb6-9"><a href="running-pvactools.html#cb6-9" aria-hidden="true" tabindex="-1"></a>--percentile-threshold 0.01 <span class="dt">\</span></span>
+<span id="cb6-10"><a href="running-pvactools.html#cb6-10" aria-hidden="true" tabindex="-1"></a>--run-reference-proteome-similarity <span class="dt">\</span></span>
+<span id="cb6-11"><a href="running-pvactools.html#cb6-11" aria-hidden="true" tabindex="-1"></a>--peptide-fasta /HCC1395_inputs/Homo_sapiens.GRCh38.pep.all.fa.gz <span class="dt">\</span></span>
+<span id="cb6-12"><a href="running-pvactools.html#cb6-12" aria-hidden="true" tabindex="-1"></a>--problematic-amino-acids C <span class="dt">\</span></span>
+<span id="cb6-13"><a href="running-pvactools.html#cb6-13" aria-hidden="true" tabindex="-1"></a>--downstream-sequence-length 100 <span class="dt">\</span></span>
+<span id="cb6-14"><a href="running-pvactools.html#cb6-14" aria-hidden="true" tabindex="-1"></a>--n-threads 8 <span class="dt">\</span></span>
+<span id="cb6-15"><a href="running-pvactools.html#cb6-15" aria-hidden="true" tabindex="-1"></a>--keep-tmp-files</span></code></pre></div>
 
+</div>
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Xia2023" class="csl-entry">
+Xia, Huiming, Joshua McMichael, Michelle Becker-Hapak, Onyinyechi C. Onyeador, Rico Buchli, Ethan McClain, Patrick Pence, et al. 2023. <span>“Computational Prediction of <span>MHC</span> Anchor Locations Guides Neoantigen Identification and Prioritization.”</span> <em>Science Immunology</em> 8 (82). <a href="https://doi.org/10.1126/sciimmunol.abg2200">https://doi.org/10.1126/sciimmunol.abg2200</a>.
 </div>
 </div>
 <hr>
@@ -201,8 +559,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tour-of-pvacview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="understanding-pvactools-outputs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

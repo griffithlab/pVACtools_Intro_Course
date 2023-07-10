@@ -549,6 +549,12 @@ a.anchor:hover {
   font-size: .85em;
   color: #193a5c;
 }
+
+/* Reference List Entry */
+
+div.csl-entry {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
 /*Get rid of TOC stuff from https://github.com/rstudio/bookdown/issues/1251 */
 
 .book .book-body .page-wrapper .page-inner {
