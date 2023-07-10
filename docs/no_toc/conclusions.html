@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Conclusions | Introduction to pVACtools</title>
+  <title>Chapter 6 Conclusions | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Conclusions | Introduction to pVACtools" />
+  <meta property="og:title" content="Chapter 6 Conclusions | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Conclusions | Introduction to pVACtools" />
+  <meta name="twitter:title" content="Chapter 6 Conclusions | Introduction to pVACtools" />
   
   <meta name="twitter:description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   
@@ -53,6 +53,69 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -97,37 +160,56 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.2</b> Target Audience</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.3</b> Curriculum</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.2</b> Background</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.3</b> Target Audience</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.4</b> Curriculum</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="running-pvactools.html"><a href="running-pvactools.html"><i class="fa fa-check"></i><b>2</b> Running pVACtools</a>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="running-pvactools.html"><a href="running-pvactools.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="running-pvactools.html"><a href="running-pvactools.html#installation-of-pvactools"><i class="fa fa-check"></i><b>2.2</b> Installation of pVACtools</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="running-pvactools.html"><a href="running-pvactools.html#using-docker"><i class="fa fa-check"></i><b>2.2.1</b> Using docker</a></li>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#docker"><i class="fa fa-check"></i><b>2.2</b> Docker</a></li>
+<li class="chapter" data-level="2.3" data-path="prerequisites.html"><a href="prerequisites.html#terminal"><i class="fa fa-check"></i><b>2.3</b> Terminal</a></li>
+<li class="chapter" data-level="2.4" data-path="prerequisites.html"><a href="prerequisites.html#r-studio-and-r-package-dependencies"><i class="fa fa-check"></i><b>2.4</b> R Studio and R package dependencies</a></li>
+<li class="chapter" data-level="2.5" data-path="prerequisites.html"><a href="prerequisites.html#data"><i class="fa fa-check"></i><b>2.5</b> Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvactools-1"><i class="fa fa-check"></i><b>2.3</b> Running pVACtools</a></li>
-<li class="chapter" data-level="2.4" data-path="running-pvactools.html"><a href="running-pvactools.html#understanding-pvac-outputs"><i class="fa fa-check"></i><b>2.4</b> Understanding pVAC outputs</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html"><i class="fa fa-check"></i><b>3</b> Tour of pVACview</a>
+<li class="chapter" data-level="3" data-path="running-pvactools.html"><a href="running-pvactools.html"><i class="fa fa-check"></i><b>3</b> Running pVACtools</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="3.2" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#introduction-to-the-pvacview-module"><i class="fa fa-check"></i><b>3.2</b> Introduction to the pVACview module</a></li>
-<li class="chapter" data-level="3.3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#tour-of-the-pvacview-interface"><i class="fa fa-check"></i><b>3.3</b> Tour of the pVACview interface</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a>
+<li class="chapter" data-level="3.1" data-path="running-pvactools.html"><a href="running-pvactools.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="running-pvactools.html"><a href="running-pvactools.html#starting-docker"><i class="fa fa-check"></i><b>3.2</b> Starting Docker</a></li>
+<li class="chapter" data-level="3.3" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacseq"><i class="fa fa-check"></i><b>3.3</b> Running pVACseq</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="conclusions.html"><a href="conclusions.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="conclusions.html"><a href="conclusions.html#key-conclusions"><i class="fa fa-check"></i><b>4.2</b> Key conclusions</a></li>
-<li class="chapter" data-level="4.3" data-path="conclusions.html"><a href="conclusions.html#additional-resources"><i class="fa fa-check"></i><b>4.3</b> Additional Resources</a></li>
+<li class="chapter" data-level="3.3.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacseq"><i class="fa fa-check"></i><b>3.3.1</b> Required Parameters for pVACseq</a></li>
+<li class="chapter" data-level="3.3.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacseq"><i class="fa fa-check"></i><b>3.3.2</b> Optional Parameters for pVACseq</a></li>
+<li class="chapter" data-level="3.3.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacseq-command"><i class="fa fa-check"></i><b>3.3.3</b> pVACseq Command</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacfuse"><i class="fa fa-check"></i><b>3.4</b> Running pVACfuse</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.1</b> Required Parameters for pVACfuse</a></li>
+<li class="chapter" data-level="3.4.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.2</b> Optional Parameters for pVACfuse</a></li>
+<li class="chapter" data-level="3.4.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacfuse-command"><i class="fa fa-check"></i><b>3.4.3</b> pVACfuse Command</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html"><i class="fa fa-check"></i><b>4</b> Understanding pVACtools outputs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html"><i class="fa fa-check"></i><b>5</b> Tour of pVACview</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#introduction-to-the-pvacview-module"><i class="fa fa-check"></i><b>5.2</b> Introduction to the pVACview module</a></li>
+<li class="chapter" data-level="5.3" data-path="tour-of-pvacview.html"><a href="tour-of-pvacview.html#tour-of-the-pvacview-interface"><i class="fa fa-check"></i><b>5.3</b> Tour of the pVACview interface</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="conclusions.html"><a href="conclusions.html#key-conclusions"><i class="fa fa-check"></i><b>6.2</b> Key conclusions</a></li>
+<li class="chapter" data-level="6.3" data-path="conclusions.html"><a href="conclusions.html#additional-resources"><i class="fa fa-check"></i><b>6.3</b> Additional Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
+<li class="chapter" data-level="7" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
 <li class="divider"></li>
 <p style="text-align:center;"> <a href="https://github.com/jhudsl/OTTR_Template" target="blank" > This content was published with</a> <a href="https://bookdown.org/" target="blank"> bookdown by: </a> </p>
-<p style="text-align:center;"> <a href="http://jhudatascience.org/"> The Johns Hopkins Data Science Lab </a></p>
-<a href="http://jhudatascience.org/"><img src="https://jhudatascience.org/images/dasl.png" style=" width: 80%; filter: grayscale(100%); padding-left: 40px; padding-top: 8px; vertical-align: top "</a>
+<p style="text-align:center;"> <a href="https://griffithlab.org/"> The Griffith Lab </a></p>
 <p style="text-align:center; font-size: 12px;"> <a href="https://github.com/rstudio4edu/rstudio4edu-book/"> Style adapted from: rstudio4edu-book </a> <a href ="https://creativecommons.org/licenses/by/2.0/"> (CC-BY 2.0) </a></p>
 <p style="padding-left: 40px;"><div class="trapezoid" style = "padding-left: 40px;"><span>  <a href="https://forms.gle/hc8Xt3Y2Znjb6M4Y7"> Click here to provide feedback</a> <img src="assets/itcr_arrow.png" style=" width: 10%" ></span></div></p>
 </ul>
@@ -159,21 +241,21 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/itcr_main_image.png">
 </div>
-<div id="conclusions" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Conclusions</h1>
-<div id="learning-objectives-2" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<div id="conclusions" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Conclusions</h1>
+<div id="learning-objectives-4" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Learning Objectives</h2>
 <p>This chapter will summarize:</p>
 <ul>
 <li>Key conclusions of the course</li>
 <li>Additional learning resources</li>
 </ul>
 </div>
-<div id="key-conclusions" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Key conclusions</h2>
+<div id="key-conclusions" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Key conclusions</h2>
 </div>
-<div id="additional-resources" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Additional Resources</h2>
+<div id="additional-resources" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Additional Resources</h2>
 
 </div>
 </div>
