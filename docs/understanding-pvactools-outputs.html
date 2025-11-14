@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   
@@ -31,7 +30,6 @@
   <link rel="shortcut icon" href="assets/ITN_favicon.ico" type="image/x-icon" />
 <link rel="prev" href="running-pvactools.html"/>
 <link rel="next" href="review-your-results-in-pvacview.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,8 +47,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -89,11 +88,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -102,14 +101,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -117,6 +116,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -265,10 +268,10 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/itcr_main_image.png">
 </div>
-<div id="understanding-pvactools-outputs" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Understanding pVACtools outputs</h1>
-<div id="learning-objectives-2" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<div id="understanding-pvactools-outputs" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Understanding pVACtools outputs<a href="understanding-pvactools-outputs.html#understanding-pvactools-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Learning Objectives<a href="understanding-pvactools-outputs.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter will cover:</p>
 <ul>
 <li>Understanding the output files produced by pVACtools</li>
@@ -276,8 +279,8 @@ div.csl-indent {
 <li>Interpreting the .aggregated.tsv file</li>
 </ul>
 </div>
-<div id="pvactools-output-files" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> pVACtools Output Files</h2>
+<div id="pvactools-output-files" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> pVACtools Output Files<a href="understanding-pvactools-outputs.html#pvactools-output-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Both pVACseq and pVACfuse produce three main output files:</p>
 <ul>
 <li>The <code>all_epitopes.tsv</code> file is a TSV file with all predicted neoantigens and
@@ -302,15 +305,15 @@ reference proteome match feature is enabled during a run. It contains
 detailed information about the reference matches found, if there are any.</li>
 </ul>
 </div>
-<div id="interpreting-the-filtered.tsv-file" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Interpreting the filtered.tsv File</h2>
+<div id="interpreting-the-filtered.tsv-file" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Interpreting the filtered.tsv File<a href="understanding-pvactools-outputs.html#interpreting-the-filtered.tsv-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The filtered.tsv file takes all the predicted neoantigens from the
 all_epitopes.tsv file and applies a number of filters to it. Filters are
 applied consecutively, meaning that only the entries passing the first filter
 will be passed along to the second filter, and so on. Only neoantigens
 passing all filters will be reported in this file.</p>
-<div id="binding-filter" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Binding Filter</h3>
+<div id="binding-filter" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Binding Filter<a href="understanding-pvactools-outputs.html#binding-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The binding filter’s primary function is to filter neoantigen candidates on
 their IC50 binding affinity to an HLA allele. Because pVACtools allows users
 to run more than one prediction algorithm, we then apply two summarization
@@ -349,8 +352,8 @@ algorithms chosen by the user and which on is used for filtering is again
 controlled by the <code>--top-score-metric</code> parameter.</li>
 </ul>
 </div>
-<div id="coverage-filter" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Coverage Filter</h3>
+<div id="coverage-filter" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Coverage Filter<a href="understanding-pvactools-outputs.html#coverage-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Coverage Filter is generally used to filter out variants that don’t have
 enough read support or expression. This ensures that the remaining variants
 are not just artifacts and that the genes are actually expressed in the
@@ -389,8 +392,8 @@ parsed from the <code>--starfusion-file</code>, when provided. This is reported 
 <li><code>--expn-val</code>: Expression cutoff. Sites above this cutoff will be considered (default: 0.1).</li>
 </ul>
 </div>
-<div id="transcript-support-level-filter" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Transcript Support Level Filter</h3>
+<div id="transcript-support-level-filter" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Transcript Support Level Filter<a href="understanding-pvactools-outputs.html#transcript-support-level-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Transcript Support Level (TSL) Filter removes neoantigen candidates for
 transcripts with a high TSL, as defined <a href="https://grch37.ensembl.org/info/genome/genebuild/transcript_quality_tags.html#tsl">by Ensembl</a>.
 The cutoff for this filter is set by the <code>--maximum-transcript-support-level</code>
@@ -400,8 +403,8 @@ species and older builds, a value of “Not Supported” is written to the repor
 and the TSL filter will skip those variants.</p>
 <p>This filter is currently only run by pVACseq.</p>
 </div>
-<div id="top-score-filter" class="section level3" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Top Score Filter</h3>
+<div id="top-score-filter" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Top Score Filter<a href="understanding-pvactools-outputs.html#top-score-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Top Score Filter will attempt to determine the best neoantigen candidate
 for each variants.</p>
 <p>For pVACseq it works as follows. Given a set of neoantigen candidates for a
@@ -427,8 +430,8 @@ MT IC50 Score (Median or Best depending on the <code>--top-score-metric</code>) 
 highest fusion transcript expression.</p>
 </div>
 </div>
-<div id="interpreting-the-aggregated.tsv-file" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Interpreting the aggregated.tsv File</h2>
+<div id="interpreting-the-aggregated.tsv-file" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Interpreting the aggregated.tsv File<a href="understanding-pvactools-outputs.html#interpreting-the-aggregated.tsv-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>aggregated.tsv</code> is a condensed output file that shows the best neoantigen
 candidate for each variant and reports only the information most pertinent to
 interpreting the results. It also assigns each of the selected neoantigen candidates
@@ -437,8 +440,8 @@ a tier based on its suitability for vaccine manufacturing.</p>
 (default: 5000). Depending on the value used for the <code>--top-score-metric</code>, all neoantigen
 candidates with a Median or Best MT IC50 Score below the selected <code>--aggregate-inclusion-threshold</code>
 are included in creating this report.</p>
-<div id="determining-the-best-transcript-and-best-peptide-of-a-variant" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Determining the Best Transcript and Best Peptide of a Variant</h3>
+<div id="determining-the-best-transcript-and-best-peptide-of-a-variant" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Determining the Best Transcript and Best Peptide of a Variant<a href="understanding-pvactools-outputs.html#determining-the-best-transcript-and-best-peptide-of-a-variant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In pVACseq, for each variant, all neoantigen candidates meeting the <code>--aggregate-inclusion-threshold</code> are evaluated as follows:</p>
 <ul>
 <li>Pick all entries with a variant transcript that have a protein_coding Biotype.</li>
@@ -454,12 +457,12 @@ median binding affinity is used for this comparison.</p>
 <p>The chosen entry determines the best neoantigen candidate and the best
 transcript coding for it.</p>
 </div>
-<div id="tier-and-tiering-criteria" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Tier and Tiering Criteria</h3>
+<div id="tier-and-tiering-criteria" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Tier and Tiering Criteria<a href="understanding-pvactools-outputs.html#tier-and-tiering-criteria" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For the purpose of assigning tiers, each best peptide is evaluated by a set of
 criteria. These criteria and the available tiers differ from tool to tool.</p>
-<div id="tiering-in-pvacseq" class="section level4" number="4.4.2.1">
-<h4><span class="header-section-number">4.4.2.1</span> Tiering in pVACseq</h4>
+<div id="tiering-in-pvacseq" class="section level4 hasAnchor" number="4.4.2.1">
+<h4><span class="header-section-number">4.4.2.1</span> Tiering in pVACseq<a href="understanding-pvactools-outputs.html#tiering-in-pvacseq" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Tiers available in pVACseq are:</p>
 <table>
 <colgroup>
@@ -547,8 +550,8 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 </tbody>
 </table>
 </div>
-<div id="tiering-in-pvacfuse" class="section level4" number="4.4.2.2">
-<h4><span class="header-section-number">4.4.2.2</span> Tiering in pVACfuse</h4>
+<div id="tiering-in-pvacfuse" class="section level4 hasAnchor" number="4.4.2.2">
+<h4><span class="header-section-number">4.4.2.2</span> Tiering in pVACfuse<a href="understanding-pvactools-outputs.html#tiering-in-pvacfuse" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Tiers available in pVACfuse are:</p>
 <table>
 <colgroup>
@@ -645,42 +648,42 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>
