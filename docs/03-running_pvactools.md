@@ -128,7 +128,7 @@ your run. Here are a list of parameters we generally recommend:
   `--percentile-threshold` set, this parameter will influence how both the
   IC50 cutoff and the percentile cutoff are applied. The default,
   `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold while the `exploratory` option will require a candiate
+  percentile threshold, while the `exploratory` option will require a candidate
   to only pass either the binding or the percentile threshold.
 
 Additionally there are a number of parameters that might be useful depending
@@ -284,7 +284,7 @@ usually apply. Here are a list of parameters we generally recommend:
   `--percentile-threshold` set, this parameter will influence how both the
   IC50 cutoff and the percentile cutoff are applied. The default,
   `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold while the `exploratory` option will require a candiate
+  percentile threshold, while the `exploratory` option will require a candidate
   to only pass either the binding or the percentile threshold.
 
 Additionally there are a number of parameters that might be useful depending
@@ -364,7 +364,7 @@ following order:
 - `allele(s)`: The name of the HLA allele to use for epitope prediction. Multiple
   alleles can be specified using a comma-separated list. These should be the
   HLA alleles of your patient. You might have clinical typing information for
-  your patient. If not, you will need to computational predict the patient's
+  your patient. If not, you will need to computationally predict the patient's
   HLA type using software such as OptiType.
 - `prediction_algorithms`: The epitope prediction algorithms to use. Multiple
   prediction algorithms can be specified, separated by spaces. Use `all` to
@@ -373,15 +373,15 @@ following order:
 - `annotated_vcf`: A VEP-annotated single- or multi-sample VCF containing
   genotype and transcript information. This is generally the same input VCF
   used for pVACseq.
-- `ref_fasta`: A reference DNA FASTA file
+- `ref_fasta`: A reference DNA FASTA file.
 - `gtf_file`: A reference GTF file.
 
 ### Optional Parameters for pVACsplice
 
 In addition to the required parameters, the `pvacsplice run` command also offers
 optional arguments to fine-tune your run. You will find a lot of overlap
-between pVACsplice, pVACfuse and pVACseq parameters and the same general considerations
-usually apply. Here are a list of parameters we generally recommend:
+between pVACsplice, pVACfuse, and pVACseq parameters, and the same general considerations
+usually apply. Here is a list of parameters we generally recommend:
 
 - `--iedb-install-directory`: For speed and reliability, we generally recommend
   that users use a standalone installation of the IEDB software. The pVACtools
@@ -395,21 +395,21 @@ usually apply. Here are a list of parameters we generally recommend:
   this flag enables allele-specific binding cutoffs as recommended by
   [IEDB](https://help.iedb.org/hc/en-us/articles/114094152371-What-thresholds-cut-offs-should-I-use-for-MHC-class-I-and-II-binding-predictions).
 - `--run-reference-proteome-similarity`: One consideration when selecting
-  neoantigen candidates, is that the neoantigen should not occur natively in
+  neoantigen candidates is that the neoantigen should not occur natively in
   the patient's proteome. When this flag is set, pVACfuse will search for each
   neoantigen candidate in the reference proteome and report any hits found.
-  By default this is done using BLASTp but we recommend using a proteome FASTA
+  By default this is done using BLASTp, but we recommend using a proteome FASTA
   file via the `--peptide-fasta` parameter to speed up this step.
 - `--percentile-threshold`: When considering the peptide-MHC binding affinity
   for filtering and prioritizing neoantigen candidates, by default only the
-  IC50 value is being used. Setting this parameter will additionally also filter
+  IC50 value is being used. Setting this parameter will additionally filter
   on the predicted percentile. We recommend a value of 2 (2%) for this
   threshold.
 - `--percentile-threshold-strategy`: When running pVACsplice with a
   `--percentile-threshold` set, this parameter will influence how both the
   IC50 cutoff and the percentile cutoff are applied. The default,
   `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold while the `exploratory` option will require a candiate
+  percentile threshold, while the `exploratory` option will require a candidate
   to only pass either the binding or the percentile threshold.
 
 Additionally there are a number of parameters that might be useful depending
