@@ -268,7 +268,7 @@ The Tiers available in pVACseq are:
 | Tier | Criteria |
 |------|----------|
 | Pass | Best Peptide passes the binding, reference match, expression, transcript, clonal, problematic position, and anchor criteria |
-| PoorBinder | Best Peptide fails the binding criteria but passed the reference match, expression, transcript, clonal, problematic position, and anchor criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, problematic position, and anchor criteria |
 | RefMatch | Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, problematic position, and anchor criteria |
 | PoorTranscript | Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, problematic position, and anchor criteria |
 | LowExpr | Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, problematic position, and anchor criteria |
@@ -287,7 +287,7 @@ The Tiers available in pVACseq are:
 | Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
 | Expression Criteria | Pass if Best Transcript is expressed | Allele Expr > `--trna-vaf` * `--expn-val` |
 | Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
-| Transcript Criteria | Pass if Best Transcript matches any of the user-specified `--transcript-prioritization-strategy` criteria | `TSL <= --maximum-transcript-support level` (if strategy includes `tsl`<br/>`MANE Select == True` (if strategy includes `mane_select`<br/>`Canonical == True` (if strategy includes `canonical` |
+| Transcript Criteria | Pass if Best Transcript matches any of the user-specified `--transcript-prioritization-strategy` criteria | `TSL <= --maximum-transcript-support level` (if strategy includes `tsl`)<br/>`MANE Select == True` (if strategy includes `mane_select`)<br/>`Canonical == True` (if strategy includes `canonical`) |
 | Low Expression Criteria | Peptide has low expression or no expression but RNA VAF and coverage | (0 < Allele Expr < `--trna-vaf` * `--expn-val`) OR (RNA Expr == 0 AND RNA Depth > `--trna-cov` AND RNA VAF > `--trna-vaf`) |
 | Anchor Criteria | Fail if all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (IC50 WT < `--binding-threshold`). `--allele-specific-binding-thresholds` flag is respected. |
 | Clonal Criteria | Best Peptide is likely in the founding clone of the tumor | DNA VAF > `--tumor-purity` / 4 |
@@ -301,16 +301,53 @@ The Tiers available in pVACfuse are:
 
 | Tier | Criteria |
 |------|---------|
-| Pass | Best Peptide passes the binding, read support, and expression criteria |
-| LowReadSupport | Best Peptide fails the read support criteria but passes the binding and expression criteria |
-| LowExpr | Best Peptide fails the expression criteria but passes the binding and read support criteria |
-| Poor | Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria or if it fails the binding criteria |
+| Pass | Best Peptide passes the binding, reference match, read support, expression, and problematic position criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, read support, expression, and problematic position criteria |
+| RefMatch | Best Peptide fails the reference match criteria but passes the binding, read support, expression, and problematic position criteria |
+| LowReadSupport | Best Peptide fails the read support criteria but passes the binding, reference match, expression, and problematic position criteria |
+| LowExpr | Best Peptide fails the expression criteria but passes the binding, reference match, read support, and problematic position criteria |
+| ProbPos | Best Peptide fails the problematic position criteria but passes the binding, reference match, read support, and expression |
+| Poor | Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria |
+
 
 **Criteria Details**
 
 
 | Criteria | Description | Evaluation |
 |----------|-------------|------------|
-| Binding Criteria | Pass if Best Peptide is strong binder | IC50 MT < `--binding-threshold` and %ile MT < `--percentile-threshold` (if parameter is set). `--allele-specific-binding-thresholds` flag is respected. |
-| Read Support Criteria | Pass if the variant has read support | Read Support < `--read-support` |
-| Expression Criteria | Pass if Best Transcript is expressed | Expr < `--expn-val` |
+| Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
+| Expression Criteria | Pass if variant has read support | Read Support < `--read-support` |
+| Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
+| Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
+
+
+#### Tiering in pVACsplice
+
+The Tiers available in pVACsplice are:
+
+
+| Tier | Criteria |
+|------|----------|
+| Pass | Best Peptide passes the binding, reference match, expression, transcript, clonal, and problematic position criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, and problematic position criteria |
+| RefMatch | Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, and problematic position criteria
+| PoorTranscript | Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, and problematic position criteria |
+| LowExpr | Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, and problematic position criteria |
+| Subclonal | Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, and problematic position criteria |
+| ProbPos | Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, and clonal criteria |
+| Poor | Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria |
+| NoExpr | Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0) |
+
+
+**Criteria Details**
+
+
+| Criteria | Description | Evaluation |
+|----------|-------------|------------|
+| Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
+| Expression Criteria | Pass if Best Transcript is expressed | Allele Expr > `--trna-vaf` * `--expn-val` |
+| Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
+| Transcript Criteria | Pass if Best Transcript matches any of the user-specified `--transcript-prioritization-strategy` criteria | `TSL <= --maximum-transcript-support level` (if strategy includes `tsl`)<br/>`MANE Select == True` (if strategy includes `mane_select`)<br/>`Canonical == True` (if strategy includes `canonical`) |
+| Low Expression Criteria | Peptide has low expression or no expression but RNA VAF and coverage | (0 < Allele Expr < `--trna-vaf` * `--expn-val`) OR (RNA Expr == 0 AND RNA Depth > `--trna-cov` AND RNA VAF > `--trna-vaf`) |
+| Clonal Criteria | Best Peptide is likely in the founding clone of the tumor | DNA VAF > `--tumor-purity` / 4 |
+| Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
