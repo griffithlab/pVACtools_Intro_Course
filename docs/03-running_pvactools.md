@@ -22,11 +22,11 @@ mkdir pVACtools_outputs
 docker run \
 -v ${PWD}/HCC1395_inputs:/HCC1395_inputs \
 -v ${PWD}/pVACtools_outputs:/pVACtools_outputs \
--it griffithlab/pvactools:4.0.0 \
+-it griffithlab/pvactools:6.0.1 \
 /bin/bash
 ```
 
-This will pull the 4.0.0 version of the griffithlab/pvactools Docker image and
+This will pull the 6.0.1 version of the griffithlab/pvactools Docker image and
 start an interactive session (`-it`) of that Docker image using the bash shell (`/bin/bash`). 
 The `-v ${PWD}/HCC1395_inputs:/HCC1395_inputs`
 part of the command will mount the
@@ -64,12 +64,12 @@ following order:
   alleles can be specified using a comma-separated list. These should be the
   HLA alleles of your patient/sample. You might have clinical typing information for
   your patient. If not, you will need to computationally predict the patient's
-  HLA type using software such as OptiType. The the HLA allele names should 
-  be in the following format: `HLA-A*02:01`.  
+  HLA type using software such as OptiType. The HLA allele names should 
+  be in the following format: `HLA-A*02:01`.
 - `prediction_algorithms`: The epitope prediction algorithms to use. Multiple
   prediction algorithms can be specified, separated by spaces. Use `all` to
   run all available prediction algorithms. pVACseq will automatically determine 
-  which algorithms are valid for each HLA allele. 
+  which algorithms are valid for each HLA allele.
 - `output_dir`: The directory for writing all result files.
 
 ### Optional Parameters for pVACseq
@@ -122,8 +122,14 @@ your run. Here are a list of parameters we generally recommend:
 - `--percentile-threshold`: When considering the peptide-MHC binding affinity
   for filtering and prioritizing neoantigen candidates, by default only the
   IC50 value is being used. Setting this parameter will additionally also filter
-  on the predicted percentile. We recommend a value of 0.01 (1%) for this
+  on the predicted percentile. We recommend a value of 2 (2%) for this
   threshold.
+- `--percentile-threshold-strategy`: When running pVACseq with a
+  `--percentile-threshold` set, this parameter will influence how both the
+  IC50 cutoff and the percentile cutoff are applied. The default,
+  `conservative`, will require a candidate to pass both the binding and the
+  percentile threshold, while the `exploratory` option will require a candidate
+  to only pass either the binding or the percentile threshold.
 
 Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:
@@ -140,6 +146,18 @@ on your specific analysis needs:
   unstable. This parameter allows users to set their own rules as to which
   peptides are considered problematic and peptides meeting those rules will be marked in the
   pVACseq results and deprioritized.
+- `--transcript-prioritization-strategy` and
+  `--maximum-transcript-support-level`: Generally, multiple transcripts of a
+  gene may code for a neoantigen candidate. When picking the best transcript
+  coding for a candidate, the transcript prioritization strategy controls
+  which factors to consider. By default the MANE Select status, the canonical
+  status, and the Transcript Support Level (TSL) are all considered and any
+  transcript meeting at least one of the specified factors will be considered
+  as the best transcript. However, a more stringent approach might be desired,
+  in which case the strategy could be adjusted to, for example, only consider
+  the MANE Select status or the canonical status of a transcript. The maximum
+  transcript support level parameters controls the TSL cutoff when considering
+  TSL as a factor.
 - `--threads`: This argument will allow pVACseq to run in multi-processing
   mode.
 - `--keep-tmp-files`: Setting this flag will save intermediate files created by pVACseq.
@@ -192,7 +210,7 @@ all \
 --iedb-install-directory /opt/iedb \
 --pass-only \
 --allele-specific-binding-thresholds \
---percentile-threshold 0.01 \
+--percentile-threshold 2 \
 --allele-specific-anchors \
 --run-reference-proteome-similarity \
 --peptide-fasta /HCC1395_inputs/Homo_sapiens.GRCh38.pep.all.fa.gz \
@@ -204,7 +222,7 @@ all \
 
 ## Running pVACfuse
 
-pVACfuse is run to in order to predict neoantigens from fusion events. The
+pVACfuse is run in order to predict neoantigens from fusion events. The
 pipeline uses annotated fusion calls from either AGFusion or Arriba for this
 purpose. These annotators already include the fusion peptide sequence in their
 outputs which pVACfuse uses to extract neoantigens around the fusion position.
@@ -232,7 +250,7 @@ following order:
 
 ### Optional Parameters for pVACfuse
 
-In addition to the required parameters, the `pvacseq run` command also offers
+In addition to the required parameters, the `pvacfuse run` command also offers
 optional arguments to fine-tune your run. You will find a lot of overlap
 between pVACfuse and pVACseq parameters and the same general considerations
 usually apply. Here are a list of parameters we generally recommend:
@@ -260,8 +278,14 @@ usually apply. Here are a list of parameters we generally recommend:
 - `--percentile-threshold`: When considering the peptide-MHC binding affinity
   for filtering and prioritizing neoantigen candidates, by default only the
   IC50 value is being used. Setting this parameter will additionally also filter
-  on the predicted percentile. We recommend a value of 0.01 (1%) for this
+  on the predicted percentile. We recommend a value of 2 (2%) for this
   threshold.
+- `--percentile-threshold-strategy`: When running pVACfuse with a
+  `--percentile-threshold` set, this parameter will influence how both the
+  IC50 cutoff and the percentile cutoff are applied. The default,
+  `conservative`, will require a candidate to pass both the binding and the
+  percentile threshold, while the `exploratory` option will require a candidate
+  to only pass either the binding or the percentile threshold.
 
 Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:
@@ -274,7 +298,7 @@ on your specific analysis needs:
   Cysteine is commonly considered problematic as it makes the peptide
   unstable. This parameter allows users to set their own rules as to which
   peptides are considered problematic and peptides meeting those rules will be marked in the
-  pVACseq results and deprioritized.
+  pVACfuse results and deprioritized.
 - `--threads`: This argument will allow pVACfuse to run in multi-processing
   mode.
 - `--keep-tmp-files`: Setting this flag will save intermediate files created by pVACfuse.
@@ -295,7 +319,7 @@ identified DQA1\*03:03, DQB1\*03:02, and DRB1\*04:05 as the patient's class II a
 For pVACfuse the sample name is not used for any parsing so it doesn't need to
 match any specific information in the AGFusion results. It is only used for
 naming result files. For consistency we will use the same `HCC1395_TUMOR_DNA`
-sample name we used in pVACfuse.
+sample name we used in pVACseq.
 
 For our test run, please execute the `pvacfuse run` command below. The
 prediction run might take a while but pVACfuse will output progress messages as
@@ -311,7 +335,147 @@ all \
 /pVACtools_outputs/pvacfuse_predictions \
 --iedb-install-directory /opt/iedb \
 --allele-specific-binding-thresholds \
---percentile-threshold 0.01 \
+--percentile-threshold 2 \
+--run-reference-proteome-similarity \
+--peptide-fasta /HCC1395_inputs/Homo_sapiens.GRCh38.pep.all.fa.gz \
+--problematic-amino-acids C \
+--downstream-sequence-length 100 \
+--n-threads 8 \
+--keep-tmp-files
+```
+
+## Running pVACsplice
+
+pVACsplice is run in order to predict neoantigens from tumor-specific alternative
+splicing patterns. The pipeline uses splice site variants predicted by RegTools
+for this purpose. The RegTools output is used by pVACsplice in combination with a
+GTF file to construct peptide sequences for the alternative splicing patterns and
+extract neoantigens around the splice site.
+
+The pVACsplice pipeline is run using the `pvacsplice run` command.
+
+### Required Parameters for pVACsplice
+
+The `pvacsplice run` command takes a number of required parameters in the
+following order:
+
+- `input_file`: A RegTools junctions output TSV file.
+- `sample_name`: The name of the tumor sample being processed.
+- `allele(s)`: The name of the HLA allele to use for epitope prediction. Multiple
+  alleles can be specified using a comma-separated list. These should be the
+  HLA alleles of your patient. You might have clinical typing information for
+  your patient. If not, you will need to computationally predict the patient's
+  HLA type using software such as OptiType.
+- `prediction_algorithms`: The epitope prediction algorithms to use. Multiple
+  prediction algorithms can be specified, separated by spaces. Use `all` to
+  run all available prediction algorithms.
+- `output_dir`: The directory for writing all result files.
+- `annotated_vcf`: A VEP-annotated single- or multi-sample VCF containing
+  genotype and transcript information. This is generally the same input VCF
+  used for pVACseq.
+- `ref_fasta`: A reference DNA FASTA file.
+- `gtf_file`: A reference GTF file.
+
+### Optional Parameters for pVACsplice
+
+In addition to the required parameters, the `pvacsplice run` command also offers
+optional arguments to fine-tune your run. You will find a lot of overlap
+between pVACsplice, pVACfuse, and pVACseq parameters, and the same general considerations
+usually apply. Here is a list of parameters we generally recommend:
+
+- `--iedb-install-directory`: For speed and reliability, we generally recommend
+  that users use a standalone installation of the IEDB software. The pVACtools
+  Docker containers already come with this software pre-installed in the
+  `/opt/iedb` directory.
+- `--allele-specific-binding-thresholds`: When filtering and tiering
+  neoantigen candidates, one main criteria is the predicted peptide-MHC
+  binding affinity. By default, pVACfuse uses a cutoff of <500 nmol IC50.
+  However, for some HLA alleles, other cutoffs are more appropriate depending
+  on the distribution of binding affinities across peptides. Setting
+  this flag enables allele-specific binding cutoffs as recommended by
+  [IEDB](https://help.iedb.org/hc/en-us/articles/114094152371-What-thresholds-cut-offs-should-I-use-for-MHC-class-I-and-II-binding-predictions).
+- `--run-reference-proteome-similarity`: One consideration when selecting
+  neoantigen candidates is that the neoantigen should not occur natively in
+  the patient's proteome. When this flag is set, pVACfuse will search for each
+  neoantigen candidate in the reference proteome and report any hits found.
+  By default this is done using BLASTp, but we recommend using a proteome FASTA
+  file via the `--peptide-fasta` parameter to speed up this step.
+- `--percentile-threshold`: When considering the peptide-MHC binding affinity
+  for filtering and prioritizing neoantigen candidates, by default only the
+  IC50 value is being used. Setting this parameter will additionally filter
+  on the predicted percentile. We recommend a value of 2 (2%) for this
+  threshold.
+- `--percentile-threshold-strategy`: When running pVACsplice with a
+  `--percentile-threshold` set, this parameter will influence how both the
+  IC50 cutoff and the percentile cutoff are applied. The default,
+  `conservative`, will require a candidate to pass both the binding and the
+  percentile threshold, while the `exploratory` option will require a candidate
+  to only pass either the binding or the percentile threshold.
+
+Additionally there are a number of parameters that might be useful depending
+on your specific analysis needs:
+
+- `--class-i-epitope-length` and `--class-ii-epitope-length`: By default 8,
+  9, 10, 11 and 12, 13, 14, 15, 16, 17, 18 are set for these parameters,
+  respectively, but different lengths might be desired.
+- `--problematic-amino-acids`: Some vaccine manufacturers will consider certain amino
+  acids in the neoantigen candidates difficult to manufacture. For example, a
+  Cysteine is commonly considered problematic as it makes the peptide
+  unstable. This parameter allows users to set their own rules as to which
+  peptides are considered problematic and peptides meeting those rules will be marked in the
+  pVACsplice results and deprioritized.
+- `--transcript-prioritization-strategy` and
+  `--maximum-transcript-support-level`: Generally, multiple transcripts of a
+  gene may code for a neoantigen candidate. When picking the best transcript
+  coding for a candidate, the transcript prioritization strategy controls
+  which factors to consider. By default the MANE Select status, the canonical
+  status, and the Transcript Support Level (TSL) are all considered and any
+  transcript meeting at least one of the specified factors will be considered
+  as the best transcript. However, a more stringent approach might be desired,
+  in which case the strategy could be adjusted to, for example, only consider
+  the MANE Select status or the canonical status of a transcript. The maximum
+  transcript support level parameters controls the TSL cutoff when considering
+  TSL as a factor.
+- `--threads`: This argument will allow pVACfuse to run in multi-processing
+  mode.
+- `--keep-tmp-files`: Setting this flag will save intermediate files created by pVACsplice.
+- `--downstream-sequence-length`: For frameshift fusions, the downstream
+  sequence can potentially be very long, which can be computationally
+  expensive. This parameter limits how many amino acids of the downstream
+  sequence are included in the prediction. We often set a limit of `100`.
+
+### pVACsplice Command
+
+Given the considerations outlined above, let's run pVACfuse on our sample data.
+
+As with pVACsplice and pVACfuse, we can use the `optitype_normal_result.tsv` file to identify the patient's
+class I HLA alleles. These are HLA-A\*29:02, HLA-B\*45:01, HLA-B\*82:02, and HLA-C\*06:02.
+We also have clinical typing information that confirms these class I alleles as well as 
+identified DQA1\*03:03, DQB1\*03:02, and DRB1\*04:05 as the patient's class II alleles.
+
+As with pVACseq, the sample name needs to match the tumor sample ID in the input
+VCF #CHROM header. Because the input VCF used in pVACsplice is the same as the
+one used in pVACseq, we will use the same `HCC1395_TUMOR_DNA` sample name.
+
+For our test run, please execute the `pvacsplice run` command below. The
+prediction run might take a while but pVACsplice will output progress messages as
+it runs through the pipeline.
+
+
+```bash
+pvacsplice run \
+/HCC1395_inputs/HCC1395.splice_junctions.tsv \
+HCC1395_TUMOR_DNA \
+HLA-A*29:02,HLA-B*45:01,HLA-B*82:02,HLA-C*06:02,DQA1*03:03,DQB1*03:02,DRB1*04:05 \
+all \
+/pVACtools_outputs/pvacsplice_predictions \
+/HCC1395_inputs/annotated.expression.vcf.gz \
+/HCC1395_inputs/ref_genome.fa \
+/HCC1395_inputs/Homo_sapiens.GRCh38.105.chr.gtf.gz \
+--normal-sample-name HCC1395_NORMAL_DNA
+--iedb-install-directory /opt/iedb \
+--allele-specific-binding-thresholds \
+--percentile-threshold 2 \
 --run-reference-proteome-similarity \
 --peptide-fasta /HCC1395_inputs/Homo_sapiens.GRCh38.pep.all.fa.gz \
 --problematic-amino-acids C \
