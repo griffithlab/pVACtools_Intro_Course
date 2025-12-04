@@ -5,7 +5,7 @@ ottrpal::set_knitr_image_path()
 
 # Introduction
 
-This course has been developed recently (Summer 2023). We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
+This course was developed in Summer 2023 and updated in Fall 2025. We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
 
 ## Motivation
 
@@ -19,12 +19,12 @@ allele expression, peptide binding affinities, and determination of whether a mu
 users to efficiently generate, review, and interpret results, selecting candidate peptides for individual experiments or patient vaccine designs. Additional modules
 support design choices needed for competing vaccine delivery approaches. One such module optimizes peptide ordering to minimize junctional epitopes in DNA vector
 vaccines. Downstream analysis commands for synthetic long peptide vaccines are available to assess candidates for factors that influence peptide synthesis. All
-of the aforementioned steps are executed via a modular workflow consisting of tools for neoantigen prediction from somatic alterations (pVACseq, pVACfuse, and pVACbind),
+of the aforementioned steps are executed via a modular workflow consisting of tools for neoantigen prediction from somatic alterations (pVACseq, pVACfuse, pVACsplice, and pVACbind),
 prioritization, and selection using a graphical Web-based interface (pVACview), and design of DNA vector–based vaccines (pVACvector) and synthetic long peptide
 vaccines. pVACtools is available at [http://www.pvactools.org](http://www.pvactools.org).
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "pVACtools is a cancer immunotherapy tools suite"}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y/edit#slide=id.g22b1533a196_0_0")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y/edit#slide=id.g3a37485c18b_1_0")
 ```
 
 ## Background
