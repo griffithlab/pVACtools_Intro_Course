@@ -89,7 +89,7 @@ enabled additional filtering on related metrics:
   `--percentile-threshold` set, this parameter will influence how both the
   binding cutoff and the percentile cutoff are applied. The default,
   `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold while the `exploratory` option will require a candiate
+  percentile threshold while the `exploratory` option will require a candidate
   to only pass either the binding or the percentile threshold.
 
 ### Coverage Filter

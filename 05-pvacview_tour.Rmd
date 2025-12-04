@@ -92,7 +92,7 @@ highlighted with a green border.
 
 Next, this table lists the IC50 peptide MHC binding affinity for both the Best Peptide
 (MT) and the matched wild type (WT). These values are either a median of all of the
-binding predictions made by the predictiors selected in your pVACseq run, or
+binding predictions made by the predictors selected in your pVACseq run, or
 the lowest binding prediction made. This depends on the value set for the
 `--top-score-metric` in your run. The table also shows the median/lowest percentile
 scores of all predictors that provide this value, again depending on the
@@ -279,7 +279,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCG
 ## Regenerate Tiers with Custom Parameters
 
 During review of your data it might become apparent that different tiering
-thresholds would've been more approriate. pVACview allows you to re-tier your
+thresholds would've been more appropriate. pVACview allows you to re-tier your
 data with custom parameters by adjusting the sliders and inputs in the
 "Advanced Options: Regenerate Tiering with different parameters" panel and
 pressing the "Recalculate Tiering with new parameters" button. The tiering

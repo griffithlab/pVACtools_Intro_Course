@@ -9,6 +9,7 @@ Bloomberg
 Bookdown
 bioinformatics
 biotype
+CDS
 CHROM
 CLI
 ClinVar
@@ -37,6 +38,7 @@ favicon
 frameshift
 fyi
 GDSCN
+GTF
 GenBank
 GH
 GitHub
@@ -66,6 +68,7 @@ indel
 indels
 inframe
 itcrtraining
+JunctionReadCount
 json
 junctional
 Leanpub
@@ -103,17 +106,20 @@ proteomics
 pVAC
 pVACfuse
 pVACseq
+pVACsplice
 pvactools
 pVACtools
 pVACvector
 pVACview
 pVACviz
 RefSeq
+RegTools
 reproducibility
 somatically
 subclonal
 summarization
 STARFusion
+SpanningFragCount
 tbi
 tiering
 TSL
