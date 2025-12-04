@@ -44,7 +44,7 @@ you are not familiar with launching R Shiny from the command line.
 Additionally, there are a number of packages you will need to install in your R/R studio:
 
 
-```r
+``` r
 install.packages("shiny", dependencies=TRUE)
 install.packages("ggplot2", dependencies=TRUE)
 install.packages("DT", dependencies=TRUE)
@@ -62,9 +62,6 @@ install.packages("RCurl", dependencies=TRUE)
 install.packages("curl", dependencies=TRUE)
 install.packages("string", dependencies=TRUE)
 install.packages("shinycssloaders", dependencies=TRUE)
-install.packages("plotly", dependencies=TRUE)
-install.packages("shinyWidgets", dependencies=TRUE)
-install.packages("colourpicker", dependencies=TRUE)
 ```
 
 ## Data
@@ -99,10 +96,6 @@ For pVACfuse:
 - `star-fusion.fusion_predictions.tsv`: A STARFusion prediction file with fusion read support
   and expression information.
 
-For pVACsplice:
-
-- `HCC1395.splice_junctions.tsv`: A RegTools junctions output TSV file
-
 General:
 
 - `Homo_sapiens.GRCh38.pep.all.fa.gz`: A reference proteome peptide FASTA to use
@@ -110,29 +103,13 @@ General:
 
 To download this data, please run the following commands:
 
-```bash
+
+``` bash
 wget https://raw.githubusercontent.com/griffithlab/pVACtools_Intro_Course/main/HCC1395_inputs.zip
 unzip HCC1395_inputs.zip
 ```
 
-Additionally, to run pVACsplice, a set of reference files are required that
-are too large to include in the HCC1395_inputs.zip archive. To download these
-manually please run the following commands:
-
-```bash
-cd HCC1395_inputs
-wget https://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.chr.gtf.gz
-wget http://genomedata.org/pmbio-workshop/references/genome/all/ref_genome.tar
-tar -xf ref_genome.tar ref_genome.fa.gz ref_genome.fa.fai
-gunzip ref_genome.fa.gz
-rm -rf ref_genome.tar
-```
-
-This will add the following reference files
-
-- `ref_genome.fa` and `.fai`: A reference DNA FASTA file and index
-- `Homo_sapiens.GRCh38.105.chr.gtf.gz`: A reference GTF file
-
 This course will not cover the required pre-processing steps for the pVACtools
 input data but extensive instructions on how to prepare your own data for use
 with pVACtools can be found at [pvactools.org](http://www.pvactools.org).
+
