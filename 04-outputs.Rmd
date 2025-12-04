@@ -364,7 +364,7 @@ cat(tabl)
 
 **Criteria Details**
 
-```{r pvacfuse_tier_criteria, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r pvacsplice_tier_criteria, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 | Criteria | Description | Evaluation |
 |----------|-------------|------------|
