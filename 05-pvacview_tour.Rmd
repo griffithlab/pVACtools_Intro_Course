@@ -264,7 +264,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCG
 ## Regenerate Tiers with Custom Parameters
 
 During review of your data it might become apparent that different tiering
-thresholds would've been more approriate. pVACview allows you to re-tier your
+thresholds would've been more appropriate. pVACview allows you to re-tier your
 data with custom parameters by adjusting the sliders and inputs in the
 "Advanced Options: Regenerate Tiering with different parameters" panel and
 pressing the "Recalculate Tiering with new parameters" button.
