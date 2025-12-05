@@ -1,10 +1,10 @@
 url	chapt_title	img_path
-https://course.pvactools.org/no_toc/index.html	About this Course	resources/chapt_screen_images/index.png
-https://course.pvactools.org/no_toc/introduction.html	1 Introduction	resources/chapt_screen_images/introduction.png
-https://course.pvactools.org/no_toc/prerequisites.html	2 Prerequisites	resources/chapt_screen_images/prerequisites.png
-https://course.pvactools.org/no_toc/running-pvactools.html	3 Running pVACtools	resources/chapt_screen_images/running-pvactools.png
-https://course.pvactools.org/no_toc/understanding-pvactools-outputs.html	4 Understanding pVACtools outputs	resources/chapt_screen_images/understanding-pvactools-outputs.png
-https://course.pvactools.org/no_toc/review-your-results-in-pvacview.html	5 Review Your Results in pVACview	resources/chapt_screen_images/review-your-results-in-pvacview.png
-https://course.pvactools.org/no_toc/conclusions.html	6 Conclusions	resources/chapt_screen_images/conclusions.png
-https://course.pvactools.org/no_toc/about-the-authors.html	About the Authors	resources/chapt_screen_images/about-the-authors.png
-https://course.pvactools.org/no_toc/references.html	7 References	resources/chapt_screen_images/references.png
+https://course.pvactools.org/index.html	About this Course	./resources/chapt_screen_images/index.png
+https://course.pvactools.org/introduction.html	1 Introduction	./resources/chapt_screen_images/introduction.png
+https://course.pvactools.org/prerequisites.html	2 Prerequisites	./resources/chapt_screen_images/prerequisites.png
+https://course.pvactools.org/running-pvactools.html	3 Running pVACtools	./resources/chapt_screen_images/running-pvactools.png
+https://course.pvactools.org/understanding-pvactools-outputs.html	4 Understanding pVACtools outputs	./resources/chapt_screen_images/understanding-pvactools-outputs.png
+https://course.pvactools.org/review-your-results-in-pvacview.html	5 Review Your Results in pVACview	./resources/chapt_screen_images/review-your-results-in-pvacview.png
+https://course.pvactools.org/conclusions.html	6 Conclusions	./resources/chapt_screen_images/conclusions.png
+https://course.pvactools.org/about-the-authors.html	About the Authors	./resources/chapt_screen_images/about-the-authors.png
+https://course.pvactools.org/references.html	7 References	./resources/chapt_screen_images/references.png
