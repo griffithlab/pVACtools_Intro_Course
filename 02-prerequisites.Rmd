@@ -129,7 +129,7 @@ gunzip ref_genome.fa.gz
 rm -rf ref_genome.tar
 ```
 
-This will add the following reference files
+This will add the following reference files:
 
 - `ref_genome.fa` and `.fai`: A reference DNA FASTA file and index
 - `Homo_sapiens.GRCh38.105.chr.gtf.gz`: A reference GTF file

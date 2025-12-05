@@ -113,7 +113,7 @@ reference proteome which is undesired since such peptides are not novel and
 including them in a vaccine might lead to an auto immune response.
 
 Users are able to set a status for each candidate by clicking the appropriate
-buttons: thumbs-up (Accept), thumbs-down (Reject), or Flag (requires further review).
+buttons: thumbs-up (accept), thumbs-down (reject), or flag (requires further review).
 
 Clicking on the row for a variant will select it. This
 will update the lower panels with details for the selected variant.
@@ -210,7 +210,7 @@ Best Peptide. The Best Peptide is highlighted in green.
 ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y/edit#slide=id.g3a65970eb36_0_24")
 ```
 
-The Anchor Heatmap tab shows a heatmap overlayed over each included neoantigen
+The Anchor Heatmap tab shows a heatmap overlaying each included neoantigen
 candidate from the selected transcript set. A darker color represents a higher
 probability that a position in the peptide is an anchor. Mutated positions are
 represented by red letters. More information
