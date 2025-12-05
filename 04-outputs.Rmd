@@ -14,7 +14,7 @@ This chapter will cover:
 
 ## pVACtools Output Files
 
-Both pVACseq and pVACfuse produce three main output files:
+pVACseq, pVACfuse, and pVACsplice all produce three main output files:
 
 - The `all_epitopes.tsv` file is a TSV file with all predicted neoantigens and
   all information obtained during the run.
@@ -23,13 +23,13 @@ Both pVACseq and pVACfuse produce three main output files:
   the user during the run. The filters will be further explained in
   subsequent sections.
 - The `aggregated.tsv` is a condensed output file that contains only the
-  information most pertinent to interpret the results. It has contains only
+  information most pertinent to interpret the results. It contains only
   the best neoantigen candidate for each variant. Our heuristic for
   determining the best neoantigen is described in subsequent sections of this
   course.
 
-There are also a number of a secondary output files produced by pVACseq and
-pVACfuse. The most important are:
+There are also a number of a secondary output files produced by pVACseq,
+pVACfuse, and pVACsplice. The most important are:
 
 - `aggregated.metrics.json`: The file is only produced by pVACseq. It contains
   metadata needed for visualizing your results in pVACview.
@@ -54,9 +54,9 @@ methods on the calls for each neoantigen candidate and HLA allele combination:
 (1) pVACtools calculates the median IC50 binding affinity for all selected prediction
 algorithms (reported in the `Median [MT] IC50 Score` column), and (2) pVACtools selects
 the IC50 binding affinity prediction with the lowest value (reported in the
-`Best [MT] IC50 Score)` column. By default,
+`Best [MT] IC50 Score` column). By default,
 the binding filter is applied to the median IC50 score unless
-users set the `--top-score-metric` parameters to `lowest`.
+users set the `--top-score-metric` parameter to `lowest`.
 
 The binding filter discards candidates where the binding affinity is above the
 `--binding-threshold` (default: 500). However, users may set the
@@ -85,6 +85,12 @@ enabled additional filtering on related metrics:
   percentile scores for the range of scores reported by the prediction
   algorithms chosen by the user and which on is used for filtering is again
   controlled by the `--top-score-metric` parameter.
+- `--percentile-threshold-strategy`: When running pVACtools with a
+  `--percentile-threshold` set, this parameter will influence how both the
+  binding cutoff and the percentile cutoff are applied. The default,
+  `conservative`, will require a candidate to pass both the binding and the
+  percentile threshold while the `exploratory` option will require a candidate
+  to only pass either the binding or the percentile threshold.
 
 ### Coverage Filter
 
@@ -93,19 +99,19 @@ enough read support or expression. This ensures that the remaining variants
 are not just artifacts and that the genes are actually expressed in the
 patient's RNA.
 
-For pVACseq, this generally relies on your VCF being annotated with coverage
+For both pVACseq and pVACsplice, this generally relies on your VCF being annotated with coverage
 and expression data. In our example, the VCF has already been annotated with
 this data. For more information about how to add [coverage](https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/readcounts.html)
 and [expression data](https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/expression.html)
 to your own VCFs, please see our docs.
 Additionally, filtering on the normal DNA depth and variant allele frequency
 (VAF) requires your VCF to be a tumor-normal sample VCF and the normal sample
-to be identifies in your pVACseq run using the `--normal-sample-name`
+to be identified in your pVACseq/pVACsplice run using the `--normal-sample-name`
 parameter. If a coverage metric doesn't apply because the underlying data is
 not available, `NA` is reported by pVACtools. By default, the filter will skip
 evaluating a coverage criteria when a neoantigen's value for it is `NA`.
 
-The following thresholds are applied in pVACseq by this filter:
+The following thresholds are applied in pVACseq and pVACsplice by this filter:
 
 - `--normal-cov`: Normal coverage cutoff. Minimum number of required reads in the normal DNA (default: 5).
 - `--tdna-cov`: Tumor DNA coverage cutoff. Minimum number of required reads in the tumor DNA (default: 10).
@@ -119,7 +125,9 @@ For pVACfuse, this filter evaluates a fusion variant's fusion read support and f
 Arriba natively outputs a number of read metrics. These are the number of supporting split fragments with an anchor in
 gene1 or gene2, respectively, as well as the number of pairs (fragments) of discordant mates supporting the fusion
 (a.k.a. spanning reads or bridge reads). The sum of these three values is
-reported as Read Support in pVACfuse. The fusion transcript expression is
+reported as Read Support in pVACfuse. For AGFusion, the read support is parsed
+from the `--starfusion-file` as the sum of the JunctionReadCount and
+SpanningFragCount. For both types of input, the fusion transcript expression is
 parsed from the `--starfusion-file`, when provided. This is reported as FFPM
 (fusion fragments per million total reads).
 
@@ -128,18 +136,24 @@ The following thresholds are applied in pVACfuse by this filter:
 - `--read-support`: Read Support cutoff. Sites above this cutoff will be considered (default: 5).
 - `--expn-val`: Expression cutoff. Sites above this cutoff will be considered (default: 0.1).
 
-### Transcript Support Level Filter
+### Transcript Filter
 
-The Transcript Support Level (TSL) Filter removes neoantigen candidates for
-transcripts with a high TSL, as defined [by Ensembl](https://grch37.ensembl.org/info/genome/genebuild/transcript_quality_tags.html#tsl).
-The cutoff for this filter is set by the `--maximum-transcript-support-level`
-parameter. Transcripts with a TSL of NA will always be filtered out.
+The Transcript Filter removes neoantigens resulting from transcripts that are
+considered poor candidates. To determine whether a transcript is poor, the
+`--transcript-prioritization-strategy` parameter is used. This parameter
+defines a list of criteria to consider. These are:
 
-Annotation with TSL values through VEP is only available for GRCh38. For other
-species and older builds, a value of "Not Supported" is written to the report
-and the TSL filter will skip those variants.
+- `mane_select`: MANE Select status of the transcript
+- `canonical`: Canonical status of the transcripts
+- `tsl`: Whether or not the Transcript Support Level (TSL) meets the
+  `--maximum-transcript-support-level`, as defined [by Ensembl](https://grch37.ensembl.org/info/genome/genebuild/transcript_quality_tags.html#tsl).
 
-This filter is currently only run by pVACseq.
+Users may specify one or more of these criteria as their strategy. A transcript
+meeting at least one of the specified criteria is considered a
+good transcript and passes the transcript filter. Only transcripts meeting none of the
+specified criteria will be filtered out.
+
+This filter is currently only run by pVACseq and pVACsplice.
 
 ### Top Score Filter
 
@@ -151,14 +165,18 @@ variant we first group the transcripts into sets where all transcripts in a set
 code for the same set of neoantigen candidates. For each transcript set we then
 determine the best neoantigen candidate as follows:
 
-- Pick all neoantigens with a variant transcript that have a protein_coding Biotype
-- Of the remaining candidates, pick the ones with a variant transcript having a
-  TSL less then the `--maximum-transcript-support-level`.
+- Pick all neoantigens with a variant transcript that doesn't have a Transcript CDS Flag
+- Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype
+- Of the remaining candidates, pick the ones with a passing transcript according
+  to the selected `--transcript-prioritization-strategy` and `--maximum-transcript-support-level`.
 - Of the remaining candidates, pick the entries with no Problematic Positions.
 - Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
   more detail further below).
-- Of the remaining candidates, pick the one with the lowest MT IC50 Score (Median or Best
-  depending on the `--top-score-metric`), lowest TSL, and longest transcript.
+- Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+  depending on the `--top-score-metric`, Score or Percentile depending on the
+  `--top-score-metric2`), the transcript's MANE Select Status, the
+  transcript's Canonical status, the transcript's TSL, the transcript length,
+  and the transcript expression. Select the highest sorted entry.
 
 This filter then reports the best neoantigen candidate for each transcript set.
 
@@ -168,6 +186,23 @@ same set of neoantigen candidates. From there, the best neoantigen candidate
 for each transcript set is determined by picking the candidate with the lowest
 MT IC50 Score (Median or Best depending on the `--top-score-metric`) and the
 highest fusion transcript expression.
+
+For pVACsplice, the neoantigen candidates are grouped into sets with the same splice
+site Junction. From there, the best neoantigen candidate for each set is
+determined very similarly to pVACseq:
+
+- Pick all neoantigens with a variant transcript that doesn't have a Transcript CDS Flag
+- Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype
+- Of the remaining candidates, pick the ones with a passing transcript according
+  to the selected `--transcript-prioritization-strategy` and `--maximum-transcript-support-level`.
+- Of the remaining candidates, pick the entries with no Problematic Positions.
+- Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+  more detail further below).
+- Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+  depending on the `--top-score-metric`, Score or Percentile depending on the
+  `--top-score-metric2`), the transcript's MANE Select Status, the
+  transcript's Canonical status, the transcript's TSL, the transcript WT
+  Protein Length, and the transcript expression. Select the highest sorted entry.
 
 ## Interpreting the aggregated.tsv File
 
@@ -179,22 +214,45 @@ a tier based on its suitability for vaccine manufacturing.
 Only epitopes meeting the `--aggregate-inclusion-threshold` are included in this report
 (default: 5000). Depending on the value used for the `--top-score-metric`, all neoantigen
 candidates with a Median or Best MT IC50 Score below the selected `--aggregate-inclusion-threshold`
-are included in creating this report.
+are included in creating this report. If this cutoff yields a lot of candidates, the
+included neoantigens are pared to the best `--aggregate-inclusion-count-limit` candidates.
 
 ### Determining the Best Transcript and Best Peptide of a Variant
 
 In pVACseq, for each variant, all neoantigen candidates meeting the `--aggregate-inclusion-threshold` are evaluated as follows:
 
-- Pick all entries with a variant transcript that have a protein_coding Biotype.
-- Of the remaining entries, pick the ones with a variant transcript having a Transcript Support Level <= `--maximum-transcript-support-level`.
-- Of the remaining entries, pick the entries with no Problematic Positions.
-- Of the remaining entries, pick the ones passing the Anchor Criteria (see Criteria Details section below).
-- Of the remaining entries, pick the one with the lowest MT IC50 score( Median or Best
-  depending on the `--top-score-metric`), lowest Transcript Support Level, and longest transcript.
+- Pick all neoantigens with a variant transcript that doesn't have a Transcript CDS Flag
+- Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype
+- Of the remaining candidates, pick the ones with a passing transcript according
+  to the selected `--transcript-prioritization-strategy` and `--maximum-transcript-support-level`.
+- Of the remaining candidates, pick the entries with no Problematic Positions.
+- Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+  more detail further below).
+- Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+  depending on the `--top-score-metric`, Score or Percentile depending on the
+  `--top-score-metric2`), the transcript's MANE Select Status, the
+  transcript's Canonical status, the transcript's TSL, the transcript length,
+  and the transcript expression. Select the highest sorted entry.
 
-In pVACfuse, the neoantigen candidate with the lowest IC50 binding affinity for each variant is selected.
+In pVACfuse, the neoantigen candidate with the lowest IC50 binding affinity for each variant
+and highest transcript expression is selected.
 The value used for the `--top-score-metric` determines whether the lowest or
 median binding affinity is used for this comparison.
+
+For pVACsplice, the best neoantigen candidate for each variant is determined very similarly to pVACseq:
+
+- Pick all neoantigens with a variant transcript that doesn't have a Transcript CDS Flag
+- Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype
+- Of the remaining candidates, pick the ones with a passing transcript according
+  to the selected `--transcript-prioritization-strategy` and `--maximum-transcript-support-level`.
+- Of the remaining candidates, pick the entries with no Problematic Positions.
+- Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+  more detail further below).
+- Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+  depending on the `--top-score-metric`, Score or Percentile depending on the
+  `--top-score-metric2`), the transcript's MANE Select Status, the
+  transcript's Canonical status, the transcript's TSL, the transcript WT
+  Protein Length, and the transcript expression. Select the highest sorted entry.
 
 The chosen entry determines the best neoantigen candidate and the best
 transcript coding for it.
@@ -212,12 +270,16 @@ The Tiers available in pVACseq are:
 tabl <- "
 | Tier | Criteria |
 |------|----------|
-| Pass | Best Peptide passes the binding, expression, tsl, clonal, and anchor criteria |
-| Anchor | Best Peptide fails the anchor criteria but passes the binding, expression, tsl, and clonal criteria |
-| Subclonal | Best Peptide fails the clonal criteria but passes the binding, tsl, and anchor criteria |
-| LowExpr | Best Peptide meets the Low Expression Criteria and passes the binding, tsl, clonal, and anchor criteria |
+| Pass | Best Peptide passes the binding, reference match, expression, transcript, clonal, problematic position, and anchor criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, problematic position, and anchor criteria |
+| RefMatch | Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, problematic position, and anchor criteria |
+| PoorTranscript | Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, problematic position, and anchor criteria |
+| LowExpr | Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, problematic position, and anchor criteria |
+| Anchor | Best Peptide fails the anchor criteria but  passes the binding, reference match, expression, transcript, clonal, and problematic position criteria |
+| Subclonal | Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, problematic position, and anchor criteria |
+| ProbPos | Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, clonal, and anchor criteria |
+| Poor | Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria |
 | NoExpr | Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0) |
-| Poor | Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria or if it fails the binding criteria |
 "
 cat(tabl)
 ```
@@ -228,15 +290,18 @@ cat(tabl)
 tabl <- "
 | Criteria | Description | Evaluation |
 |----------|-------------|------------|
-| Binding Criteria | Pass if Best Peptide is a strong binder | IC50 MT < `--binding-threshold` and %ile MT < `--percentile-threshold` (if parameter is set). `--allele-specific-binding-thresholds` flag is respected. |
+| Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
 | Expression Criteria | Pass if Best Transcript is expressed | Allele Expr > `--trna-vaf` * `--expn-val` |
+| Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
+| Transcript Criteria | Pass if Best Transcript matches any of the user-specified `--transcript-prioritization-strategy` criteria | `TSL <= --maximum-transcript-support level` (if strategy includes `tsl`)<br/>`MANE Select == True` (if strategy includes `mane_select`)<br/>`Canonical == True` (if strategy includes `canonical`) |
 | Low Expression Criteria | Peptide has low expression or no expression but RNA VAF and coverage | (0 < Allele Expr < `--trna-vaf` * `--expn-val`) OR (RNA Expr == 0 AND RNA Depth > `--trna-cov` AND RNA VAF > `--trna-vaf`) |
-| TSL Criteria | Pass if Best Transcript has good transcript support level | TSL <= `--maximum-transcript-support-level` |
-| Clonal Criteria | Best Peptide is likely in the founding clone of the tumor | DNA VAF > `--tumor-purity` / 4 |
 | Anchor Criteria | Fail if all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (IC50 WT < `--binding-threshold`). `--allele-specific-binding-thresholds` flag is respected. |
+| Clonal Criteria | Best Peptide is likely in the founding clone of the tumor | DNA VAF > `--tumor-purity` / 4 |
+| Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
 "
 cat(tabl)
 ```
+
 
 #### Tiering in pVACfuse
 
@@ -246,13 +311,17 @@ The Tiers available in pVACfuse are:
 tabl <- "
 | Tier | Criteria |
 |------|---------|
-| Pass | Best Peptide passes the binding, read support, and expression criteria |
-| LowReadSupport | Best Peptide fails the read support criteria but passes the binding and expression criteria |
-| LowExpr | Best Peptide fails the expression criteria but passes the binding and read support criteria |
-| Poor | Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria or if it fails the binding criteria |
+| Pass | Best Peptide passes the binding, reference match, read support, expression, and problematic position criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, read support, expression, and problematic position criteria |
+| RefMatch | Best Peptide fails the reference match criteria but passes the binding, read support, expression, and problematic position criteria |
+| LowReadSupport | Best Peptide fails the read support criteria but passes the binding, reference match, expression, and problematic position criteria |
+| LowExpr | Best Peptide fails the expression criteria but passes the binding, reference match, read support, and problematic position criteria |
+| ProbPos | Best Peptide fails the problematic position criteria but passes the binding, reference match, read support, and expression |
+| Poor | Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria |
 "
 cat(tabl)
 ```
+
 
 **Criteria Details**
 
@@ -260,9 +329,52 @@ cat(tabl)
 tabl <- "
 | Criteria | Description | Evaluation |
 |----------|-------------|------------|
-| Binding Criteria | Pass if Best Peptide is strong binder | IC50 MT < `--binding-threshold` and %ile MT < `--percentile-threshold` (if parameter is set). `--allele-specific-binding-thresholds` flag is respected. |
-| Read Support Criteria | Pass if the variant has read support | Read Support < `--read-support` |
-| Expression Criteria | Pass if Best Transcript is expressed | Expr < `--expn-val` |
+| Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
+| Read Support Criteria | Pass if variant has read support | Read Support < `--read-support` |
+| Expression Criteria | Pass if Best Transcript is expressed | Expr > `--expn-val` |
+| Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
+| Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
+"
+cat(tabl)
+```
+
+
+#### Tiering in pVACsplice
+
+The Tiers available in pVACsplice are:
+
+```{r pvacsplice_tiers, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+
+| Tier | Criteria |
+|------|----------|
+| Pass | Best Peptide passes the binding, reference match, expression, transcript, clonal, and problematic position criteria |
+| PoorBinder | Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, and problematic position criteria |
+| RefMatch | Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, and problematic position criteria
+| PoorTranscript | Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, and problematic position criteria |
+| LowExpr | Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, and problematic position criteria |
+| Subclonal | Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, and problematic position criteria |
+| ProbPos | Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, and clonal criteria |
+| Poor | Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria |
+| NoExpr | Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0) |
+"
+cat(tabl)
+```
+
+
+**Criteria Details**
+
+```{r pvacsplice_tier_criteria, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Criteria | Description | Evaluation |
+|----------|-------------|------------|
+| Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
+| Expression Criteria | Pass if Best Transcript is expressed | Allele Expr > `--trna-vaf` * `--expn-val` |
+| Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
+| Transcript Criteria | Pass if Best Transcript matches any of the user-specified `--transcript-prioritization-strategy` criteria | `TSL <= --maximum-transcript-support level` (if strategy includes `tsl`)<br/>`MANE Select == True` (if strategy includes `mane_select`)<br/>`Canonical == True` (if strategy includes `canonical`) |
+| Low Expression Criteria | Peptide has low expression or no expression but RNA VAF and coverage | (0 < Allele Expr < `--trna-vaf` * `--expn-val`) OR (RNA Expr == 0 AND RNA Depth > `--trna-cov` AND RNA VAF > `--trna-vaf`) |
+| Clonal Criteria | Best Peptide is likely in the founding clone of the tumor | DNA VAF > `--tumor-purity` / 4 |
+| Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
 "
 cat(tabl)
 ```
