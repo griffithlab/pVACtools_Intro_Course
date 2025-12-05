@@ -1,6 +1,6 @@
 ---
 title: "Introduction to pVACtools"
-date: "September, 2023"
+date: "December, 2025"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

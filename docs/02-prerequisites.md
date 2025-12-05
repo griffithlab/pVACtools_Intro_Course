@@ -44,7 +44,7 @@ you are not familiar with launching R Shiny from the command line.
 Additionally, there are a number of packages you will need to install in your R/R studio:
 
 
-```r
+``` r
 install.packages("shiny", dependencies=TRUE)
 install.packages("ggplot2", dependencies=TRUE)
 install.packages("DT", dependencies=TRUE)
@@ -110,7 +110,8 @@ General:
 
 To download this data, please run the following commands:
 
-```bash
+
+``` bash
 wget https://raw.githubusercontent.com/griffithlab/pVACtools_Intro_Course/main/HCC1395_inputs.zip
 unzip HCC1395_inputs.zip
 ```
@@ -119,7 +120,8 @@ Additionally, to run pVACsplice, a set of reference files are required that
 are too large to include in the HCC1395_inputs.zip archive. To download these
 manually please run the following commands:
 
-```bash
+
+``` bash
 cd HCC1395_inputs
 wget https://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.chr.gtf.gz
 wget http://genomedata.org/pmbio-workshop/references/genome/all/ref_genome.tar
@@ -128,7 +130,7 @@ gunzip ref_genome.fa.gz
 rm -rf ref_genome.tar
 ```
 
-This will add the following reference files
+This will add the following reference files:
 
 - `ref_genome.fa` and `.fai`: A reference DNA FASTA file and index
 - `Homo_sapiens.GRCh38.105.chr.gtf.gz`: A reference GTF file

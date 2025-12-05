@@ -16,17 +16,17 @@ This chapter will cover:
 In your Terminal execute the following command:
 
 
-```bash
+``` bash
 mkdir pVACtools_outputs
 
 docker run \
 -v ${PWD}/HCC1395_inputs:/HCC1395_inputs \
 -v ${PWD}/pVACtools_outputs:/pVACtools_outputs \
--it griffithlab/pvactools:6.0.1 \
+-it griffithlab/pvactools:6.0.3 \
 /bin/bash
 ```
 
-This will pull the 6.0.1 version of the griffithlab/pvactools Docker image and
+This will pull the 6.0.3 version of the griffithlab/pvactools Docker image and
 start an interactive session (`-it`) of that Docker image using the bash shell (`/bin/bash`). 
 The `-v ${PWD}/HCC1395_inputs:/HCC1395_inputs`
 part of the command will mount the
@@ -64,7 +64,7 @@ following order:
   alleles can be specified using a comma-separated list. These should be the
   HLA alleles of your patient/sample. You might have clinical typing information for
   your patient. If not, you will need to computationally predict the patient's
-  HLA type using software such as OptiType. The HLA allele names should 
+  HLA type using software such as OptiType. The HLA allele names should
   be in the following format: `HLA-A*02:01`.
 - `prediction_algorithms`: The epitope prediction algorithms to use. Multiple
   prediction algorithms can be specified, separated by spaces. Use `all` to
@@ -187,7 +187,7 @@ To identify the tumor and normal sample names we will grep the VCF file for
 the CHROM header:
 
 
-```bash
+``` bash
 zgrep CHROM /HCC1395_inputs/annotated.expression.vcf.gz
 ```
 
@@ -198,7 +198,7 @@ prediction run might take a while but pVACseq will output progress messages as
 it runs through the pipeline.
 
 
-```bash
+``` bash
 pvacseq run \
 /HCC1395_inputs/annotated.expression.vcf.gz \
 HCC1395_TUMOR_DNA \
@@ -326,7 +326,7 @@ prediction run might take a while but pVACfuse will output progress messages as
 it runs through the pipeline.
 
 
-```bash
+``` bash
 pvacfuse run \
 /HCC1395_inputs/agfusion_results \
 HCC1395_TUMOR_DNA \
@@ -462,7 +462,8 @@ prediction run might take a while but pVACsplice will output progress messages a
 it runs through the pipeline.
 
 
-```bash
+
+``` bash
 pvacsplice run \
 /HCC1395_inputs/HCC1395.splice_junctions.tsv \
 HCC1395_TUMOR_DNA \

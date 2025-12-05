@@ -13,7 +13,7 @@ This chapter will summarize:
 ## Key conclusions
 
 In this course you will have gained a better understanding of the current best
-practices for neoantigen indentification and prioritization. You will have
+practices for neoantigen identification and prioritization. You will have
 learned how to run pVACtools, interpret pVACtools results, and select neoantigen
 candidates suitable for vaccine manufacturing using pVACview.
 

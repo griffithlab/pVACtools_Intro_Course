@@ -87,7 +87,7 @@ enabled additional filtering on related metrics:
   `--percentile-threshold` set, this parameter will influence how both the
   binding cutoff and the percentile cutoff are applied. The default,
   `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold while the `exploratory` option will require a candiate
+  percentile threshold while the `exploratory` option will require a candidate
   to only pass either the binding or the percentile threshold.
 
 ### Coverage Filter
@@ -278,7 +278,6 @@ The Tiers available in pVACseq are:
 | Poor | Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria |
 | NoExpr | Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0) |
 
-
 **Criteria Details**
 
 
@@ -316,7 +315,8 @@ The Tiers available in pVACfuse are:
 | Criteria | Description | Evaluation |
 |----------|-------------|------------|
 | Binding Criteria | Pass if Best Peptide is a strong binder | binding score criteria: `IC50 MT < --binding-threshold` (`--allele-specific-binding-thresholds` flag is respected)<br/>percentile score criteria (if `--percentile-threshold` parameters is set): `%ile MT < --percentile-threshold` (if parameter is set)<br/>`conservative` `--percentile-threshold-strategy`: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/>`exploratory` `--percentile-threshold-strategy`: needs to pass EITHER the binding score criteria OR the percentile score criteria|
-| Expression Criteria | Pass if variant has read support | Read Support < `--read-support` |
+| Read Support Criteria | Pass if variant has read support | Read Support < `--read-support` |
+| Expression Criteria | Pass if Best Transcript is expressed | Expr > `--expn-val` |
 | Reference Match Criteria | Pass if there are no reference protome matches | `Ref Match == False` |
 | Problematic Position Criteria | Best Peptide does not contain a problematic amino acid as defined by the `--problematic-amino-acids` parameter | `Prob Pos == None`
 
