@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Prerequisites | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Prerequisites | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   
@@ -31,7 +30,6 @@
   <link rel="shortcut icon" href="assets/ITN_favicon.ico" type="image/x-icon" />
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="running-pvactools.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,8 +47,10 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<base target="_blank">
 
 
 <style type="text/css">
@@ -89,11 +89,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -102,14 +102,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -117,6 +117,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -188,6 +192,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.4.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.2</b> Optional Parameters for pVACfuse</a></li>
 <li class="chapter" data-level="3.4.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacfuse-command"><i class="fa fa-check"></i><b>3.4.3</b> pVACfuse Command</a></li>
 </ul></li>
+<li class="chapter" data-level="3.5" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacsplice"><i class="fa fa-check"></i><b>3.5</b> Running pVACsplice</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacsplice"><i class="fa fa-check"></i><b>3.5.1</b> Required Parameters for pVACsplice</a></li>
+<li class="chapter" data-level="3.5.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacsplice"><i class="fa fa-check"></i><b>3.5.2</b> Optional Parameters for pVACsplice</a></li>
+<li class="chapter" data-level="3.5.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacsplice-command"><i class="fa fa-check"></i><b>3.5.3</b> pVACsplice Command</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html"><i class="fa fa-check"></i><b>4</b> Understanding pVACtools outputs</a>
 <ul>
@@ -197,7 +207,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#binding-filter"><i class="fa fa-check"></i><b>4.3.1</b> Binding Filter</a></li>
 <li class="chapter" data-level="4.3.2" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#coverage-filter"><i class="fa fa-check"></i><b>4.3.2</b> Coverage Filter</a></li>
-<li class="chapter" data-level="4.3.3" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#transcript-support-level-filter"><i class="fa fa-check"></i><b>4.3.3</b> Transcript Support Level Filter</a></li>
+<li class="chapter" data-level="4.3.3" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#transcript-filter"><i class="fa fa-check"></i><b>4.3.3</b> Transcript Filter</a></li>
 <li class="chapter" data-level="4.3.4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#top-score-filter"><i class="fa fa-check"></i><b>4.3.4</b> Top Score Filter</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#interpreting-the-aggregated.tsv-file"><i class="fa fa-check"></i><b>4.4</b> Interpreting the aggregated.tsv File</a>
@@ -265,10 +275,10 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/itcr_main_image.png">
 </div>
-<div id="prerequisites" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Prerequisites</h1>
-<div id="learning-objectives" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Learning Objectives</h2>
+<div id="prerequisites" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Prerequisites<a href="prerequisites.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Learning Objectives<a href="prerequisites.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter will cover the prerequisites for this course, including:</p>
 <ul>
 <li>Installing Docker</li>
@@ -276,8 +286,8 @@ div.csl-indent {
 <li>Downloading data files</li>
 </ul>
 </div>
-<div id="docker" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Docker</h2>
+<div id="docker" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Docker<a href="prerequisites.html#docker" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For the purpose of this course, we will be using Docker to run pVACseq and
 pVACfuse.
 Docker is a tool that is used to automate the deployment of applications
@@ -289,42 +299,45 @@ via <a href="https://hub.docker.com/r/griffithlab/pvactools">Docker Hub using th
 Please ensure you select the correct install package for your operating
 system.</p>
 </div>
-<div id="terminal" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Terminal</h2>
+<div id="terminal" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Terminal<a href="prerequisites.html#terminal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will be running Docker from the command line on your preferred terminal
 using the Docker command line interface (CLI). The Docker CLI is already
 included with Docker Desktop. Most operating systems already
 come with a Terminal application. If yours doesn’t, you will need to first
 install one.</p>
 </div>
-<div id="r-studio-and-r-package-dependencies" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> R Studio and R package dependencies</h2>
+<div id="r-studio-and-r-package-dependencies" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> R Studio and R package dependencies<a href="prerequisites.html#r-studio-and-r-package-dependencies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In order to use pVACview, you will need to download R. Please refer
 <a href="https://cran.rstudio.com/">here</a> for downloading R (version 3.5 and above
 required). You may also take the additional step of <a href="https://www.rstudio.com/products/rstudio/download/">downloading R
 studio</a> if
 you are not familiar with launching R Shiny from the command line.</p>
 <p>Additionally, there are a number of packages you will need to install in your R/R studio:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="prerequisites.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a href="prerequisites.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-3"><a href="prerequisites.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;DT&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="prerequisites.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-5"><a href="prerequisites.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-6"><a href="prerequisites.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tibble&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-7"><a href="prerequisites.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-8"><a href="prerequisites.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-9"><a href="prerequisites.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-10"><a href="prerequisites.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinydashboard&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-11"><a href="prerequisites.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinydashboardPlus&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-12"><a href="prerequisites.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;fresh&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-13"><a href="prerequisites.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinycssloaders&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-14"><a href="prerequisites.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;RCurl&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-15"><a href="prerequisites.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;curl&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-16"><a href="prerequisites.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;string&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-17"><a href="prerequisites.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinycssloaders&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="prerequisites.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="prerequisites.html#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="prerequisites.html#cb1-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;DT&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="prerequisites.html#cb1-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-5"><a href="prerequisites.html#cb1-5" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="prerequisites.html#cb1-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tibble&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="prerequisites.html#cb1-7" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="prerequisites.html#cb1-8" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a href="prerequisites.html#cb1-9" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-10"><a href="prerequisites.html#cb1-10" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinydashboard&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="prerequisites.html#cb1-11" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinydashboardPlus&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-12"><a href="prerequisites.html#cb1-12" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;fresh&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-13"><a href="prerequisites.html#cb1-13" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinycssloaders&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-14"><a href="prerequisites.html#cb1-14" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;RCurl&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-15"><a href="prerequisites.html#cb1-15" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;curl&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-16"><a href="prerequisites.html#cb1-16" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;string&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-17"><a href="prerequisites.html#cb1-17" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinycssloaders&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-18"><a href="prerequisites.html#cb1-18" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-19"><a href="prerequisites.html#cb1-19" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shinyWidgets&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-20"><a href="prerequisites.html#cb1-20" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;colourpicker&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
-<div id="data" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Data</h2>
+<div id="data" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Data<a href="prerequisites.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For this course, we have put together a set of input data generated from the breast
 cancer cell line HCC1395 and a matched normal lymphoblastoid cell line HCC1395BL.
 Data from this cell line is commonly used as test data in bioinformatics applications.
@@ -352,14 +365,32 @@ calls.</li>
 <li><code>star-fusion.fusion_predictions.tsv</code>: A STARFusion prediction file with fusion read support
 and expression information.</li>
 </ul>
+<p>For pVACsplice:</p>
+<ul>
+<li><code>HCC1395.splice_junctions.tsv</code>: A RegTools junctions output TSV file</li>
+</ul>
 <p>General:</p>
 <ul>
 <li><code>Homo_sapiens.GRCh38.pep.all.fa.gz</code>: A reference proteome peptide FASTA to use
 for determining whether there are any reference matches of neoantigen candidates.</li>
 </ul>
 <p>To download this data, please run the following commands:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="prerequisites.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/griffithlab/pVACtools_Intro_Course/main/HCC1395_inputs.zip</span>
-<span id="cb2-2"><a href="prerequisites.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> HCC1395_inputs.zip</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="prerequisites.html#cb2-1" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/griffithlab/pVACtools_Intro_Course/main/HCC1395_inputs.zip</span>
+<span id="cb2-2"><a href="prerequisites.html#cb2-2" tabindex="-1"></a><span class="fu">unzip</span> HCC1395_inputs.zip</span></code></pre></div>
+<p>Additionally, to run pVACsplice, a set of reference files are required that
+are too large to include in the HCC1395_inputs.zip archive. To download these
+manually please run the following commands:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="prerequisites.html#cb3-1" tabindex="-1"></a><span class="bu">cd</span> HCC1395_inputs</span>
+<span id="cb3-2"><a href="prerequisites.html#cb3-2" tabindex="-1"></a><span class="fu">wget</span> https://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.chr.gtf.gz</span>
+<span id="cb3-3"><a href="prerequisites.html#cb3-3" tabindex="-1"></a><span class="fu">wget</span> http://genomedata.org/pmbio-workshop/references/genome/all/ref_genome.tar</span>
+<span id="cb3-4"><a href="prerequisites.html#cb3-4" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xf</span> ref_genome.tar ref_genome.fa.gz ref_genome.fa.fai</span>
+<span id="cb3-5"><a href="prerequisites.html#cb3-5" tabindex="-1"></a><span class="fu">gunzip</span> ref_genome.fa.gz</span>
+<span id="cb3-6"><a href="prerequisites.html#cb3-6" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> ref_genome.tar</span></code></pre></div>
+<p>This will add the following reference files:</p>
+<ul>
+<li><code>ref_genome.fa</code> and <code>.fai</code>: A reference DNA FASTA file and index</li>
+<li><code>Homo_sapiens.GRCh38.105.chr.gtf.gz</code>: A reference GTF file</li>
+</ul>
 <p>This course will not cover the required pre-processing steps for the pVACtools
 input data but extensive instructions on how to prepare your own data for use
 with pVACtools can be found at <a href="http://www.pvactools.org">pvactools.org</a>.</p>
@@ -394,42 +425,42 @@ with pVACtools can be found at <a href="http://www.pvactools.org">pvactools.org<
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

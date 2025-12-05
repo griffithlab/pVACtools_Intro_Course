@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
   
@@ -31,7 +30,6 @@
   <link rel="shortcut icon" href="assets/ITN_favicon.ico" type="image/x-icon" />
 <link rel="prev" href="running-pvactools.html"/>
 <link rel="next" href="review-your-results-in-pvacview.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,8 +47,10 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<base target="_blank">
 
 
 <style type="text/css">
@@ -89,11 +89,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -102,14 +102,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -117,6 +117,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -188,6 +192,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.4.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacfuse"><i class="fa fa-check"></i><b>3.4.2</b> Optional Parameters for pVACfuse</a></li>
 <li class="chapter" data-level="3.4.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacfuse-command"><i class="fa fa-check"></i><b>3.4.3</b> pVACfuse Command</a></li>
 </ul></li>
+<li class="chapter" data-level="3.5" data-path="running-pvactools.html"><a href="running-pvactools.html#running-pvacsplice"><i class="fa fa-check"></i><b>3.5</b> Running pVACsplice</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="running-pvactools.html"><a href="running-pvactools.html#required-parameters-for-pvacsplice"><i class="fa fa-check"></i><b>3.5.1</b> Required Parameters for pVACsplice</a></li>
+<li class="chapter" data-level="3.5.2" data-path="running-pvactools.html"><a href="running-pvactools.html#optional-parameters-for-pvacsplice"><i class="fa fa-check"></i><b>3.5.2</b> Optional Parameters for pVACsplice</a></li>
+<li class="chapter" data-level="3.5.3" data-path="running-pvactools.html"><a href="running-pvactools.html#pvacsplice-command"><i class="fa fa-check"></i><b>3.5.3</b> pVACsplice Command</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html"><i class="fa fa-check"></i><b>4</b> Understanding pVACtools outputs</a>
 <ul>
@@ -197,7 +207,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#binding-filter"><i class="fa fa-check"></i><b>4.3.1</b> Binding Filter</a></li>
 <li class="chapter" data-level="4.3.2" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#coverage-filter"><i class="fa fa-check"></i><b>4.3.2</b> Coverage Filter</a></li>
-<li class="chapter" data-level="4.3.3" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#transcript-support-level-filter"><i class="fa fa-check"></i><b>4.3.3</b> Transcript Support Level Filter</a></li>
+<li class="chapter" data-level="4.3.3" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#transcript-filter"><i class="fa fa-check"></i><b>4.3.3</b> Transcript Filter</a></li>
 <li class="chapter" data-level="4.3.4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#top-score-filter"><i class="fa fa-check"></i><b>4.3.4</b> Top Score Filter</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="understanding-pvactools-outputs.html"><a href="understanding-pvactools-outputs.html#interpreting-the-aggregated.tsv-file"><i class="fa fa-check"></i><b>4.4</b> Interpreting the aggregated.tsv File</a>
@@ -265,10 +275,10 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/itcr_main_image.png">
 </div>
-<div id="understanding-pvactools-outputs" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Understanding pVACtools outputs</h1>
-<div id="learning-objectives-2" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<div id="understanding-pvactools-outputs" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Understanding pVACtools outputs<a href="understanding-pvactools-outputs.html#understanding-pvactools-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Learning Objectives<a href="understanding-pvactools-outputs.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter will cover:</p>
 <ul>
 <li>Understanding the output files produced by pVACtools</li>
@@ -276,9 +286,9 @@ div.csl-indent {
 <li>Interpreting the .aggregated.tsv file</li>
 </ul>
 </div>
-<div id="pvactools-output-files" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> pVACtools Output Files</h2>
-<p>Both pVACseq and pVACfuse produce three main output files:</p>
+<div id="pvactools-output-files" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> pVACtools Output Files<a href="understanding-pvactools-outputs.html#pvactools-output-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>pVACseq, pVACfuse, and pVACsplice all produce three main output files:</p>
 <ul>
 <li>The <code>all_epitopes.tsv</code> file is a TSV file with all predicted neoantigens and
 all information obtained during the run.</li>
@@ -287,13 +297,13 @@ but the entries have been filtered down according to the thresholds set by
 the user during the run. The filters will be further explained in
 subsequent sections.</li>
 <li>The <code>aggregated.tsv</code> is a condensed output file that contains only the
-information most pertinent to interpret the results. It has contains only
+information most pertinent to interpret the results. It contains only
 the best neoantigen candidate for each variant. Our heuristic for
 determining the best neoantigen is described in subsequent sections of this
 course.</li>
 </ul>
-<p>There are also a number of a secondary output files produced by pVACseq and
-pVACfuse. The most important are:</p>
+<p>There are also a number of a secondary output files produced by pVACseq,
+pVACfuse, and pVACsplice. The most important are:</p>
 <ul>
 <li><code>aggregated.metrics.json</code>: The file is only produced by pVACseq. It contains
 metadata needed for visualizing your results in pVACview.</li>
@@ -302,15 +312,15 @@ reference proteome match feature is enabled during a run. It contains
 detailed information about the reference matches found, if there are any.</li>
 </ul>
 </div>
-<div id="interpreting-the-filtered.tsv-file" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Interpreting the filtered.tsv File</h2>
+<div id="interpreting-the-filtered.tsv-file" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Interpreting the filtered.tsv File<a href="understanding-pvactools-outputs.html#interpreting-the-filtered.tsv-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The filtered.tsv file takes all the predicted neoantigens from the
 all_epitopes.tsv file and applies a number of filters to it. Filters are
 applied consecutively, meaning that only the entries passing the first filter
 will be passed along to the second filter, and so on. Only neoantigens
 passing all filters will be reported in this file.</p>
-<div id="binding-filter" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Binding Filter</h3>
+<div id="binding-filter" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Binding Filter<a href="understanding-pvactools-outputs.html#binding-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The binding filter’s primary function is to filter neoantigen candidates on
 their IC50 binding affinity to an HLA allele. Because pVACtools allows users
 to run more than one prediction algorithm, we then apply two summarization
@@ -318,9 +328,9 @@ methods on the calls for each neoantigen candidate and HLA allele combination:
 (1) pVACtools calculates the median IC50 binding affinity for all selected prediction
 algorithms (reported in the <code>Median [MT] IC50 Score</code> column), and (2) pVACtools selects
 the IC50 binding affinity prediction with the lowest value (reported in the
-<code>Best [MT] IC50 Score)</code> column. By default,
+<code>Best [MT] IC50 Score</code> column). By default,
 the binding filter is applied to the median IC50 score unless
-users set the <code>--top-score-metric</code> parameters to <code>lowest</code>.</p>
+users set the <code>--top-score-metric</code> parameter to <code>lowest</code>.</p>
 <p>The binding filter discards candidates where the binding affinity is above the
 <code>--binding-threshold</code> (default: 500). However, users may set the
 <code>--allele-specific-binding-thresholds</code> flag in order to use differing binding
@@ -347,26 +357,32 @@ the binding affinity itself, pVACtools report the median and the lowest
 percentile scores for the range of scores reported by the prediction
 algorithms chosen by the user and which on is used for filtering is again
 controlled by the <code>--top-score-metric</code> parameter.</li>
+<li><code>--percentile-threshold-strategy</code>: When running pVACtools with a
+<code>--percentile-threshold</code> set, this parameter will influence how both the
+binding cutoff and the percentile cutoff are applied. The default,
+<code>conservative</code>, will require a candidate to pass both the binding and the
+percentile threshold while the <code>exploratory</code> option will require a candidate
+to only pass either the binding or the percentile threshold.</li>
 </ul>
 </div>
-<div id="coverage-filter" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Coverage Filter</h3>
+<div id="coverage-filter" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Coverage Filter<a href="understanding-pvactools-outputs.html#coverage-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Coverage Filter is generally used to filter out variants that don’t have
 enough read support or expression. This ensures that the remaining variants
 are not just artifacts and that the genes are actually expressed in the
 patient’s RNA.</p>
-<p>For pVACseq, this generally relies on your VCF being annotated with coverage
+<p>For both pVACseq and pVACsplice, this generally relies on your VCF being annotated with coverage
 and expression data. In our example, the VCF has already been annotated with
 this data. For more information about how to add <a href="https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/readcounts.html">coverage</a>
 and <a href="https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/expression.html">expression data</a>
 to your own VCFs, please see our docs.
 Additionally, filtering on the normal DNA depth and variant allele frequency
 (VAF) requires your VCF to be a tumor-normal sample VCF and the normal sample
-to be identifies in your pVACseq run using the <code>--normal-sample-name</code>
+to be identified in your pVACseq/pVACsplice run using the <code>--normal-sample-name</code>
 parameter. If a coverage metric doesn’t apply because the underlying data is
 not available, <code>NA</code> is reported by pVACtools. By default, the filter will skip
 evaluating a coverage criteria when a neoantigen’s value for it is <code>NA</code>.</p>
-<p>The following thresholds are applied in pVACseq by this filter:</p>
+<p>The following thresholds are applied in pVACseq and pVACsplice by this filter:</p>
 <ul>
 <li><code>--normal-cov</code>: Normal coverage cutoff. Minimum number of required reads in the normal DNA (default: 5).</li>
 <li><code>--tdna-cov</code>: Tumor DNA coverage cutoff. Minimum number of required reads in the tumor DNA (default: 10).</li>
@@ -380,7 +396,9 @@ evaluating a coverage criteria when a neoantigen’s value for it is <code>NA</c
 Arriba natively outputs a number of read metrics. These are the number of supporting split fragments with an anchor in
 gene1 or gene2, respectively, as well as the number of pairs (fragments) of discordant mates supporting the fusion
 (a.k.a. spanning reads or bridge reads). The sum of these three values is
-reported as Read Support in pVACfuse. The fusion transcript expression is
+reported as Read Support in pVACfuse. For AGFusion, the read support is parsed
+from the <code>--starfusion-file</code> as the sum of the JunctionReadCount and
+SpanningFragCount. For both types of input, the fusion transcript expression is
 parsed from the <code>--starfusion-file</code>, when provided. This is reported as FFPM
 (fusion fragments per million total reads).</p>
 <p>The following thresholds are applied in pVACfuse by this filter:</p>
@@ -389,19 +407,26 @@ parsed from the <code>--starfusion-file</code>, when provided. This is reported 
 <li><code>--expn-val</code>: Expression cutoff. Sites above this cutoff will be considered (default: 0.1).</li>
 </ul>
 </div>
-<div id="transcript-support-level-filter" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Transcript Support Level Filter</h3>
-<p>The Transcript Support Level (TSL) Filter removes neoantigen candidates for
-transcripts with a high TSL, as defined <a href="https://grch37.ensembl.org/info/genome/genebuild/transcript_quality_tags.html#tsl">by Ensembl</a>.
-The cutoff for this filter is set by the <code>--maximum-transcript-support-level</code>
-parameter. Transcripts with a TSL of NA will always be filtered out.</p>
-<p>Annotation with TSL values through VEP is only available for GRCh38. For other
-species and older builds, a value of “Not Supported” is written to the report
-and the TSL filter will skip those variants.</p>
-<p>This filter is currently only run by pVACseq.</p>
+<div id="transcript-filter" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Transcript Filter<a href="understanding-pvactools-outputs.html#transcript-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Transcript Filter removes neoantigens resulting from transcripts that are
+considered poor candidates. To determine whether a transcript is poor, the
+<code>--transcript-prioritization-strategy</code> parameter is used. This parameter
+defines a list of criteria to consider. These are:</p>
+<ul>
+<li><code>mane_select</code>: MANE Select status of the transcript</li>
+<li><code>canonical</code>: Canonical status of the transcripts</li>
+<li><code>tsl</code>: Whether or not the Transcript Support Level (TSL) meets the
+<code>--maximum-transcript-support-level</code>, as defined <a href="https://grch37.ensembl.org/info/genome/genebuild/transcript_quality_tags.html#tsl">by Ensembl</a>.</li>
+</ul>
+<p>Users may specify one or more of these criteria as their strategy. A transcript
+meeting at least one of the specified criteria is considered a
+good transcript and passes the transcript filter. Only transcripts meeting none of the
+specified criteria will be filtered out.</p>
+<p>This filter is currently only run by pVACseq and pVACsplice.</p>
 </div>
-<div id="top-score-filter" class="section level3" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Top Score Filter</h3>
+<div id="top-score-filter" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Top Score Filter<a href="understanding-pvactools-outputs.html#top-score-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Top Score Filter will attempt to determine the best neoantigen candidate
 for each variants.</p>
 <p>For pVACseq it works as follows. Given a set of neoantigen candidates for a
@@ -409,14 +434,18 @@ variant we first group the transcripts into sets where all transcripts in a set
 code for the same set of neoantigen candidates. For each transcript set we then
 determine the best neoantigen candidate as follows:</p>
 <ul>
-<li>Pick all neoantigens with a variant transcript that have a protein_coding Biotype</li>
-<li>Of the remaining candidates, pick the ones with a variant transcript having a
-TSL less then the <code>--maximum-transcript-support-level</code>.</li>
+<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
+<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
+<li>Of the remaining candidates, pick the ones with a passing transcript according
+to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
 <li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
 <li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
 more detail further below).</li>
-<li>Of the remaining candidates, pick the one with the lowest MT IC50 Score (Median or Best
-depending on the <code>--top-score-metric</code>), lowest TSL, and longest transcript.</li>
+<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
+<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
+transcript’s Canonical status, the transcript’s TSL, the transcript length,
+and the transcript expression. Select the highest sorted entry.</li>
 </ul>
 <p>This filter then reports the best neoantigen candidate for each transcript set.</p>
 <p>For pVACfuse, the neoantigen candidate for each fusion are similarly grouped
@@ -425,10 +454,27 @@ same set of neoantigen candidates. From there, the best neoantigen candidate
 for each transcript set is determined by picking the candidate with the lowest
 MT IC50 Score (Median or Best depending on the <code>--top-score-metric</code>) and the
 highest fusion transcript expression.</p>
+<p>For pVACsplice, the neoantigen candidates are grouped into sets with the same splice
+site Junction. From there, the best neoantigen candidate for each set is
+determined very similarly to pVACseq:</p>
+<ul>
+<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
+<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
+<li>Of the remaining candidates, pick the ones with a passing transcript according
+to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
+<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
+<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+more detail further below).</li>
+<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
+<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
+transcript’s Canonical status, the transcript’s TSL, the transcript WT
+Protein Length, and the transcript expression. Select the highest sorted entry.</li>
+</ul>
 </div>
 </div>
-<div id="interpreting-the-aggregated.tsv-file" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Interpreting the aggregated.tsv File</h2>
+<div id="interpreting-the-aggregated.tsv-file" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Interpreting the aggregated.tsv File<a href="understanding-pvactools-outputs.html#interpreting-the-aggregated.tsv-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>aggregated.tsv</code> is a condensed output file that shows the best neoantigen
 candidate for each variant and reports only the information most pertinent to
 interpreting the results. It also assigns each of the selected neoantigen candidates
@@ -436,30 +482,53 @@ a tier based on its suitability for vaccine manufacturing.</p>
 <p>Only epitopes meeting the <code>--aggregate-inclusion-threshold</code> are included in this report
 (default: 5000). Depending on the value used for the <code>--top-score-metric</code>, all neoantigen
 candidates with a Median or Best MT IC50 Score below the selected <code>--aggregate-inclusion-threshold</code>
-are included in creating this report.</p>
-<div id="determining-the-best-transcript-and-best-peptide-of-a-variant" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Determining the Best Transcript and Best Peptide of a Variant</h3>
+are included in creating this report. If this cutoff yields a lot of candidates, the
+included neoantigens are pared to the best <code>--aggregate-inclusion-count-limit</code> candidates.</p>
+<div id="determining-the-best-transcript-and-best-peptide-of-a-variant" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Determining the Best Transcript and Best Peptide of a Variant<a href="understanding-pvactools-outputs.html#determining-the-best-transcript-and-best-peptide-of-a-variant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In pVACseq, for each variant, all neoantigen candidates meeting the <code>--aggregate-inclusion-threshold</code> are evaluated as follows:</p>
 <ul>
-<li>Pick all entries with a variant transcript that have a protein_coding Biotype.</li>
-<li>Of the remaining entries, pick the ones with a variant transcript having a Transcript Support Level &lt;= <code>--maximum-transcript-support-level</code>.</li>
-<li>Of the remaining entries, pick the entries with no Problematic Positions.</li>
-<li>Of the remaining entries, pick the ones passing the Anchor Criteria (see Criteria Details section below).</li>
-<li>Of the remaining entries, pick the one with the lowest MT IC50 score( Median or Best
-depending on the <code>--top-score-metric</code>), lowest Transcript Support Level, and longest transcript.</li>
+<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
+<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
+<li>Of the remaining candidates, pick the ones with a passing transcript according
+to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
+<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
+<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+more detail further below).</li>
+<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
+<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
+transcript’s Canonical status, the transcript’s TSL, the transcript length,
+and the transcript expression. Select the highest sorted entry.</li>
 </ul>
-<p>In pVACfuse, the neoantigen candidate with the lowest IC50 binding affinity for each variant is selected.
+<p>In pVACfuse, the neoantigen candidate with the lowest IC50 binding affinity for each variant
+and highest transcript expression is selected.
 The value used for the <code>--top-score-metric</code> determines whether the lowest or
 median binding affinity is used for this comparison.</p>
+<p>For pVACsplice, the best neoantigen candidate for each variant is determined very similarly to pVACseq:</p>
+<ul>
+<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
+<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
+<li>Of the remaining candidates, pick the ones with a passing transcript according
+to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
+<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
+<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
+more detail further below).</li>
+<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
+depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
+<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
+transcript’s Canonical status, the transcript’s TSL, the transcript WT
+Protein Length, and the transcript expression. Select the highest sorted entry.</li>
+</ul>
 <p>The chosen entry determines the best neoantigen candidate and the best
 transcript coding for it.</p>
 </div>
-<div id="tier-and-tiering-criteria" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Tier and Tiering Criteria</h3>
+<div id="tier-and-tiering-criteria" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Tier and Tiering Criteria<a href="understanding-pvactools-outputs.html#tier-and-tiering-criteria" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For the purpose of assigning tiers, each best peptide is evaluated by a set of
 criteria. These criteria and the available tiers differ from tool to tool.</p>
-<div id="tiering-in-pvacseq" class="section level4" number="4.4.2.1">
-<h4><span class="header-section-number">4.4.2.1</span> Tiering in pVACseq</h4>
+<div id="tiering-in-pvacseq" class="section level4 hasAnchor" number="4.4.2.1">
+<h4><span class="header-section-number">4.4.2.1</span> Tiering in pVACseq<a href="understanding-pvactools-outputs.html#tiering-in-pvacseq" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Tiers available in pVACseq are:</p>
 <table>
 <colgroup>
@@ -475,27 +544,43 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Pass</td>
-<td>Best Peptide passes the binding, expression, tsl, clonal, and anchor criteria</td>
+<td>Best Peptide passes the binding, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="even">
+<td>PoorBinder</td>
+<td>Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="odd">
+<td>RefMatch</td>
+<td>Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="even">
+<td>PoorTranscript</td>
+<td>Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="odd">
+<td>LowExpr</td>
+<td>Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
 <td>Anchor</td>
-<td>Best Peptide fails the anchor criteria but passes the binding, expression, tsl, and clonal criteria</td>
+<td>Best Peptide fails the anchor criteria but passes the binding, reference match, expression, transcript, clonal, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>Subclonal</td>
-<td>Best Peptide fails the clonal criteria but passes the binding, tsl, and anchor criteria</td>
+<td>Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
-<td>LowExpr</td>
-<td>Best Peptide meets the Low Expression Criteria and passes the binding, tsl, clonal, and anchor criteria</td>
+<td>ProbPos</td>
+<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, clonal, and anchor criteria</td>
 </tr>
 <tr class="odd">
-<td>NoExpr</td>
-<td>Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0)</td>
+<td>Poor</td>
+<td>Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria</td>
 </tr>
 <tr class="even">
-<td>Poor</td>
-<td>Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria or if it fails the binding criteria</td>
+<td>NoExpr</td>
+<td>Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0)</td>
 </tr>
 </tbody>
 </table>
@@ -517,7 +602,7 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tr class="odd">
 <td>Binding Criteria</td>
 <td>Pass if Best Peptide is a strong binder</td>
-<td>IC50 MT &lt; <code>--binding-threshold</code> and %ile MT &lt; <code>--percentile-threshold</code> (if parameter is set). <code>--allele-specific-binding-thresholds</code> flag is respected.</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
 </tr>
 <tr class="even">
 <td>Expression Criteria</td>
@@ -525,14 +610,24 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <td>Allele Expr &gt; <code>--trna-vaf</code> * <code>--expn-val</code></td>
 </tr>
 <tr class="odd">
+<td>Reference Match Criteria</td>
+<td>Pass if there are no reference protome matches</td>
+<td><code>Ref Match == False</code></td>
+</tr>
+<tr class="even">
+<td>Transcript Criteria</td>
+<td>Pass if Best Transcript matches any of the user-specified <code>--transcript-prioritization-strategy</code> criteria</td>
+<td><code>TSL &lt;= --maximum-transcript-support level</code> (if strategy includes <code>tsl</code>)<br/><code>MANE Select == True</code> (if strategy includes <code>mane_select</code>)<br/><code>Canonical == True</code> (if strategy includes <code>canonical</code>)</td>
+</tr>
+<tr class="odd">
 <td>Low Expression Criteria</td>
 <td>Peptide has low expression or no expression but RNA VAF and coverage</td>
 <td>(0 &lt; Allele Expr &lt; <code>--trna-vaf</code> * <code>--expn-val</code>) OR (RNA Expr == 0 AND RNA Depth &gt; <code>--trna-cov</code> AND RNA VAF &gt; <code>--trna-vaf</code>)</td>
 </tr>
 <tr class="even">
-<td>TSL Criteria</td>
-<td>Pass if Best Transcript has good transcript support level</td>
-<td>TSL &lt;= <code>--maximum-transcript-support-level</code></td>
+<td>Anchor Criteria</td>
+<td>Fail if all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (IC50 WT &lt; <code>--binding-threshold</code>). <code>--allele-specific-binding-thresholds</code> flag is respected.</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Clonal Criteria</td>
@@ -540,15 +635,15 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <td>DNA VAF &gt; <code>--tumor-purity</code> / 4</td>
 </tr>
 <tr class="even">
-<td>Anchor Criteria</td>
-<td>Fail if all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (IC50 WT &lt; <code>--binding-threshold</code>). <code>--allele-specific-binding-thresholds</code> flag is respected.</td>
-<td></td>
+<td>Problematic Position Criteria</td>
+<td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
+<td><code>Prob Pos == None</code></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tiering-in-pvacfuse" class="section level4" number="4.4.2.2">
-<h4><span class="header-section-number">4.4.2.2</span> Tiering in pVACfuse</h4>
+<div id="tiering-in-pvacfuse" class="section level4 hasAnchor" number="4.4.2.2">
+<h4><span class="header-section-number">4.4.2.2</span> Tiering in pVACfuse<a href="understanding-pvactools-outputs.html#tiering-in-pvacfuse" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Tiers available in pVACfuse are:</p>
 <table>
 <colgroup>
@@ -564,19 +659,31 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Pass</td>
-<td>Best Peptide passes the binding, read support, and expression criteria</td>
+<td>Best Peptide passes the binding, reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>PoorBinder</td>
+<td>Best Peptide fails the binding criteria but passes the reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>RefMatch</td>
+<td>Best Peptide fails the reference match criteria but passes the binding, read support, expression, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>LowReadSupport</td>
-<td>Best Peptide fails the read support criteria but passes the binding and expression criteria</td>
+<td>Best Peptide fails the read support criteria but passes the binding, reference match, expression, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>LowExpr</td>
-<td>Best Peptide fails the expression criteria but passes the binding and read support criteria</td>
+<td>Best Peptide fails the expression criteria but passes the binding, reference match, read support, and problematic position criteria</td>
 </tr>
 <tr class="even">
+<td>ProbPos</td>
+<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, read support, and expression</td>
+</tr>
+<tr class="odd">
 <td>Poor</td>
-<td>Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria or if it fails the binding criteria</td>
+<td>Best Peptide doesn’t fit any of the above tiers, usually if it fails two or more criteria</td>
 </tr>
 </tbody>
 </table>
@@ -597,18 +704,134 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Binding Criteria</td>
-<td>Pass if Best Peptide is strong binder</td>
-<td>IC50 MT &lt; <code>--binding-threshold</code> and %ile MT &lt; <code>--percentile-threshold</code> (if parameter is set). <code>--allele-specific-binding-thresholds</code> flag is respected.</td>
+<td>Pass if Best Peptide is a strong binder</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
 </tr>
 <tr class="even">
 <td>Read Support Criteria</td>
-<td>Pass if the variant has read support</td>
+<td>Pass if variant has read support</td>
 <td>Read Support &lt; <code>--read-support</code></td>
 </tr>
 <tr class="odd">
 <td>Expression Criteria</td>
 <td>Pass if Best Transcript is expressed</td>
-<td>Expr &lt; <code>--expn-val</code></td>
+<td>Expr &gt; <code>--expn-val</code></td>
+</tr>
+<tr class="even">
+<td>Reference Match Criteria</td>
+<td>Pass if there are no reference protome matches</td>
+<td><code>Ref Match == False</code></td>
+</tr>
+<tr class="odd">
+<td>Problematic Position Criteria</td>
+<td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
+<td><code>Prob Pos == None</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tiering-in-pvacsplice" class="section level4 hasAnchor" number="4.4.2.3">
+<h4><span class="header-section-number">4.4.2.3</span> Tiering in pVACsplice<a href="understanding-pvactools-outputs.html#tiering-in-pvacsplice" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Tiers available in pVACsplice are:</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pass</td>
+<td>Best Peptide passes the binding, reference match, expression, transcript, clonal, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>PoorBinder</td>
+<td>Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>RefMatch</td>
+<td>Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>PoorTranscript</td>
+<td>Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>LowExpr</td>
+<td>Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>Subclonal</td>
+<td>Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>ProbPos</td>
+<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, and clonal criteria</td>
+</tr>
+<tr class="even">
+<td>Poor</td>
+<td>Best Peptide doesn’t fit in any of the above tiers, usually if it fails two or more criteria</td>
+</tr>
+<tr class="odd">
+<td>NoExpr</td>
+<td>Best Peptide is not expressed (RNA Expr == 0 or RNA VAF == 0)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Criteria Details</strong></p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="37%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criteria</th>
+<th>Description</th>
+<th>Evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binding Criteria</td>
+<td>Pass if Best Peptide is a strong binder</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
+</tr>
+<tr class="even">
+<td>Expression Criteria</td>
+<td>Pass if Best Transcript is expressed</td>
+<td>Allele Expr &gt; <code>--trna-vaf</code> * <code>--expn-val</code></td>
+</tr>
+<tr class="odd">
+<td>Reference Match Criteria</td>
+<td>Pass if there are no reference protome matches</td>
+<td><code>Ref Match == False</code></td>
+</tr>
+<tr class="even">
+<td>Transcript Criteria</td>
+<td>Pass if Best Transcript matches any of the user-specified <code>--transcript-prioritization-strategy</code> criteria</td>
+<td><code>TSL &lt;= --maximum-transcript-support level</code> (if strategy includes <code>tsl</code>)<br/><code>MANE Select == True</code> (if strategy includes <code>mane_select</code>)<br/><code>Canonical == True</code> (if strategy includes <code>canonical</code>)</td>
+</tr>
+<tr class="odd">
+<td>Low Expression Criteria</td>
+<td>Peptide has low expression or no expression but RNA VAF and coverage</td>
+<td>(0 &lt; Allele Expr &lt; <code>--trna-vaf</code> * <code>--expn-val</code>) OR (RNA Expr == 0 AND RNA Depth &gt; <code>--trna-cov</code> AND RNA VAF &gt; <code>--trna-vaf</code>)</td>
+</tr>
+<tr class="even">
+<td>Clonal Criteria</td>
+<td>Best Peptide is likely in the founding clone of the tumor</td>
+<td>DNA VAF &gt; <code>--tumor-purity</code> / 4</td>
+</tr>
+<tr class="odd">
+<td>Problematic Position Criteria</td>
+<td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
+<td><code>Prob Pos == None</code></td>
 </tr>
 </tbody>
 </table>
@@ -645,42 +868,42 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

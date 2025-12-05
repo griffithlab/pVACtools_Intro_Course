@@ -3,7 +3,7 @@
 
 # Introduction
 
-This course has been developed recently (Summer 2023). We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
+This course was developed in Summer 2023 and updated in Fall 2025. We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
 
 ## Motivation
 
@@ -17,11 +17,11 @@ allele expression, peptide binding affinities, and determination of whether a mu
 users to efficiently generate, review, and interpret results, selecting candidate peptides for individual experiments or patient vaccine designs. Additional modules
 support design choices needed for competing vaccine delivery approaches. One such module optimizes peptide ordering to minimize junctional epitopes in DNA vector
 vaccines. Downstream analysis commands for synthetic long peptide vaccines are available to assess candidates for factors that influence peptide synthesis. All
-of the aforementioned steps are executed via a modular workflow consisting of tools for neoantigen prediction from somatic alterations (pVACseq, pVACfuse, and pVACbind),
+of the aforementioned steps are executed via a modular workflow consisting of tools for neoantigen prediction from somatic alterations (pVACseq, pVACfuse, pVACsplice, and pVACbind),
 prioritization, and selection using a graphical Web-based interface (pVACview), and design of DNA vector–based vaccines (pVACvector) and synthetic long peptide
 vaccines. pVACtools is available at [http://www.pvactools.org](http://www.pvactools.org).
 
-<img src="resources/images/01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g22b1533a196_0_0.png" title="pVACtools is a cancer immunotherapy tools suite" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" />
+<img src="01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a37485c18b_1_0.png" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" />
 
 ## Background
 
@@ -45,7 +45,7 @@ antigen analysis and is utilized by pVACtools to provide an end-to-end integrati
 and utilize tumor-specific neoantigens in basic research and clinical applications. Combining pVACtools with existing variant calling pipelines provides an end-to-end
 solution for neoantigen prediction and characterization.
 
-<img src="resources/images/01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g22b1533a196_0_6.png" title="Tumor neoantigen background" alt="Tumor neoantigen background" width="100%" style="display: block; margin: auto;" />
+<img src="01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g22b1533a196_0_6.png" alt="Tumor neoantigen background" width="100%" style="display: block; margin: auto;" />
 
 ## Target Audience
 
