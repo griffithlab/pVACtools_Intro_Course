@@ -86,7 +86,7 @@ enabled additional filtering on related metrics:
   Which one is filtered on for this metric depends again on the
   `--top-score-metric` set. When a minimum fold change parameter is set, the binding filter
   discards any prediction with a agretopicity below the set cutoff. This
-  parameter is not available in pVACfuse and pVAcsplice because there is no matched wildtype
+  parameter is not available in pVACfuse and pVACsplice because there is no matched wildtype
   peptide for each neoantigen candidate.
 - `--percentile-threshold-strategy`: This parameter will influence how both the
   binding cutoff and the percentile cutoffs are applied. The default,

@@ -3,6 +3,7 @@ Arriba
 AnVIL
 agretopicity
 BIPOC
+BigMHC
 Biotype
 BLASTp
 Bloomberg
@@ -23,6 +24,7 @@ DQB
 DRB
 Datatrail
 DataTrail
+DeepImmuno
 Dockerfile
 Dockerhub
 deprioritized
@@ -58,7 +60,9 @@ IC
 IEDB
 ITCR
 ITN
+ImmuoScope
 ile
+immunogenicity
 immunotherapies
 immunotherapy
 isoform
@@ -75,6 +79,8 @@ Leanpub
 lymphoblastoid
 MHCnuggets
 Markua
+MixMHC
+MixMHCpred
 mRNA
 manufacturability
 mentorship
@@ -95,6 +101,7 @@ Neoantigen
 neoantigens
 neoantigen's
 nmol
+nM
 OptiType
 ottrpal
 PHLAT
@@ -102,6 +109,7 @@ pVACbind
 proteome
 Pandoc
 pre
+pred
 proteomics
 pVAC
 pVACfuse
@@ -112,6 +120,7 @@ pVACtools
 pVACvector
 pVACview
 pVACviz
+PoorBinder
 RefSeq
 RegTools
 reproducibility
@@ -123,6 +132,7 @@ SpanningFragCount
 tbi
 tiering
 TSL
+tsl
 tsv
 UE
 UE5

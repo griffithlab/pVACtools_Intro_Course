@@ -239,7 +239,7 @@ In the Additional Peptide Information panel, users can see more information
 for the neoantigen candidate selected in the Transcript Set Detailed Data
 panel.
 
-The first tab, %ile Plot, shows a violing plot for the predicted percentile
+The first tab, %ile Plot, shows a violin plot for the predicted percentile
 scores for each prediction algorithm for both the neoantigen candidate and
 its matched wildtype peptide. This can be used to check concordance of
 predictions between the different algorithms. Each data point is colored
@@ -282,7 +282,7 @@ falls in relation to presentation percentile threshold.
 ottrpal::include_slide("https://docs.google.com/presentation/d/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y/edit#slide=id.g3e422d3441b_0_15")
 ```
 
-The Immunogenicity Data tab shows the predicted immunogenicity scores and imunogenicity
+The Immunogenicity Data tab shows the predicted immunogenicity scores and immunogenicity
 percentiles. Heatmap table cell backgrounds indicate where each percentile value
 falls in relation to immunogenicity percentile threshold.
 
