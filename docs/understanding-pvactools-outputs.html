@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Understanding pVACtools outputs | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
@@ -337,7 +337,16 @@ thresholds depending on the HLA allele of the prediction, as recommended by
 <a href="https://help.iedb.org/hc/en-us/articles/114094152371-What-thresholds-cut-offs-should-I-use-for-MHC-class-I-and-II-binding-predictions">IEDB</a>.
 Custom thresholds are available for the most common 76 class I HLA alleles.
 For all others, the <code>--binding-threshold</code> value is used.</p>
-<p>In addition to the binding affinity, other optional parameters can be set to
+<p>Additionally, candidates are filtered on the binding percentile, presentation
+percentile, and immunogenicity percentiles. Similarly to the binding affinity,
+a <code>Median</code> and <code>Best</code> value is calculated over all of the percentiles outputted
+from the individual binding, presentation, and immunogenicity algorithms,
+respectively. The <code>--top-score-metric</code> parameter is also used to set which ones
+of the two is used for filtering (default: Median). By default the percentile
+thresholds are set to 2.0, which can be adjusted using the
+<code>--binding-percentile-threshold</code>, <code>--presentation-percentile-threshold</code>,
+and <code>--immunogenicity-percentile-threshold</code> parameters, respectively.</p>
+<p>In addition to these default parameters, other optional parameters can be set to
 enabled additional filtering on related metrics:</p>
 <ul>
 <li><code>--minimum-fold-change</code>: The fold change is the ratio of the mutant binding affinity to
@@ -347,21 +356,13 @@ calculates this ratio for both the median as well as the lowest values.
 Which one is filtered on for this metric depends again on the
 <code>--top-score-metric</code> set. When a minimum fold change parameter is set, the binding filter
 discards any prediction with a agretopicity below the set cutoff. This
-parameter is not available in pVACfuse because there is no matched wildtype
+parameter is not available in pVACfuse and pVACsplice because there is no matched wildtype
 peptide for each neoantigen candidate.</li>
-<li><code>--percentile-threshold</code>: The prediction algorithms supported by pVACtools
-also report a percentile score that represents where each neoantigen’s predicted
-affinity falls in the range of other values for an HLA allele. Similar to
-the binding affinity itself, pVACtools report the median and the lowest
-percentile scores for the range of scores reported by the prediction
-algorithms chosen by the user and which on is used for filtering is again
-controlled by the <code>--top-score-metric</code> parameter.</li>
-<li><code>--percentile-threshold-strategy</code>: When running pVACtools with a
-<code>--percentile-threshold</code> set, this parameter will influence how both the
-binding cutoff and the percentile cutoff are applied. The default,
-<code>conservative</code>, will require a candidate to pass both the binding and the
-percentile threshold while the <code>exploratory</code> option will require a candidate
-to only pass either the binding or the percentile threshold.</li>
+<li><code>--percentile-threshold-strategy</code>: This parameter will influence how both the
+binding cutoff and the percentile cutoffs are applied. The default,
+<code>conservative</code>, will require a candidate to pass all thresholds while the
+<code>exploratory</code> option will require a candidate to only pass either one of
+the thresholds.</li>
 </ul>
 </div>
 <div id="coverage-filter" class="section level3 hasAnchor" number="4.3.2">
@@ -379,7 +380,7 @@ Additionally, filtering on the normal DNA depth and variant allele frequency
 (VAF) requires your VCF to be a tumor-normal sample VCF and the normal sample
 to be identified in your pVACseq/pVACsplice run using the <code>--normal-sample-name</code>
 parameter. If a coverage metric doesn’t apply because the underlying data is
-not available, <code>NA</code> is reported by pVACtools. By default, the filter will skip
+not available, <code>NA</code> is reported by pVACtools. The filter will skip
 evaluating a coverage criteria when a neoantigen’s value for it is <code>NA</code>.</p>
 <p>The following thresholds are applied in pVACseq and pVACsplice by this filter:</p>
 <ul>
@@ -411,7 +412,7 @@ parsed from the <code>--starfusion-file</code>, when provided. This is reported 
 <p>The Transcript Filter removes neoantigens resulting from transcripts that are
 considered poor candidates. To determine whether a transcript is poor, the
 <code>--transcript-prioritization-strategy</code> parameter is used. This parameter
-defines a list of criteria to consider. These are:</p>
+defines a list of criteria to consider. The options are:</p>
 <ul>
 <li><code>mane_select</code>: MANE Select status of the transcript</li>
 <li><code>canonical</code>: Canonical status of the transcripts</li>
@@ -433,42 +434,57 @@ variant we first group the transcripts into sets where all transcripts in a set
 code for the same set of neoantigen candidates. For each transcript set we then
 determine the best neoantigen candidate as follows:</p>
 <ul>
-<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
-<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
-<li>Of the remaining candidates, pick the ones with a passing transcript according
-to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
-<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
-<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
-more detail further below).</li>
-<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
-depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
-<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
-transcript’s Canonical status, the transcript’s TSL, the transcript length,
-and the transcript expression. Select the highest sorted entry.</li>
+<li>If <code>--allow-inclomplete-transcripts</code> flag is set, pick the entries without a
+Transcript CDS Flags set.</li>
+<li>Of the remaining entries, pick the entries where the Biotype is protein_coding.</li>
+<li>Of the remaining entries, pick the entries that pass at least one of the
+transcript criteria selected in the <code>--transcript-prioritization-strategy</code>
+taking into consideration the <code>--maximum-transcript-support-level</code> if <code>tsl</code>
+is one of the selected criteria.</li>
+<li>Of the remaining entries, pick the entries with no Problematic Positions.</li>
+<li>Of the remaining entries, pick the ones passing the Anchor Criteria
+(explained in more detail further below).</li>
+<li>For the remaining entries, calculate a rank for all the metrics specified via
+the <code>--top-score-metric2</code> parameter and sum them. Whether the lowest or median
+value is considered for each metric is controlled by the <code>--top-score-metric</code>
+parameter. Sort the remaining entries on this sum rank followed by the rank of
+the first <code>--top-score-metric2</code> specified (to break any ties in the sum rank),
+MANE Select status, Canonical status, Transcript Support Level, Transcript
+Length, and Transcript Expression. Select the highest sorted entry.</li>
 </ul>
 <p>This filter then reports the best neoantigen candidate for each transcript set.</p>
 <p>For pVACfuse, the neoantigen candidate for each fusion are similarly grouped
 into sets where all transcript1-transcript2 combinations in a set code for the
 same set of neoantigen candidates. From there, the best neoantigen candidate
-for each transcript set is determined by picking the candidate with the lowest
-MT IC50 Score (Median or Best depending on the <code>--top-score-metric</code>) and the
-highest fusion transcript expression.</p>
+for each transcript set is determined as follows:</p>
+<ul>
+<li>Pick the entries with no Problematic Positions.</li>
+<li>For the remaining entries, calculate a rank for all the metrics specified via
+the <code>--top-score-metric2</code> parameter and sum them. Whether the lowest or median
+value is considered for each metric is controlled by the <code>--top-score-metric</code>
+parameter. Sort the remaining entries on this sum rank followed by the rank of
+the first top-score-metric2 specified (to break any ties in the sum rank), and
+Expression. Select the highest sorted entry.</li>
+</ul>
 <p>For pVACsplice, the neoantigen candidates are grouped into sets with the same splice
 site Junction. From there, the best neoantigen candidate for each set is
 determined very similarly to pVACseq:</p>
 <ul>
-<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
-<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
-<li>Of the remaining candidates, pick the ones with a passing transcript according
-to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
-<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
-<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
-more detail further below).</li>
-<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
-depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
-<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
-transcript’s Canonical status, the transcript’s TSL, the transcript WT
-Protein Length, and the transcript expression. Select the highest sorted entry.</li>
+<li>If <code>--allow-inclomplete-transcripts</code> flag is set, pick the entries without a
+Transcript CDS Flags set.</li>
+<li>Of the remaining entries, pick the entries where the Biotype is protein_coding.</li>
+<li>Of the remaining entries, pick the entries that pass at least one of the
+transcript criteria selected in the <code>--transcript-prioritization-strategy</code>
+taking into consideration the <code>--maximum-transcript-support-level</code> if tsl is one
+of the selected criteria.</li>
+<li>Of the remaining entries, pick the entries with no Problematic Positions.</li>
+<li>For the remaining entries, calculate a rank for all the metrics specified via
+the <code>--top-score-metric2</code> parameter and sum them. Whether the lowest or median
+value is considered for each metric is controlled by the <code>--top-score-metric</code>
+parameter. Sort the remaining entries on this sum rank followed by the rank of
+the first <code>--top-score-metric2</code> specified (to break any ties in the sum rank),
+MANE Select status, Canonical status, Transcript Support Level, WT Protein
+Length, Transcript Expression, and Tumor DNA VAF. Select the highest sorted entry.</li>
 </ul>
 </div>
 </div>
@@ -485,40 +501,10 @@ are included in creating this report. If this cutoff yields a lot of candidates,
 included neoantigens are pared to the best <code>--aggregate-inclusion-count-limit</code> candidates.</p>
 <div id="determining-the-best-transcript-and-best-peptide-of-a-variant" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Determining the Best Transcript and Best Peptide of a Variant<a href="understanding-pvactools-outputs.html#determining-the-best-transcript-and-best-peptide-of-a-variant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In pVACseq, for each variant, all neoantigen candidates meeting the <code>--aggregate-inclusion-threshold</code> are evaluated as follows:</p>
-<ul>
-<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
-<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
-<li>Of the remaining candidates, pick the ones with a passing transcript according
-to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
-<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
-<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
-more detail further below).</li>
-<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
-depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
-<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
-transcript’s Canonical status, the transcript’s TSL, the transcript length,
-and the transcript expression. Select the highest sorted entry.</li>
-</ul>
-<p>In pVACfuse, the neoantigen candidate with the lowest IC50 binding affinity for each variant
-and highest transcript expression is selected.
-The value used for the <code>--top-score-metric</code> determines whether the lowest or
-median binding affinity is used for this comparison.</p>
-<p>For pVACsplice, the best neoantigen candidate for each variant is determined very similarly to pVACseq:</p>
-<ul>
-<li>Pick all neoantigens with a variant transcript that doesn’t have a Transcript CDS Flag</li>
-<li>Of the remaining candidates, pick the ones with a variant transcript that have a protein_coding Biotype</li>
-<li>Of the remaining candidates, pick the ones with a passing transcript according
-to the selected <code>--transcript-prioritization-strategy</code> and <code>--maximum-transcript-support-level</code>.</li>
-<li>Of the remaining candidates, pick the entries with no Problematic Positions.</li>
-<li>Of the remaining candidates, pick the ones passing the Anchor Criteria (explained in
-more detail further below).</li>
-<li>Sort the remaining candidates on the lowest MT IC50 Score or Percentile (Median or Best
-depending on the <code>--top-score-metric</code>, Score or Percentile depending on the
-<code>--top-score-metric2</code>), the transcript’s MANE Select Status, the
-transcript’s Canonical status, the transcript’s TSL, the transcript WT
-Protein Length, and the transcript expression. Select the highest sorted entry.</li>
-</ul>
+<p>The Best Peptide for a variant, fusion, or junction, is generally determined the same
+way in the aggregated report as it is in the the top score filter using the criteria
+described above. However, only the neoantigen candidates meeting the
+<code>--aggregate-inclusion-threshold</code> and <code>--aggregate-inclusion-count-limit</code> are evaluated.</p>
 <p>The chosen entry determines the best neoantigen candidate and the best
 transcript coding for it.</p>
 </div>
@@ -543,35 +529,43 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Pass</td>
-<td>Best Peptide passes the binding, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+<td>Best Peptide passes the scores, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
 <td>PoorBinder</td>
-<td>Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+<td>Best Peptide fails the binding criteria but passed the presentation, immunogenicity, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="odd">
+<td>PoorPresentation</td>
+<td>Best Peptide fails the presentation criteria but passed the binding, immunogenicity, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
+</tr>
+<tr class="even">
+<td>PoorImmunogenicity</td>
+<td>Best Peptide fails the immunogenicity criteria but passed the binding, presentation, reference match, expression, transcript, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="odd">
 <td>RefMatch</td>
-<td>Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, problematic position, and anchor criteria</td>
+<td>Best Peptide fails the reference match criteria but passes the scores, expression, transcript, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
 <td>PoorTranscript</td>
-<td>Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, problematic position, and anchor criteria</td>
+<td>Best Peptide fails the transcript criteria but passes the scores, reference match, expression, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="odd">
 <td>LowExpr</td>
-<td>Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, problematic position, and anchor criteria</td>
+<td>Best Peptide meets the low expression criteria and passes the scores, reference match, transcript, clonal, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
 <td>Anchor</td>
-<td>Best Peptide fails the anchor criteria but passes the binding, reference match, expression, transcript, clonal, and problematic position criteria</td>
+<td>Best Peptide fails the anchor criteria but passes the scores, reference match, expression, transcript, clonal, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>Subclonal</td>
-<td>Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, problematic position, and anchor criteria</td>
+<td>Best Peptide fails the clonal criteria but passes the scores, reference match, expression, transcript, problematic position, and anchor criteria</td>
 </tr>
 <tr class="even">
 <td>ProbPos</td>
-<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, clonal, and anchor criteria</td>
+<td>Best Peptide fails the problematic position criteria but passes the scores, reference match, expression, transcript, clonal, and anchor criteria</td>
 </tr>
 <tr class="odd">
 <td>Poor</td>
@@ -600,42 +594,57 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Binding Criteria</td>
-<td>Pass if Best Peptide is a strong binder</td>
-<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
+<td>Pass if Best Peptide is strong binder</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code><br/>binding percentile score criteria: <code>IC50 %ile MT &lt; --binding-percentile-threshold</code><br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTH the binding score criteria AND the binding percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the binding percentile score criteria</td>
 </tr>
 <tr class="even">
+<td>Presentation Criteria</td>
+<td>Pass if the Best Peptide is presented by the MHC</td>
+<td><code>Pres %ile MT &lt; -- presentation-percentile-threshold</code></td>
+</tr>
+<tr class="odd">
+<td>Immunogenicity Criteria</td>
+<td>Pass if the Best Peptide is immunogenic</td>
+<td><code>IM %ile MT &lt; --immunogenicity-percentile-threshold</code></td>
+</tr>
+<tr class="even">
+<td>Scores Criteria</td>
+<td>Pass if the Best Peptide is a strong binder, presented by the MHC, and/or immunogenic</td>
+<td><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, AND the immunogenicity criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, OR the immunogenicity criteria</td>
+</tr>
+<tr class="odd">
 <td>Expression Criteria</td>
 <td>Pass if Best Transcript is expressed</td>
-<td>Allele Expr &gt; <code>--trna-vaf</code> * <code>--expn-val</code></td>
+<td><code>Allele Expr &gt; trna_vaf * expn_val</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Reference Match Criteria</td>
-<td>Pass if there are no reference protome matches</td>
+<td>Pass if there are no reference proteome matches</td>
 <td><code>Ref Match == False</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Transcript Criteria</td>
 <td>Pass if Best Transcript matches any of the user-specified <code>--transcript-prioritization-strategy</code> criteria</td>
-<td><code>TSL &lt;= --maximum-transcript-support level</code> (if strategy includes <code>tsl</code>)<br/><code>MANE Select == True</code> (if strategy includes <code>mane_select</code>)<br/><code>Canonical == True</code> (if strategy includes <code>canonical</code>)</td>
+<td><code>TSL &lt;= maximum_transcript_support_level</code> (if <code>--transcript-prioritization-strategy</code> includes <code>tsl</code>)<br/><code>MANE Select == True</code> (if <code>--transcript-prioritization-strategy</code> includes <code>mane_select</code>)<br/><code>Canonical == True</code> (if <code>--transcript-prioritization-strategy</code> incluces <code>canonical</code>)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Low Expression Criteria</td>
 <td>Peptide has low expression or no expression but RNA VAF and coverage</td>
-<td>(0 &lt; Allele Expr &lt; <code>--trna-vaf</code> * <code>--expn-val</code>) OR (RNA Expr == 0 AND RNA Depth &gt; <code>--trna-cov</code> AND RNA VAF &gt; <code>--trna-vaf</code>)</td>
-</tr>
-<tr class="even">
-<td>Anchor Criteria</td>
-<td>Fail if all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (IC50 WT &lt; <code>--binding-threshold</code>). <code>--allele-specific-binding-thresholds</code> flag is respected.</td>
-<td></td>
+<td><code>(0 &lt; Allele Expr &lt; trna_vaf * expn_val) OR (RNA Expr == 0 AND RNA Depth &gt; trna_cov AND RNA VAF &gt; trna_vaf)</code></td>
 </tr>
 <tr class="odd">
-<td>Clonal Criteria</td>
-<td>Best Peptide is likely in the founding clone of the tumor</td>
-<td>DNA VAF &gt; <code>--tumor-purity</code> / 4</td>
+<td>Anchor Criteria</td>
+<td>Fail if if there are &lt;= 2 mutated amino acids and all mutated amino acids of the Best Peptide (Pos) are at an anchor position and the WT peptide has good binding (<code>IC50 WT &lt; binding_threshold</code>)</td>
+<td></td>
 </tr>
 <tr class="even">
+<td>Clonal Criteria</td>
+<td>Best Peptide is likely in the founding clone of the tumor</td>
+<td><code>DNA VAF &gt; --tumor-purity / 4</code></td>
+</tr>
+<tr class="odd">
 <td>Problematic Position Criteria</td>
-<td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
+<td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameters</td>
 <td><code>Prob Pos == None</code></td>
 </tr>
 </tbody>
@@ -658,27 +667,35 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Pass</td>
-<td>Best Peptide passes the binding, reference match, read support, expression, and problematic position criteria</td>
+<td>Best Peptide passes the scores, reference match, read support, expression, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>PoorBinder</td>
-<td>Best Peptide fails the binding criteria but passes the reference match, read support, expression, and problematic position criteria</td>
+<td>Best Peptide fails the binding criteria but passes the presentation, immunogenicity, reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>PoorImmunogenicity</td>
+<td>Best Peptide fails the immunogenicity criteria but passes the binding, presentation, reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>PoorPresentation</td>
+<td>Best Peptide fails the presentation criteria but passes the binding, immunogenicity, reference match, read support, expression, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>RefMatch</td>
-<td>Best Peptide fails the reference match criteria but passes the binding, read support, expression, and problematic position criteria</td>
+<td>Best Peptide fails the reference match criteria but passes the scores, read support, expression, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>LowReadSupport</td>
-<td>Best Peptide fails the read support criteria but passes the binding, reference match, expression, and problematic position criteria</td>
+<td>Best Peptide fails the read support criteria but passes the scores, reference match, expression, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>LowExpr</td>
-<td>Best Peptide fails the expression criteria but passes the binding, reference match, read support, and problematic position criteria</td>
+<td>Best Peptide fails the expression criteria but passes the scores, reference match, read support, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>ProbPos</td>
-<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, read support, and expression</td>
+<td>Best Peptide fails the problematic position criteria but passes the scores, reference match, read support, and expression</td>
 </tr>
 <tr class="odd">
 <td>Poor</td>
@@ -703,25 +720,40 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Binding Criteria</td>
-<td>Pass if Best Peptide is a strong binder</td>
-<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
+<td>Pass if Best Peptide is strong binder</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code><br/>binding percentile score criteria: <code>IC50 %ile MT &lt; --binding-percentile-threshold</code><br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTH the binding score criteria AND the binding percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the binding percentile score criteria</td>
 </tr>
 <tr class="even">
-<td>Read Support Criteria</td>
-<td>Pass if variant has read support</td>
-<td>Read Support &lt; <code>--read-support</code></td>
+<td>Presentation Criteria</td>
+<td>Pass if the Best Peptide is presented by the MHC</td>
+<td><code>Pres %ile MT &lt; -- presentation-percentile-threshold</code></td>
 </tr>
 <tr class="odd">
-<td>Expression Criteria</td>
-<td>Pass if Best Transcript is expressed</td>
-<td>Expr &gt; <code>--expn-val</code></td>
+<td>Immunogenicity Criteria</td>
+<td>Pass if the Best Peptide is immunogenic</td>
+<td><code>IM %ile MT &lt; --immunogenicity-percentile-threshold</code></td>
 </tr>
 <tr class="even">
+<td>Scores Criteria</td>
+<td>Pass if the Best Peptide is a strong binder, presented by the MHC, and/or immunogenic</td>
+<td><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, AND the immunogenicity criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, OR the immunogenicity criteria</td>
+</tr>
+<tr class="odd">
+<td>Read Support Criteria</td>
+<td>Pass if variant has read support</td>
+<td><code>Read Support &lt; --read-support</code></td>
+</tr>
+<tr class="even">
+<td>Expression Criteria</td>
+<td>Pass if Best Transcript is expressed</td>
+<td><code>Expr &gt; --expn-val</code></td>
+</tr>
+<tr class="odd">
 <td>Reference Match Criteria</td>
 <td>Pass if there are no reference protome matches</td>
 <td><code>Ref Match == False</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Problematic Position Criteria</td>
 <td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
 <td><code>Prob Pos == None</code></td>
@@ -746,31 +778,39 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Pass</td>
-<td>Best Peptide passes the binding, reference match, expression, transcript, clonal, and problematic position criteria</td>
+<td>Best Peptide passes the scores, reference match, expression, transcript, clonal, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>PoorBinder</td>
-<td>Best Peptide fails the binding criteria but passes the reference match, expression, transcript, clonal, and problematic position criteria</td>
+<td>Best Peptide fails the binding criteria but passes the presentation, immunogenicity, reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="odd">
+<td>PoorImmunogenicity</td>
+<td>Best Peptide fails the immunogenicity criteria but passes the binding, presentation, reference match, read support, expression, and problematic position criteria</td>
+</tr>
+<tr class="even">
+<td>PoorPresentation</td>
+<td>Best Peptide fails the presentation criteria but passes the binding, immunogenicity, reference match, read support, expression, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>RefMatch</td>
-<td>Best Peptide fails the reference match criteria but passes the binding, expression, transcript, clonal, and problematic position criteria</td>
+<td>Best Peptide fails the reference match criteria but passes the scores, expression, transcript, clonal, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>PoorTranscript</td>
-<td>Best Peptide fails the transcript criteria but passes the binding, reference match, expression, clonal, and problematic position criteria</td>
+<td>Best Peptide fails the transcript criteria but passes the scores, reference match, expression, clonal, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>LowExpr</td>
-<td>Best Peptide meets the low expression criteria and passes the binding, reference match, transcript, clonal, and problematic position criteria</td>
+<td>Best Peptide meets the low expression criteria and passes the scores, reference match, transcript, clonal, and problematic position criteria</td>
 </tr>
 <tr class="even">
 <td>Subclonal</td>
-<td>Best Peptide fails the clonal criteria but passes the binding, reference match, expression, transcript, and problematic position criteria</td>
+<td>Best Peptide fails the clonal criteria but passes the scores, reference match, expression, transcript, and problematic position criteria</td>
 </tr>
 <tr class="odd">
 <td>ProbPos</td>
-<td>Best Peptide fails the problematic position criteria but passes the binding, reference match, expression, transcript, and clonal criteria</td>
+<td>Best Peptide fails the problematic position criteria but passes the scores, reference match, expression, transcript, and clonal criteria</td>
 </tr>
 <tr class="even">
 <td>Poor</td>
@@ -799,35 +839,50 @@ criteria. These criteria and the available tiers differ from tool to tool.</p>
 <tbody>
 <tr class="odd">
 <td>Binding Criteria</td>
-<td>Pass if Best Peptide is a strong binder</td>
-<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code> (<code>--allele-specific-binding-thresholds</code> flag is respected)<br/>percentile score criteria (if <code>--percentile-threshold</code> parameters is set): <code>%ile MT &lt; --percentile-threshold</code> (if parameter is set)<br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTh the binding score criteria AND the percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the percentile score criteria</td>
+<td>Pass if Best Peptide is strong binder</td>
+<td>binding score criteria: <code>IC50 MT &lt; --binding-threshold</code><br/>binding percentile score criteria: <code>IC50 %ile MT &lt; --binding-percentile-threshold</code><br/><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass BOTH the binding score criteria AND the binding percentile score criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass EITHER the binding score criteria OR the binding percentile score criteria</td>
 </tr>
 <tr class="even">
-<td>Expression Criteria</td>
-<td>Pass if Best Transcript is expressed</td>
-<td>Allele Expr &gt; <code>--trna-vaf</code> * <code>--expn-val</code></td>
+<td>Presentation Criteria</td>
+<td>Pass if the Best Peptide is presented by the MHC</td>
+<td><code>Pres %ile MT &lt; -- presentation-percentile-threshold</code></td>
 </tr>
 <tr class="odd">
+<td>Immunogenicity Criteria</td>
+<td>Pass if the Best Peptide is immunogenic</td>
+<td><code>IM %ile MT &lt; --immunogenicity-percentile-threshold</code></td>
+</tr>
+<tr class="even">
+<td>Scores Criteria</td>
+<td>Pass if the Best Peptide is a strong binder, presented by the MHC, and/or immunogenic</td>
+<td><code>conservative</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, AND the immunogenicity criteria<br/><code>exploratory</code> <code>--percentile-threshold-strategy</code>: needs to pass the binding criteria, the presentation criteria, OR the immunogenicity criteria</td>
+</tr>
+<tr class="odd">
+<td>Expression Criteria</td>
+<td>Pass if Best Transcript is expressed</td>
+<td><code>Allele Expr &gt; --trna-vaf</code> * <code>--expn-val</code></td>
+</tr>
+<tr class="even">
 <td>Reference Match Criteria</td>
 <td>Pass if there are no reference protome matches</td>
 <td><code>Ref Match == False</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Transcript Criteria</td>
 <td>Pass if Best Transcript matches any of the user-specified <code>--transcript-prioritization-strategy</code> criteria</td>
 <td><code>TSL &lt;= --maximum-transcript-support level</code> (if strategy includes <code>tsl</code>)<br/><code>MANE Select == True</code> (if strategy includes <code>mane_select</code>)<br/><code>Canonical == True</code> (if strategy includes <code>canonical</code>)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Low Expression Criteria</td>
 <td>Peptide has low expression or no expression but RNA VAF and coverage</td>
-<td>(0 &lt; Allele Expr &lt; <code>--trna-vaf</code> * <code>--expn-val</code>) OR (RNA Expr == 0 AND RNA Depth &gt; <code>--trna-cov</code> AND RNA VAF &gt; <code>--trna-vaf</code>)</td>
-</tr>
-<tr class="even">
-<td>Clonal Criteria</td>
-<td>Best Peptide is likely in the founding clone of the tumor</td>
-<td>DNA VAF &gt; <code>--tumor-purity</code> / 4</td>
+<td><code>(0 &lt; Allele Expr &lt; --trna-vaf * --expn-val) OR (RNA Expr == 0 AND RNA Depth &gt; --trna-cov AND RNA VAF &gt; --trna-vaf)</code></td>
 </tr>
 <tr class="odd">
+<td>Clonal Criteria</td>
+<td>Best Peptide is likely in the founding clone of the tumor</td>
+<td><code>DNA VAF &gt; --tumor-purity / 4</code></td>
+</tr>
+<tr class="even">
 <td>Problematic Position Criteria</td>
 <td>Best Peptide does not contain a problematic amino acid as defined by the <code>--problematic-amino-acids</code> parameter</td>
 <td><code>Prob Pos == None</code></td>

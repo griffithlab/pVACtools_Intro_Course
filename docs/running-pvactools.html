@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Running pVACtools | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Running pVACtools | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
@@ -293,9 +293,9 @@ div.csl-indent {
 <span id="cb4-3"><a href="running-pvactools.html#cb4-3" tabindex="-1"></a><span class="ex">docker</span> run <span class="dt">\</span></span>
 <span id="cb4-4"><a href="running-pvactools.html#cb4-4" tabindex="-1"></a>-v <span class="va">${PWD}</span>/HCC1395_inputs:/HCC1395_inputs <span class="dt">\</span></span>
 <span id="cb4-5"><a href="running-pvactools.html#cb4-5" tabindex="-1"></a>-v <span class="va">${PWD}</span>/pVACtools_outputs:/pVACtools_outputs <span class="dt">\</span></span>
-<span id="cb4-6"><a href="running-pvactools.html#cb4-6" tabindex="-1"></a>-it griffithlab/pvactools:6.0.3 <span class="dt">\</span></span>
+<span id="cb4-6"><a href="running-pvactools.html#cb4-6" tabindex="-1"></a>-it griffithlab/pvactools:7.0.0 <span class="dt">\</span></span>
 <span id="cb4-7"><a href="running-pvactools.html#cb4-7" tabindex="-1"></a>/bin/bash</span></code></pre></div>
-<p>This will pull the 6.0.3 version of the griffithlab/pvactools Docker image and
+<p>This will pull the 7.0.0 version of the griffithlab/pvactools Docker image and
 start an interactive session (<code>-it</code>) of that Docker image using the bash shell (<code>/bin/bash</code>).
 The <code>-v ${PWD}/HCC1395_inputs:/HCC1395_inputs</code>
 part of the command will mount the
@@ -303,7 +303,7 @@ part of the command will mount the
 so that you will have access to the input data from inside the Docker
 container. The <code>-v ${PWD}/pVACtools_outputs:/pVACtools_outputs</code> part of the command
 will mount the <code>pVACtools_outputs</code> folder you just created. We will write the
-outputs from pVACseq and pVACfuse to that folder so that you will have access
+outputs from pVACseq, pVACfuse, and pVACsplice to that folder so that you will have access
 to it once you exit the Docker image.</p>
 </div>
 <div id="running-pvacseq" class="section level2 hasAnchor" number="3.3">
@@ -387,17 +387,14 @@ a much faster k-mer based search strategy.</li>
 are considered by pVACseq. This flag will lead pVACseq to skip variants that
 have a FILTER applied in the VCF to, e.g., exclude variants that were marked
 as low quality by the variant caller.</li>
-<li><code>--percentile-threshold</code>: When considering the peptide-MHC binding affinity
-for filtering and prioritizing neoantigen candidates, by default only the
-IC50 value is being used. Setting this parameter will additionally also filter
-on the predicted percentile. We recommend a value of 2 (2%) for this
-threshold.</li>
-<li><code>--percentile-threshold-strategy</code>: When running pVACseq with a
-<code>--percentile-threshold</code> set, this parameter will influence how both the
-IC50 cutoff and the percentile cutoff are applied. The default,
-<code>conservative</code>, will require a candidate to pass both the binding and the
-percentile threshold, while the <code>exploratory</code> option will require a candidate
-to only pass either the binding or the percentile threshold.</li>
+<li><code>--use-normalized-percentiles</code>: Not all prediction algorithms supported by
+pVACseq output a percentile rank. This option will calculate normalized percentiles
+for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+most common human class I MHC alleles based on the same set of 100,000 reference
+peptides. These percentiles will be used in place of percentiles natively
+calculated by some algorithms. This ensures that all class I algorithms will
+return a percentile score since some do not do so natively. It also ensures
+that the percentiles are calculated consistently between all algorithms.</li>
 </ul>
 <p>Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:</p>
@@ -414,6 +411,12 @@ Cysteine is commonly considered problematic as it makes the peptide
 unstable. This parameter allows users to set their own rules as to which
 peptides are considered problematic and peptides meeting those rules will be marked in the
 pVACseq results and deprioritized.</li>
+<li><code>--percentile-threshold-strategy</code>: By default, pVACseq will
+filter and prioritize neoantigen candidates on the binding, presentation,
+and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+A candidate will need to pass all thresholds. However, setting this parameter
+to <code>exploratory</code> will relax this behavior and only require a candidate to
+pass one of the thresholds.</li>
 <li><code>--transcript-prioritization-strategy</code> and
 <code>--maximum-transcript-support-level</code>: Generally, multiple transcripts of a
 gene may code for a neoantigen candidate. When picking the best transcript
@@ -530,17 +533,14 @@ the patient’s proteome. When this flag is set, pVACfuse will search for each
 neoantigen candidate in the reference proteome and report any hits found.
 By default this is done using BLASTp but we recommend using a proteome FASTA
 file via the <code>--peptide-fasta</code> parameter to speed up this step.</li>
-<li><code>--percentile-threshold</code>: When considering the peptide-MHC binding affinity
-for filtering and prioritizing neoantigen candidates, by default only the
-IC50 value is being used. Setting this parameter will additionally also filter
-on the predicted percentile. We recommend a value of 2 (2%) for this
-threshold.</li>
-<li><code>--percentile-threshold-strategy</code>: When running pVACfuse with a
-<code>--percentile-threshold</code> set, this parameter will influence how both the
-IC50 cutoff and the percentile cutoff are applied. The default,
-<code>conservative</code>, will require a candidate to pass both the binding and the
-percentile threshold, while the <code>exploratory</code> option will require a candidate
-to only pass either the binding or the percentile threshold.</li>
+<li><code>--use-normalized-percentiles</code>: Not all prediction algorithms supported by
+pVACfuse output a percentile rank. This option will calculate normalized percentiles
+for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+most common human class I MHC alleles based on the same set of 100,000 reference
+peptides. These percentiles will be used in place of percentiles natively
+calculated by some algorithms. This ensures that all class I algorithms will
+return a percentile score since some do not do so natively. It also ensures
+that the percentiles are calculated consistently between all algorithms.</li>
 </ul>
 <p>Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:</p>
@@ -554,6 +554,12 @@ Cysteine is commonly considered problematic as it makes the peptide
 unstable. This parameter allows users to set their own rules as to which
 peptides are considered problematic and peptides meeting those rules will be marked in the
 pVACfuse results and deprioritized.</li>
+<li><code>--percentile-threshold-strategy</code>: By default, pVACfuse will
+filter and prioritize neoantigen candidates on the binding, presentation,
+and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+A candidate will need to pass all thresholds. However, setting this parameter
+to <code>exploratory</code> will relax this behavior and only require a candidate to
+pass one of the thresholds.</li>
 <li><code>--threads</code>: This argument will allow pVACfuse to run in multi-processing
 mode.</li>
 <li><code>--keep-tmp-files</code>: Setting this flag will save intermediate files created by pVACfuse.</li>
@@ -649,17 +655,14 @@ the patient’s proteome. When this flag is set, pVACfuse will search for each
 neoantigen candidate in the reference proteome and report any hits found.
 By default this is done using BLASTp, but we recommend using a proteome FASTA
 file via the <code>--peptide-fasta</code> parameter to speed up this step.</li>
-<li><code>--percentile-threshold</code>: When considering the peptide-MHC binding affinity
-for filtering and prioritizing neoantigen candidates, by default only the
-IC50 value is being used. Setting this parameter will additionally filter
-on the predicted percentile. We recommend a value of 2 (2%) for this
-threshold.</li>
-<li><code>--percentile-threshold-strategy</code>: When running pVACsplice with a
-<code>--percentile-threshold</code> set, this parameter will influence how both the
-IC50 cutoff and the percentile cutoff are applied. The default,
-<code>conservative</code>, will require a candidate to pass both the binding and the
-percentile threshold, while the <code>exploratory</code> option will require a candidate
-to only pass either the binding or the percentile threshold.</li>
+<li><code>--use-normalized-percentiles</code>: Not all prediction algorithms supported by
+pVACsplice output a percentile rank. This option will calculate normalized percentiles
+for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+most common human class I MHC alleles based on the same set of 100,000 reference
+peptides. These percentiles will be used in place of percentiles natively
+calculated by some algorithms. This ensures that all class I algorithms will
+return a percentile score since some do not do so natively. It also ensures
+that the percentiles are calculated consistently between all algorithms.</li>
 </ul>
 <p>Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:</p>
@@ -673,6 +676,12 @@ Cysteine is commonly considered problematic as it makes the peptide
 unstable. This parameter allows users to set their own rules as to which
 peptides are considered problematic and peptides meeting those rules will be marked in the
 pVACsplice results and deprioritized.</li>
+<li><code>--percentile-threshold-strategy</code>: By default, pVACsplice will
+filter and prioritize neoantigen candidates on the binding, presentation,
+and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+A candidate will need to pass all thresholds. However, setting this parameter
+to <code>exploratory</code> will relax this behavior and only require a candidate to
+pass one of the thresholds.</li>
 <li><code>--transcript-prioritization-strategy</code> and
 <code>--maximum-transcript-support-level</code>: Generally, multiple transcripts of a
 gene may code for a neoantigen candidate. When picking the best transcript
