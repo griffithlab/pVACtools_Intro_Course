@@ -23,11 +23,11 @@ mkdir pVACtools_outputs
 docker run \
 -v ${PWD}/HCC1395_inputs:/HCC1395_inputs \
 -v ${PWD}/pVACtools_outputs:/pVACtools_outputs \
--it griffithlab/pvactools:6.0.3 \
+-it griffithlab/pvactools:7.0.0 \
 /bin/bash
 ```
 
-This will pull the 6.0.3 version of the griffithlab/pvactools Docker image and
+This will pull the 7.0.0 version of the griffithlab/pvactools Docker image and
 start an interactive session (`-it`) of that Docker image using the bash shell (`/bin/bash`). 
 The `-v ${PWD}/HCC1395_inputs:/HCC1395_inputs`
 part of the command will mount the
@@ -35,7 +35,7 @@ part of the command will mount the
 so that you will have access to the input data from inside the Docker
 container. The `-v ${PWD}/pVACtools_outputs:/pVACtools_outputs` part of the command
 will mount the `pVACtools_outputs` folder you just created. We will write the
-outputs from pVACseq and pVACfuse to that folder so that you will have access
+outputs from pVACseq, pVACfuse, and pVACsplice to that folder so that you will have access
 to it once you exit the Docker image.
 
 ## Running pVACseq
@@ -120,17 +120,14 @@ your run. Here are a list of parameters we generally recommend:
   are considered by pVACseq. This flag will lead pVACseq to skip variants that
   have a FILTER applied in the VCF to, e.g., exclude variants that were marked
   as low quality by the variant caller.
-- `--percentile-threshold`: When considering the peptide-MHC binding affinity
-  for filtering and prioritizing neoantigen candidates, by default only the
-  IC50 value is being used. Setting this parameter will additionally also filter
-  on the predicted percentile. We recommend a value of 2 (2%) for this
-  threshold.
-- `--percentile-threshold-strategy`: When running pVACseq with a
-  `--percentile-threshold` set, this parameter will influence how both the
-  IC50 cutoff and the percentile cutoff are applied. The default,
-  `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold, while the `exploratory` option will require a candidate
-  to only pass either the binding or the percentile threshold.
+- `--use-normalized-percentiles`: Not all prediction algorithms supported by
+  pVACseq output a percentile rank. This option will calculate normalized percentiles
+  for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+  most common human class I MHC alleles based on the same set of 100,000 reference
+  peptides. These percentiles will be used in place of percentiles natively
+  calculated by some algorithms. This ensures that all class I algorithms will
+  return a percentile score since some do not do so natively. It also ensures
+  that the percentiles are calculated consistently between all algorithms.
 
 Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:
@@ -147,6 +144,12 @@ on your specific analysis needs:
   unstable. This parameter allows users to set their own rules as to which
   peptides are considered problematic and peptides meeting those rules will be marked in the
   pVACseq results and deprioritized.
+- `--percentile-threshold-strategy`: By default, pVACseq will
+  filter and prioritize neoantigen candidates on the binding, presentation,
+  and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+  A candidate will need to pass all thresholds. However, setting this parameter
+  to `exploratory` will relax this behavior and only require a candidate to
+  pass one of the thresholds.
 - `--transcript-prioritization-strategy` and
   `--maximum-transcript-support-level`: Generally, multiple transcripts of a
   gene may code for a neoantigen candidate. When picking the best transcript
@@ -177,8 +180,8 @@ Given the considerations outlined above, let's run pVACseq on our sample data.
 
 From the `optitype_normal_result.tsv` we know that the patient's class I alleles are
 HLA-A\*29:02, HLA-B\*45:01, HLA-B\*82:02, and HLA-C\*06:02 (indicated that two of three class I
-alleles are homozygous in this sample). We also have clinical typing information that confirms 
-these class I alleles as well as identifying DQA1\*03:03, DQB1\*03:02, and DRB1\*04:05 as the 
+alleles are homozygous in this sample). We also have clinical typing information that confirms
+these class I alleles as well as identifying DQA1\*03:03, DQB1\*03:02, and DRB1\*04:05 as the
 patient's class II alleles.
 
 Note that where needed pVACseq will automatically create HLA class II dimer combinations using
@@ -274,17 +277,14 @@ usually apply. Here are a list of parameters we generally recommend:
   neoantigen candidate in the reference proteome and report any hits found.
   By default this is done using BLASTp but we recommend using a proteome FASTA
   file via the `--peptide-fasta` parameter to speed up this step.
-- `--percentile-threshold`: When considering the peptide-MHC binding affinity
-  for filtering and prioritizing neoantigen candidates, by default only the
-  IC50 value is being used. Setting this parameter will additionally also filter
-  on the predicted percentile. We recommend a value of 2 (2%) for this
-  threshold.
-- `--percentile-threshold-strategy`: When running pVACfuse with a
-  `--percentile-threshold` set, this parameter will influence how both the
-  IC50 cutoff and the percentile cutoff are applied. The default,
-  `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold, while the `exploratory` option will require a candidate
-  to only pass either the binding or the percentile threshold.
+- `--use-normalized-percentiles`: Not all prediction algorithms supported by
+  pVACfuse output a percentile rank. This option will calculate normalized percentiles
+  for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+  most common human class I MHC alleles based on the same set of 100,000 reference
+  peptides. These percentiles will be used in place of percentiles natively
+  calculated by some algorithms. This ensures that all class I algorithms will
+  return a percentile score since some do not do so natively. It also ensures
+  that the percentiles are calculated consistently between all algorithms.
 
 Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:
@@ -298,6 +298,12 @@ on your specific analysis needs:
   unstable. This parameter allows users to set their own rules as to which
   peptides are considered problematic and peptides meeting those rules will be marked in the
   pVACfuse results and deprioritized.
+- `--percentile-threshold-strategy`: By default, pVACfuse will
+  filter and prioritize neoantigen candidates on the binding, presentation,
+  and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+  A candidate will need to pass all thresholds. However, setting this parameter
+  to `exploratory` will relax this behavior and only require a candidate to
+  pass one of the thresholds.
 - `--threads`: This argument will allow pVACfuse to run in multi-processing
   mode.
 - `--keep-tmp-files`: Setting this flag will save intermediate files created by pVACfuse.
@@ -312,7 +318,7 @@ Given the considerations outlined above, let's run pVACfuse on our sample data.
 
 As with pVACseq, we can use the `optitype_normal_result.tsv` file to identify the patient's
 class I HLA alleles. These are HLA-A\*29:02, HLA-B\*45:01, HLA-B\*82:02, and HLA-C\*06:02.
-We also have clinical typing information that confirms these class I alleles as well as 
+We also have clinical typing information that confirms these class I alleles as well as
 identified DQA1\*03:03, DQB1\*03:02, and DRB1\*04:05 as the patient's class II alleles.
 
 For pVACfuse the sample name is not used for any parsing so it doesn't need to
@@ -398,17 +404,14 @@ usually apply. Here is a list of parameters we generally recommend:
   neoantigen candidate in the reference proteome and report any hits found.
   By default this is done using BLASTp, but we recommend using a proteome FASTA
   file via the `--peptide-fasta` parameter to speed up this step.
-- `--percentile-threshold`: When considering the peptide-MHC binding affinity
-  for filtering and prioritizing neoantigen candidates, by default only the
-  IC50 value is being used. Setting this parameter will additionally filter
-  on the predicted percentile. We recommend a value of 2 (2%) for this
-  threshold.
-- `--percentile-threshold-strategy`: When running pVACsplice with a
-  `--percentile-threshold` set, this parameter will influence how both the
-  IC50 cutoff and the percentile cutoff are applied. The default,
-  `conservative`, will require a candidate to pass both the binding and the
-  percentile threshold, while the `exploratory` option will require a candidate
-  to only pass either the binding or the percentile threshold.
+- `--use-normalized-percentiles`: Not all prediction algorithms supported by
+  pVACsplice output a percentile rank. This option will calculate normalized percentiles
+  for class I epitopes of length 8-11 and all class I algorithms and the 1,000
+  most common human class I MHC alleles based on the same set of 100,000 reference
+  peptides. These percentiles will be used in place of percentiles natively
+  calculated by some algorithms. This ensures that all class I algorithms will
+  return a percentile score since some do not do so natively. It also ensures
+  that the percentiles are calculated consistently between all algorithms.
 
 Additionally there are a number of parameters that might be useful depending
 on your specific analysis needs:
@@ -422,6 +425,12 @@ on your specific analysis needs:
   unstable. This parameter allows users to set their own rules as to which
   peptides are considered problematic and peptides meeting those rules will be marked in the
   pVACsplice results and deprioritized.
+- `--percentile-threshold-strategy`: By default, pVACsplice will
+  filter and prioritize neoantigen candidates on the binding, presentation,
+  and immunogenicity percentiles in addition to the raw IC50 binding affinity.
+  A candidate will need to pass all thresholds. However, setting this parameter
+  to `exploratory` will relax this behavior and only require a candidate to
+  pass one of the thresholds.
 - `--transcript-prioritization-strategy` and
   `--maximum-transcript-support-level`: Generally, multiple transcripts of a
   gene may code for a neoantigen candidate. When picking the best transcript
