@@ -3,7 +3,7 @@
 
 # Introduction
 
-This course was developed in Summer 2023 and updated in Fall 2025. We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
+This course was developed in Summer 2023 and last updated in Summer 2026. We welcome any feedback at help@pvactools.org or by submission of [GitHub issues](https://github.com/griffithlab/pVACtools_Intro_Course/issues).
 
 ## Motivation
 
@@ -21,7 +21,7 @@ of the aforementioned steps are executed via a modular workflow consisting of to
 prioritization, and selection using a graphical Web-based interface (pVACview), and design of DNA vector–based vaccines (pVACvector) and synthetic long peptide
 vaccines. pVACtools is available at [http://www.pvactools.org](http://www.pvactools.org).
 
-<img src="01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a37485c18b_1_0.png" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" />
+<img src="01-intro_files/figure-html//1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e342b543ab_0_0.png" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" />
 
 ## Background
 
@@ -39,7 +39,9 @@ stability and recognition by cytotoxic T cells [@Richters2019].
 pVACtools can be used as the final step in a well-established variant calling pipeline. It leverages existing tools with functionality related to variant annotation
 (Ensembl VEP [@McLaren2016]), identifying neoantigens from specific sources (e.g. fusions via star-fusion [@Haas2019], AGFusion [@Murphy2016], and Arriba [@Uhrig2021]),
 HLA typing (OptiType [@Szolek2014], PHLAT [@Bai2018]), peptide-MHC binding prediction (IEDB [@Vita2018], NetMHCpan [@Jurtz2017], MHCflurry [@ODonnell2018],
-MHCnuggets [@Shao2020]), peptide-MHC stability (NetMHCstabpan [@Rasmussen2016]], peptide processing (NetChop [@Nielsen2005]), manufacturability
+MHCnuggets [@Shao2020], MixMHCpred [@Gfeller2023]), presentation (IEDB [@Vita2018], BigMHC [@Albert2023], MHCflurry[@ODonnell2018], MixMHC2pred [@Racle2023]),
+immunogenicity (BigMHC [@Albert2023], DeepImmuno [@Li2021], ImmuoScope [@Shen2025], PRIME [@Gfeller2023]), peptide-MHC stability (NetMHCstabpan [@Rasmussen2016]],
+peptide processing (NetChop [@Nielsen2005]), manufacturability
 metrics (vaxrank [@Rubinsteyn2017]), and reference proteome similarity (BLAST [@Altschul1990]). Each of these tools tackles specific tasks within the broader goal of
 antigen analysis and is utilized by pVACtools to provide an end-to-end integration of novel algorithms and established tools needed to discover, characterize, prioritize,
 and utilize tumor-specific neoantigens in basic research and clinical applications. Combining pVACtools with existing variant calling pipelines provides an end-to-end

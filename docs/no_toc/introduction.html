@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
@@ -277,7 +277,7 @@ div.csl-indent {
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This course was developed in Summer 2023 and updated in Fall 2025. We welcome any feedback at <a href="mailto:help@pvactools.org" class="email">help@pvactools.org</a> or by submission of <a href="https://github.com/griffithlab/pVACtools_Intro_Course/issues">GitHub issues</a>.</p>
+<p>This course was developed in Summer 2023 and last updated in Summer 2026. We welcome any feedback at <a href="mailto:help@pvactools.org" class="email">help@pvactools.org</a> or by submission of <a href="https://github.com/griffithlab/pVACtools_Intro_Course/issues">GitHub issues</a>.</p>
 <div id="motivation" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Motivation<a href="introduction.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Identification of neoantigens is a critical step in predicting response to checkpoint blockade therapy and design of personalized cancer vaccines.
@@ -293,7 +293,7 @@ vaccines. Downstream analysis commands for synthetic long peptide vaccines are a
 of the aforementioned steps are executed via a modular workflow consisting of tools for neoantigen prediction from somatic alterations (pVACseq, pVACfuse, pVACsplice, and pVACbind),
 prioritization, and selection using a graphical Web-based interface (pVACview), and design of DNA vector–based vaccines (pVACvector) and synthetic long peptide
 vaccines. pVACtools is available at <a href="http://www.pvactools.org">http://www.pvactools.org</a>.</p>
-<p><img src="01-intro_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a37485c18b_1_0.png" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="01-intro_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e342b543ab_0_0.png" alt="pVACtools is a cancer immunotherapy tools suite" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="background" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Background<a href="introduction.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -308,8 +308,10 @@ translated tumor specific peptides that arise from the somatic variant, and pred
 stability and recognition by cytotoxic T cells <span class="citation">(<a href="#ref-Richters2019">Richters et al. 2019</a>)</span>.</p>
 <p>pVACtools can be used as the final step in a well-established variant calling pipeline. It leverages existing tools with functionality related to variant annotation
 (Ensembl VEP <span class="citation">(<a href="#ref-McLaren2016">McLaren et al. 2016</a>)</span>), identifying neoantigens from specific sources (e.g. fusions via star-fusion <span class="citation">(<a href="#ref-Haas2019">Haas et al. 2019</a>)</span>, AGFusion <span class="citation">(<a href="#ref-Murphy2016">Murphy and Elemento 2016</a>)</span>, and Arriba <span class="citation">(<a href="#ref-Uhrig2021">Uhrig et al. 2021</a>)</span>),
-HLA typing (OptiType <span class="citation">(<a href="#ref-Szolek2014">Szolek et al. 2014</a>)</span>, PHLAT <span class="citation">(<a href="#ref-Bai2018">Bai, Wang, and Fury 2018</a>)</span>), peptide-MHC binding prediction (IEDB <span class="citation">(<a href="#ref-Vita2018">Vita et al. 2018</a>)</span>, NetMHCpan <span class="citation">(<a href="#ref-Jurtz2017">Jurtz et al. 2017</a>)</span>, MHCflurry <span class="citation">(<a href="#ref-ODonnell2018">ODonnell et al. 2018</a>)</span>,
-MHCnuggets <span class="citation">(<a href="#ref-Shao2020">Shao et al. 2020</a>)</span>), peptide-MHC stability (NetMHCstabpan <span class="citation">(<a href="#ref-Rasmussen2016">Rasmussen et al. 2016</a>)</span>], peptide processing (NetChop <span class="citation">(<a href="#ref-Nielsen2005">Nielsen et al. 2005</a>)</span>), manufacturability
+HLA typing (OptiType <span class="citation">(<a href="#ref-Szolek2014">Szolek et al. 2014</a>)</span>, PHLAT <span class="citation">(<a href="#ref-Bai2018">Bai, Wang, and Fury 2018</a>)</span>), peptide-MHC binding prediction (IEDB <span class="citation">(<a href="#ref-Vita2018">Vita et al. 2018</a>)</span>, NetMHCpan <span class="citation">(<a href="#ref-Jurtz2017">Jurtz et al. 2017</a>)</span>, MHCflurry <span class="citation">(<a href="#ref-ODonnell2018">O’Donnell et al. 2018</a>)</span>,
+MHCnuggets <span class="citation">(<a href="#ref-Shao2020">Shao et al. 2020</a>)</span>, MixMHCpred <span class="citation">(<a href="#ref-Gfeller2023">Gfeller et al. 2023</a>)</span>), presentation (IEDB <span class="citation">(<a href="#ref-Vita2018">Vita et al. 2018</a>)</span>, BigMHC <span class="citation">(<a href="#ref-Albert2023">Albert et al. 2023</a>)</span>, MHCflurry<span class="citation">(<a href="#ref-ODonnell2018">O’Donnell et al. 2018</a>)</span>, MixMHC2pred <span class="citation">(<a href="#ref-Racle2023">Racle et al. 2023</a>)</span>),
+immunogenicity (BigMHC <span class="citation">(<a href="#ref-Albert2023">Albert et al. 2023</a>)</span>, DeepImmuno <span class="citation">(<a href="#ref-Li2021">Li et al. 2021</a>)</span>, ImmuoScope <span class="citation">(<a href="#ref-Shen2025">Shen et al. 2025</a>)</span>, PRIME <span class="citation">(<a href="#ref-Gfeller2023">Gfeller et al. 2023</a>)</span>), peptide-MHC stability (NetMHCstabpan <span class="citation">(<a href="#ref-Rasmussen2016">Rasmussen et al. 2016</a>)</span>],
+peptide processing (NetChop <span class="citation">(<a href="#ref-Nielsen2005">Nielsen et al. 2005</a>)</span>), manufacturability
 metrics (vaxrank <span class="citation">(<a href="#ref-Rubinsteyn2017">Rubinsteyn et al. 2017</a>)</span>), and reference proteome similarity (BLAST <span class="citation">(<a href="#ref-Altschul1990">Altschul et al. 1990</a>)</span>). Each of these tools tackles specific tasks within the broader goal of
 antigen analysis and is utilized by pVACtools to provide an end-to-end integration of novel algorithms and established tools needed to discover, characterize, prioritize,
 and utilize tumor-specific neoantigens in basic research and clinical applications. Combining pVACtools with existing variant calling pipelines provides an end-to-end
@@ -335,6 +337,9 @@ It assumes that the learner is familiar with basic biology, genetics and immunol
 </div>
 <h3> References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Albert2023" class="csl-entry">
+Albert, B. A., Y. Yang, X. M. Shao, D. Singh, K. N. Smit, V. Anagnostou, and R. Karchin. 2023. <span>“<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10569228">Deep Neural Networks Predict Class <span>I</span> Major Histocompatibility Complex Epitope Presentation and Transfer Learn Neoepitope Immunogenicity</a>.”</span> <em>Nat Mach Intell</em> 5: 861–72.
+</div>
 <div id="ref-Altschul1990" class="csl-entry">
 Altschul, Stephen F., Warren Gish, Webb Miller, Eugene W. Myers, and David J. Lipman. 1990. <span>“Basic Local Alignment Search Tool.”</span> <em>Journal of Molecular Biology</em> 215 (3): 403–10. <a href="https://doi.org/10.1016/s0022-2836(05)80360-2">https://doi.org/10.1016/s0022-2836(05)80360-2</a>.
 </div>
@@ -343,6 +348,9 @@ Bai, Yu, David Wang, and Wen Fury. 2018. <span>“<span>PHLAT</span>: Inference 
 </div>
 <div id="ref-Brown2014" class="csl-entry">
 Brown, Scott D., Rene L. Warren, Ewan A. Gibb, Spencer D. Martin, John J. Spinelli, Brad H. Nelson, and Robert A. Holt. 2014. <span>“Neo-Antigens Predicted by Tumor Genome Meta-Analysis Correlate with Increased Patient Survival.”</span> <em>Genome Research</em> 24 (5): 743–50. <a href="https://doi.org/10.1101/gr.165985.113">https://doi.org/10.1101/gr.165985.113</a>.
+</div>
+<div id="ref-Gfeller2023" class="csl-entry">
+Gfeller, D., J. Schmidt, G. Croce, P. Guillaume, S. Bobisse, R. Genolet, L. Queiroz, J. Cesbron, J. Racle, and A. Harari. 2023. <span>“<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9811684">Improved Predictions of Antigen Presentation and <span>TCR</span> Recognition with <span>MixMHCpred2.2</span> and <span>PRIME2.0</span> Reveal Potent <span>SARS-CoV-2</span> <span>CD8</span></a>.”</span> <em>Cell Syst</em> 14: 72–83.e5.
 </div>
 <div id="ref-Haas2019" class="csl-entry">
 Haas, Brian J., Alexander Dobin, Bo Li, Nicolas Stransky, Nathalie Pochet, and Aviv Regev. 2019. <span>“Accuracy Assessment of Fusion Transcript Detection via Read-Mapping and de Novo Fusion Transcript Assembly-Based Methods.”</span> <em>Genome Biology</em> 20 (1). <a href="https://doi.org/10.1186/s13059-019-1842-9">https://doi.org/10.1186/s13059-019-1842-9</a>.
@@ -365,6 +373,9 @@ Jurtz, Vanessa, Sinu Paul, Massimo Andreatta, Paolo Marcatili, Bjoern Peters, an
 <div id="ref-Keskin2018" class="csl-entry">
 Keskin, Derin B., Annabelle J. Anandappa, Jing Sun, Itay Tirosh, Nathan D. Mathewson, Shuqiang Li, Giacomo Oliveira, et al. 2018. <span>“Neoantigen Vaccine Generates Intratumoral t Cell Responses in Phase Ib Glioblastoma Trial.”</span> <em>Nature</em> 565 (7738): 234–39. <a href="https://doi.org/10.1038/s41586-018-0792-9">https://doi.org/10.1038/s41586-018-0792-9</a>.
 </div>
+<div id="ref-Li2021" class="csl-entry">
+Li, G., B. Iyer, V. B. S. Prasath, Y. Ni, and N. Salomonis. 2021. <span>“<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8135853"><span>DeepImmuno:</span> Deep Learning-Empowered Prediction and Generation of Immunogenic Peptides for <span>T</span>-Cell Immunity</a>.”</span> <em>Brief Bioinform</em> 22: bbab160.
+</div>
 <div id="ref-McLaren2016" class="csl-entry">
 McLaren, William, Laurent Gil, Sarah E. Hunt, Harpreet Singh Riat, Graham R. S. Ritchie, Anja Thormann, Paul Flicek, and Fiona Cunningham. 2016. <span>“The Ensembl Variant Effect Predictor.”</span> <em>Genome Biology</em> 17 (1). <a href="https://doi.org/10.1186/s13059-016-0974-4">https://doi.org/10.1186/s13059-016-0974-4</a>.
 </div>
@@ -375,10 +386,13 @@ Murphy, Charlie, and Olivier Elemento. 2016. <span>“<span>AGFusion</span>: Ann
 Nielsen, Morten, Claus Lundegaard, Ole Lund, and Can Keşmir. 2005. <span>“The Role of the Proteasome in Generating Cytotoxic t-Cell Epitopes: Insights Obtained from Improved Predictions of Proteasomal Cleavage.”</span> <em>Immunogenetics</em> 57 (1-2): 33–41. <a href="https://doi.org/10.1007/s00251-005-0781-7">https://doi.org/10.1007/s00251-005-0781-7</a>.
 </div>
 <div id="ref-ODonnell2018" class="csl-entry">
-ODonnell, Timothy J., Alex Rubinsteyn, Maria Bonsack, Angelika B. Riemer, Uri Laserson, and Jeff Hammerbacher. 2018. <span>“<span>MHCflurry</span>: Open-Source Class i <span>MHC</span> Binding Affinity Prediction.”</span> <em>Cell Systems</em> 7 (1): 129–132.e4. <a href="https://doi.org/10.1016/j.cels.2018.05.014">https://doi.org/10.1016/j.cels.2018.05.014</a>.
+O’Donnell, T. J., A. Rubinsteyn, M. Bonsack, A. B. Riemer, U. Laserson, and J. Hammerbacher. 2018. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/29960884"><span>MHCflurry:</span> <span>Open-Source</span> <span>C</span>lass <span>I</span> <span>MHC</span> <span>B</span>inding <span>A</span>ffinity <span>P</span>rediction</a>.”</span> <em>Cell Syst</em> 7: 129–132.e4.
 </div>
 <div id="ref-Ott2017" class="csl-entry">
 Ott, Patrick A., Zhuting Hu, Derin B. Keskin, Sachet A. Shukla, Jing Sun, David J. Bozym, Wandi Zhang, et al. 2017. <span>“An Immunogenic Personal Neoantigen Vaccine for Patients with Melanoma.”</span> <em>Nature</em> 547 (7662): 217–21. <a href="https://doi.org/10.1038/nature22991">https://doi.org/10.1038/nature22991</a>.
+</div>
+<div id="ref-Racle2023" class="csl-entry">
+Racle, J., P. Guillaume, J. Schmidt, J. Michaux, A. Larabi, K. Lau, M. A. S. Perez, et al. 2023. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/37023751">Machine Learning Predictions of <span>MHC-II</span> Specificities Reveal Alternative Binding Mode of Class <span>II</span> Epitopes</a>.”</span> <em>Immunity</em> 56: 1359–1375.e13.
 </div>
 <div id="ref-Rasmussen2016" class="csl-entry">
 Rasmussen, Michael, Emilio Fenoy, Mikkel Harndahl, Anne Bregnballe Kristensen, Ida Kallehauge Nielsen, Morten Nielsen, and Søren Buus. 2016. <span>“Pan-Specific Prediction of Peptide<span></span><span>MHC</span> Class i Complex Stability, a Correlate of t Cell Immunogenicity.”</span> <em>The Journal of Immunology</em> 197 (4): 1517–24. <a href="https://doi.org/10.4049/jimmunol.1600582">https://doi.org/10.4049/jimmunol.1600582</a>.
@@ -397,6 +411,9 @@ Schumacher, Ton N., and Robert D. Schreiber. 2015. <span>“Neoantigens in Cance
 </div>
 <div id="ref-Shao2020" class="csl-entry">
 Shao, Xiaoshan M., Rohit Bhattacharya, Justin Huang, I. K. Ashok Sivakumar, Collin Tokheim, Lily Zheng, Dylan Hirsch, et al. 2020. <span>“High-Throughput Prediction of <span>MHC</span> Class i and <span>II</span> Neoantigens with <span>MHCnuggets</span>.”</span> <em>Cancer Immunology Research</em> 8 (3): 396–408. <a href="https://doi.org/10.1158/2326-6066.cir-19-0464">https://doi.org/10.1158/2326-6066.cir-19-0464</a>.
+</div>
+<div id="ref-Shen2025" class="csl-entry">
+Shen, Long-Chen, Yumeng Zhang, Zhikang Wang, Dene R. Littler, Yan Liu, Jinhui Tang, Jamie Rossjohn, Dong-Jun Yu, and Jiangning Song. 2025. <span>“Self-Iterative Multiple-Instance Learning Enables the Prediction of CD4+ t Cell Immunogenic Epitopes.”</span> <em>Nature Machine Intelligence</em> 7 (8): 1250–65. <a href="https://doi.org/10.1038/s42256-025-01073-z">https://doi.org/10.1038/s42256-025-01073-z</a>.
 </div>
 <div id="ref-Szolek2014" class="csl-entry">
 Szolek, András, Benjamin Schubert, Christopher Mohr, Marc Sturm, Magdalena Feldhahn, and Oliver Kohlbacher. 2014. <span>“<span>OptiType</span>: Precision <span>HLA</span> Typing from Next-Generation Sequencing Data.”</span> <em>Bioinformatics</em> 30 (23): 3310–16. <a href="https://doi.org/10.1093/bioinformatics/btu548">https://doi.org/10.1093/bioinformatics/btu548</a>.

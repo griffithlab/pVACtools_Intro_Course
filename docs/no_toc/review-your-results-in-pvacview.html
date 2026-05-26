@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Review Your Results in pVACview | Introduction to pVACtools</title>
   <meta name="description" content="An introduction to the background and basic concepts around neoantigen identification and how to use pVACtools" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Review Your Results in pVACview | Introduction to pVACtools" />
   <meta property="og:type" content="book" />
@@ -343,41 +343,42 @@ tab in the sidebar.</p>
 shows the best neoantigen candidate for each variant.
 It lists the gene and amino acid change of the variant as well as additional
 information about the best peptide and the best transcript coding for it. These
-include, from left to right, the transcript’s MANE Select status, the transcript’s
-canonical status, the transcript support level, the best-binding HLA
-allele, the mutated positions of the best peptide, any positions in the peptide
-where the amino acid might be problematic for manufacturing, the total number of
-neoantigen candidates resulting from this variant that are included with
-additional detailed metadata, and the total number
-of neoantigen candidates passing the binding affinity threshold set by the user.
-If a gene of interest list was uploaded, variants on those genes have their gene
-highlighted with a green border.</p>
-<p>Next, this table lists the IC50 peptide MHC binding affinity for both the Best Peptide
-(MT) and the matched wild type (WT). These values are either a median of all of the
-binding predictions made by the predictors selected in your pVACseq run, or
-the lowest binding prediction made. This depends on the value set for the
-<code>--top-score-metric</code> in your run. The table also shows the median/lowest percentile
-scores of all predictors that provide this value, again depending on the
-<code>--top-score-metric</code>. For the mutant values, a heatmap coloring is applied to make it
-easier to visually identify well-binding peptides.</p>
-<p>The next few columns show the coverage and expression of the best transcript with
+include, from left to right, whether or not the transcript is considered a good
+transcript considering the <code>--transcript-prioritization-strategy</code> and
+<code>--maximum-transcript-support-level</code>, the best-binding HLA
+allele, the mutated position(s) of the best peptide, any positions in the peptide
+where the amino acid might be problematic for manufacturing according to the
+<code>--problematic-amino-acids</code>, the total number of neoantigen candidates resulting
+from this variant that are included with additional detailed metadata, and the
+total number of neoantigen candidates passing the binding affinity threshold set
+by the user. If a gene of interest list was uploaded, variants on those genes have
+their gene highlighted with a green border.</p>
+<p>Next, this table lists the IC50 peptide MHC binding affinity for both the Best
+Peptide (MT) and the matched wild type (WT). It then lists the combined mutant
+percentile score, the mutant binding percentile, the mutant presentation percentile,
+and the mutant immunogenicity percentile.These values are either a median of all of
+the prediction scores made by the predictors selected in your pVACseq run, or the
+lowest score. This depends on the value set for the <code>--top-score-metric</code> in your
+run. A heatmap coloring is applied to make it easier to visually identify
+well-binding peptides.</p>
+<p>The next few columns show the VAF, coverage, and expression of the best transcript with
 a bar plot background to represent where specific values fall across the entire
 patient sample.</p>
-<p>The Tier column represents the tier assigned to the best peptide. The neoantigen
-candidates in this view were all sorted into the Pass tier but tiers such as Low
-Expression or Subclonal are applied to easily identify why a neoantigen candidate
-might be unsuitable for vaccine selection.</p>
 <p>The Ref Match column reflects whether or not the best peptide was found in the
 reference proteome which is undesired since such peptides are not novel and
 including them in a vaccine might lead to an auto immune response.</p>
+<p>The Tier column represents the tier assigned to the best peptide. The neoantigen
+candidates in this view were mostly sorted into the Pass tier but tiers such as Low
+Expression or Subclonal are applied to easily identify why a neoantigen candidate
+might be unsuitable for vaccine selection. The bottom two variants in the view are
+assigned the PoorBinder tier because of the binding affinity exceeding the desired
+binding threshold. This is also visually indicated by the yellow cell backgrounds
+and the red border around the IC50 MT value cells for these variants.</p>
 <p>Users are able to set a status for each candidate by clicking the appropriate
 buttons: thumbs-up (accept), thumbs-down (reject), or flag (requires further review).</p>
 <p>Clicking on the row for a variant will select it. This
 will update the lower panels with details for the selected variant.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_0.png" alt="Upon successfully uploading the relevant data files, you can explore the different aspects of your neoantigen candidates." width="100%" style="display: block; margin: auto;" /></p>
-<p>For candidates not sorted into the Pass tier, red borders visually highlight the
-attributes failed by the candidate.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_6.png" alt="Neoantigen candidates are binned into tiers depending on their suitability for vaccine creation." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e3d230b076_0_0.png" alt="Upon successfully uploading the relevant data files, you can explore the different aspects of your neoantigen candidates." width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="variant-information" class="section level3 hasAnchor" number="5.5.2">
 <h3><span class="header-section-number">5.5.2</span> Variant Information<a href="review-your-results-in-pvacview.html#variant-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -428,7 +429,7 @@ one peptide-MHC binding prediction falls within the <code>--aggregate-inclusion-
 will be shown in this table. However, for variants resulting in a large number
 of well-binding candidates (e.g. frameshift variant with a long downstream
 sequence), the number of included candidates will be limited to the best
-<code>--aggregate-inclusion-count-limit</code> candidates.For HLA alleles where the peptide is not
+<code>--aggregate-inclusion-count-limit</code> candidates. For HLA alleles where the peptide is not
 well-binding the prediction details will show <code>X</code>. This table also shows the
 mutant position, whether or not the neoantigen candidate has any problematic
 positions, and whether or not it failed the anchor criteria. This helps in
@@ -458,24 +459,36 @@ the Best Transcript. The Best Transcript is highlighted in green.</p>
 <p>In the Additional Peptide Information panel, users can see more information
 for the neoantigen candidate selected in the Transcript Set Detailed Data
 panel.</p>
-<p>The first tab, “IC50 Plot”, shows violin plots of the predicted IC50 binding
-affinity for each prediction algorithm for both the neoantigen candidate and
-its matched wildtype peptide. This can be used to check concordance
-of predictions between the different algorithms. It also allows for a
-detailed comparison between the mutant and wildtype predictions in addition to
-the median or lowest IC50 binding affinity used elsewhere. A solid line is used
-to represent the median score.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_42.png" alt="The Additional Peptide Information panel shows more information for the peptide selected in the Transcript Set Detailed Data panel." width="100%" style="display: block; margin: auto;" /></p>
-<p>The %ile Plot tab shows a similar violin plot but for the predicted percentile
-scores as opposed to the IC50 binding affinity. A solid line is also used here
-to represent the median score.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_48.png" alt="The %ile Plot tab shows violin plots of the percentile score predicted by each algorithm." width="100%" style="display: block; margin: auto;" /></p>
+<p>The first tab, %ile Plot, shows a violin plot for the predicted percentile
+scores for each prediction algorithm for both the neoantigen candidate and
+its matched wildtype peptide. This can be used to check concordance of
+predictions between the different algorithms. Each data point is colored
+depending on the type of algorithm, blue for binding algorithms, yellow for
+presentation algorithms, and purple for immunogenicity algorithms. Users may
+filter to plot to only show a subset of algorithms by selecting the desired
+algorithm type in the “Specify what data to show” dropdown.</p>
+<p>A solid black line is used to represent the median score. A green solid line
+is used to show the 2% cutoff and dashed line for the 0.5% cutoff.</p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_0.png" alt="The %ile Plot tab shows violin plots of the percentile score predicted by each algorithm." width="100%" style="display: block; margin: auto;" /></p>
+<p>The “IC50 Plot” tab shows a similar violin plot but for the IC50 binding affinity
+scores as opposed to the percentile. A solid line is also used here to represent
+the median score. A green solid line is used to show the 1000nM cutoff and dashed
+line for the 500nM cutoff.</p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_5.png" alt="The IC50 Plot tab shows violin plots of the binding affinity scores predicted by each binding affinity algorithm." width="100%" style="display: block; margin: auto;" /></p>
 <p>The next tab, “Binding Data”, shows the IC50 binding affinity and
-percentile score but in table format.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_54.png" alt="The Binding Data tab shows a table of the IC50 binding affinity and percentile predicted by each algorithm." width="100%" style="display: block; margin: auto;" /></p>
-<p>The Elution Table tab shows the predicted elution scores and percentiles, if
-the appropriate prediction algorithm(s) were chosen.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_60.png" alt="The Elution Table tab shows elution prediction scores and precentiles for the selected peptide." width="100%" style="display: block; margin: auto;" /></p>
+binding percentile scores but in table format. Heatmap table cell backgrounds
+indicate where each value falls in relation to binding threshold and
+binding percentile threshold, respectively. Users may switch between the two
+by changing the selection in the “Cell heatmap background coloring” dropdown.</p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_10.png" alt="The Binding Data tab shows a table of the IC50 binding affinity and percentile values predicted by each algorithm." width="100%" style="display: block; margin: auto;" /></p>
+<p>The Presentation Data tab shows the predicted presentation scores and presentation
+percentiles. Heatmap table cell backgrounds indicate where each percentile value
+falls in relation to presentation percentile threshold.</p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_15.png" alt="The Presentation Data tab shows presentation prediction scores and precentiles for the selected peptide." width="100%" style="display: block; margin: auto;" /></p>
+<p>The Immunogenicity Data tab shows the predicted immunogenicity scores and immunogenicity
+percentiles. Heatmap table cell backgrounds indicate where each percentile value
+falls in relation to immunogenicity percentile threshold.</p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_20.png" alt="The Immunogenicity Data tab shows immunogenicity prediction scores and precentiles for the selected peptide." width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="regenerate-tiers-with-custom-parameters" class="section level2 hasAnchor" number="5.6">
@@ -490,7 +503,7 @@ for Tiering” panel.</p>
 <p>The parameters that were used in the original pVACseq run can still be viewed
 in the “Original Parameters for Tiering” panel and the tiers can be reset to
 those parameters by pressing the “Reset to original parameters” button.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3a65970eb36_0_66.png" alt="Users can re-tier the neoantigen candidates by adjusting the tiering thresholds." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_31.png" alt="Users can re-tier the neoantigen candidates by adjusting the tiering thresholds." width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="adding-comments-to-variants" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Adding Comments to Variants<a href="review-your-results-in-pvacview.html#adding-comments-to-variants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -506,7 +519,7 @@ Section” button is pressed.</p>
 be exported by switching to the Export interface via the sidebar. This will
 export the Aggregated Report with the updated Evaluation column and comments
 added. The report can be exported in either TSV or Excel format.</p>
-<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g25ad9ce8c9b_0_99.png" alt="Users can export the neoantigen candidate table after review has been completed." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="05-pvacview_tour_files/figure-html/1uz39zaObDGKhEVCGzO0JO35CTbC0oRAM0mxgLcMAA9Y_g3e422d3441b_0_38.png" alt="Users can export the neoantigen candidate table after review has been completed." width="100%" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
